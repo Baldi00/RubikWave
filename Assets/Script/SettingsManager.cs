@@ -18,7 +18,7 @@ public class SettingsManager : MonoBehaviour {
 	private AudioClip m_Whoosh, m_Turn, m_Victory;
 
 	[SerializeField]
-	private ScrittaMenuOpzioni m_ScrittaAlto, m_ScrittaMedio, m_ScrittaBasso, m_ScrittaSuoniOn, m_ScrittaSuoniOff;
+	private ScrittaMenuOpzioni m_ScrittaAlto, m_ScrittaMedio, m_ScrittaBasso, m_ScrittaVsyncOn, m_ScrittaVsyncOff, m_ScrittaSuoniOn, m_ScrittaSuoniOff;
 
 	public void SetAlto(){
 		m_CameraPrincipale.GetComponent<PostProcessingBehaviour> ().profile = m_Alto;
@@ -33,6 +33,17 @@ public class SettingsManager : MonoBehaviour {
 	public void SetBasso(){
 		m_CameraPrincipale.GetComponent<PostProcessingBehaviour> ().profile = m_Basso;
 		m_ScrittaBasso.SetAcceso (true);
+	}
+
+	public void SetVsyncOn(){
+		QualitySettings.vSyncCount = 1;
+		m_ScrittaVsyncOn.SetAcceso (true);
+	}
+
+	public void SetVsyncOff(){
+		QualitySettings.vSyncCount = 0;
+		//Application.targetFrameRate = 60;
+		m_ScrittaVsyncOff.SetAcceso (true);
 	}
 
 	public void SetSuoniOn(){
@@ -59,6 +70,10 @@ public class SettingsManager : MonoBehaviour {
 		}
 	}
 
+	public int GetGraficaVsync(){
+		return QualitySettings.vSyncCount;
+	}
+
 	public int GetSuoni(){
 		if (GetComponent<AudioSource> ().clip == null) {
 			return 0;
@@ -72,6 +87,13 @@ public class SettingsManager : MonoBehaviour {
 		case 0: SetBasso (); break;
 		case 1: SetMedio (); break;
 		case 2: SetAlto (); break;
+		}
+	}
+
+	public void SetGraficaVsync(int graficaVsync){
+		switch (graficaVsync) {
+		case 0: SetVsyncOff (); break;
+		case 1: SetVsyncOn (); break;
 		}
 	}
 

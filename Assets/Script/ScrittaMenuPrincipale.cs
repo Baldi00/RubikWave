@@ -53,6 +53,7 @@ public class ScrittaMenuPrincipale : MonoBehaviour {
 
 		if (Input.GetKeyDown (KeyCode.Mouse0) && name.Equals ("Continua")) {
 			m_MenuPrincipale.GetComponent<MenuPrincipale>().SetFirtsStart(false);
+			m_GameManager.GetComponent<GameManager>().SetCameraFreeEnabled(true);
 			m_MenuPrincipale.SetActive (false);
 			m_GameManager.GetComponent<GameManager> ().ToggleGameRunning ();
 			OnMouseExit ();
@@ -70,6 +71,7 @@ public class ScrittaMenuPrincipale : MonoBehaviour {
 			m_GameManager.GetComponent<GameManager> ().ResetTimer ();
 
 			m_MenuPrincipale.GetComponent<MenuPrincipale>().SetFirtsStart(false);
+			m_GameManager.GetComponent<GameManager>().SetCameraFreeEnabled(true);
 			m_MenuPrincipale.SetActive (false);
 			m_GameManager.GetComponent<GameManager> ().ToggleGameRunning ();
 			OnMouseExit ();

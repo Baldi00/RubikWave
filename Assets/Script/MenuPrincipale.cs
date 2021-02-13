@@ -28,6 +28,7 @@ public class MenuPrincipale : MonoBehaviour {
 
 			if (m_Principale.activeSelf) {
 				m_GameManager.ToggleGameRunning ();
+				m_GameManager.GetComponent<GameManager>().SetCameraFreeEnabled(true);
 				gameObject.SetActive (false);
 			}
 

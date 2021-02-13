@@ -18,6 +18,7 @@ public class MovimentoCamera : MonoBehaviour {
 		m_Movimentatore = GetComponent<MovimentatoreCamera> ();
 		m_SuonoCamera = GetComponent<AudioSource> ();
 		m_GameManager = GameObject.Find("GameManager").GetComponent<GameManager> ();
+		QualitySettings.vSyncCount = 0;
 	}
 	
 	// Update is called once per frame
@@ -26,8 +27,9 @@ public class MovimentoCamera : MonoBehaviour {
 		bool checkDestra = Input.GetKeyDown (KeyCode.D) || Input.GetKeyDown (KeyCode.RightArrow);
 		bool checkSu = Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown (KeyCode.UpArrow);
 		bool checkGiu = Input.GetKeyDown (KeyCode.S) || Input.GetKeyDown (KeyCode.DownArrow);
+		bool checkRuota = Input.GetKeyDown (KeyCode.R);
 
-		if (m_Movimentatore.isFermo () && m_GameManager.IsGameRunning()) {
+		if ((checkSinistra || checkDestra || checkSu || checkGiu || checkRuota) && m_Movimentatore.isFermo () && m_GameManager.IsGameRunning()) {
 			if (!m_Invertito) {
 				if (checkSinistra) {
 					switch (m_Pos) {
@@ -125,7 +127,7 @@ public class MovimentoCamera : MonoBehaviour {
 				}
 			}
 
-			if (Input.GetKeyDown (KeyCode.R)) {
+			if (checkRuota) {
 				m_Movimentatore.ruota();
 				m_Invertito = !m_Invertito;
 				m_SuonoCamera.enabled = false;

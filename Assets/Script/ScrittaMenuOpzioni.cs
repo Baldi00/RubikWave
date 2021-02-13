@@ -9,7 +9,7 @@ public class ScrittaMenuOpzioni : ScrittaMenuPrincipale {
 	private bool m_Acceso;
 
 	[SerializeField]
-	private ScrittaMenuOpzioni m_ScrittaAlto, m_ScrittaMedio, m_ScrittaBasso, m_ScrittaSuoniOn, m_ScrittaSuoniOff;
+	private ScrittaMenuOpzioni m_ScrittaAlto, m_ScrittaMedio, m_ScrittaBasso, m_VsyncOn, m_VsyncOff, m_ScrittaSuoniOn, m_ScrittaSuoniOff;
 
 	void OnMouseOver(){
 
@@ -31,6 +31,16 @@ public class ScrittaMenuOpzioni : ScrittaMenuPrincipale {
 				DisabilitaTuttiPulsantiGrafica ();
 				m_Acceso = true;
 				m_GameManager.GetComponent<SettingsManager> ().SetBasso ();
+				break;
+			case "Vs_On":
+				DisabilitaTuttiPulsantiGraficaVsync ();
+				m_Acceso = true;
+				m_GameManager.GetComponent<SettingsManager> ().SetVsyncOn ();
+				break;
+			case "Vs_Off":
+				DisabilitaTuttiPulsantiGraficaVsync ();
+				m_Acceso = true;
+				m_GameManager.GetComponent<SettingsManager> ().SetVsyncOff ();
 				break;
 			case "SuoniOn":
 				DisabilitaTuttiPulsantiSuono ();
@@ -69,6 +79,13 @@ public class ScrittaMenuOpzioni : ScrittaMenuPrincipale {
 		m_ScrittaAlto.OnMouseExit();
 		m_ScrittaMedio.OnMouseExit();
 		m_ScrittaBasso.OnMouseExit();
+	}
+
+	public void DisabilitaTuttiPulsantiGraficaVsync(){
+		m_VsyncOn.SetAcceso (false);
+		m_VsyncOff.SetAcceso (false);
+		m_VsyncOn.OnMouseExit();
+		m_VsyncOff.OnMouseExit();
 	}
 
 	public void DisabilitaTuttiPulsantiSuono(){

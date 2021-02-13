@@ -34,11 +34,15 @@ public class GameManager : MonoBehaviour {
 
 	protected bool m_CheckVittoria = false;
 
+	[SerializeField]
+	protected Camera m_CameraFree;
+
 
 	void Start () {
 		m_StatoCubo = GetComponent<StatoCubo> ();
 		m_Animatore = GameObject.Find ("Animazioni").GetComponent<Animatore>();
 		m_GameRunning = false;
+		SetCameraFreeEnabled(false);
 
 		if (FileManager.isGameSavePresent () && FileManager.caricaDaFile ()) {
 			Color attivato = new Color ();
@@ -52,6 +56,7 @@ public class GameManager : MonoBehaviour {
 			m_MenuPrincipalePrincipaleContinua.GetComponent<BoxCollider> ().enabled = false;
 
 			GetComponent<SettingsManager> ().SetAlto ();
+			GetComponent<SettingsManager> ().SetVsyncOn ();
 			GetComponent<SettingsManager> ().SetSuoniOn ();
 		}
 
@@ -76,6 +81,7 @@ public class GameManager : MonoBehaviour {
 		
 		if (Input.GetKeyDown (KeyCode.Escape) && m_GameRunning) {
 			m_MenuPrincipale.SetActive (true);
+			SetCameraFreeEnabled(false);
 			m_GameRunning = false;
 		}
 
@@ -172,6 +178,10 @@ public class GameManager : MonoBehaviour {
 
 	public int GetVelocitaMescola(){
 		return m_VelocitaMescola;
+	}
+
+	public void SetCameraFreeEnabled(bool enabled){
+		m_CameraFree.enabled = enabled;
 	}
 
 	public bool ColorCompare(Color c1, Color c2){

@@ -412,12 +412,16 @@ public class FileManager : MonoBehaviour {
 				//PREPARO GRAFICA
 				string grafica = "" + m_GameManagerObject.GetComponent<SettingsManager>().GetGrafica() + "\n";
 
+				//PREPARO GRAFICA_VSYNC
+				string vsync = "" + m_GameManagerObject.GetComponent<SettingsManager>().GetGraficaVsync() + "\n";
+
 				//PREPARO SUONI
 				string suoni = "" + m_GameManagerObject.GetComponent<SettingsManager>().GetSuoni();
 
 				m_Saving = true;
 				writer = new StreamWriter (FOLDER + m_OpzioniFileName, false);
 				writer.Write (grafica);
+				writer.Write (vsync);
 				writer.Write (suoni);
 				writer.Close ();
 				saved = true;
@@ -457,6 +461,9 @@ public class FileManager : MonoBehaviour {
 
 				//LEGGO GRAFICA
 				m_GameManagerObject.GetComponent<SettingsManager>().SetGrafica(int.Parse(reader.ReadLine ()));
+
+				//LEGGO GRAFICA_VSYNC
+				m_GameManagerObject.GetComponent<SettingsManager>().SetGraficaVsync(int.Parse(reader.ReadLine ()));
 
 				//LEGGO SUONI
 				m_GameManagerObject.GetComponent<SettingsManager>().SetSuoni(int.Parse(reader.ReadLine ()));

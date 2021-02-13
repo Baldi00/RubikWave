@@ -320,7 +320,7 @@ public class Animatore : MonoBehaviour {
 		}
 	}
 
-	public void Front(Color c1,Color c2,Color c3,Color c4,Color c5,Color c6,Color c7,Color c8,Color c9,Color c10,Color c11,Color c12,Color c13,Color c14,Color c15,Color c16,Color c17,Color c18,Color c19,Color c20,bool orario){
+	public void Front(Color c1, Color c2, Color c3, Color c4, Color c5, Color c6, Color c7, Color c8, Color c9, Color c10, Color c11, Color c12, Color c13, Color c14, Color c15, Color c16, Color c17, Color c18, Color c19, Color c20, bool orario){
 		m_Steps = m_Frames;
 		m_FrontAnim.SetActive (true);
 
