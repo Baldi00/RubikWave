@@ -2,7 +2,7 @@
 Unity Rubik Cube Game
 
 My first Unity project alone<br>
-Last update 2019-11-09
+Last update 2019-11-09<br>
 Unity version: 2017.3.0f3
 
 <img src="img1.jpg">
