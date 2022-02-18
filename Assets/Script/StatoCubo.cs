@@ -18,9 +18,9 @@ public class StatoCubo : MonoBehaviour {
 	private GameObject Spig1,Spig2,Spig3,Spig4,Spig5,Spig6,Spig7,Spig8,Spig9,Spig10,Spig11,Spig12;
 	private GameObject Vert1,Vert2,Vert3,Vert4,Vert5,Vert6,Vert7,Vert8;
 
-	private bool m_Orario = true;
+	private bool mOrario = true;
 
-	private Animatore m_Animatore;
+	private Animatore mAnimatore;
 
 	void Start(){
 		
@@ -110,7 +110,7 @@ public class StatoCubo : MonoBehaviour {
 		Vert7 = GameObject.Find("Vert7");
 		Vert8 = GameObject.Find("Vert8");
 
-		m_Animatore = GameObject.Find ("Animazioni").GetComponent<Animatore> ();
+		mAnimatore = GameObject.Find ("Animazioni").GetComponent<Animatore> ();
 	}
 
 	public void FrontOrario(){
@@ -124,8 +124,8 @@ public class StatoCubo : MonoBehaviour {
 		Vert3.SetActive (false);
 		Vert4.SetActive (false);
 
-		if (m_Orario)
-			m_Animatore.Front (VertFrontLeftUp.GetComponent<Renderer> ().material.color,
+		if (mOrario)
+			mAnimatore.Front (VertFrontLeftUp.GetComponent<Renderer> ().material.color,
 				VertFrontRightUp.GetComponent<Renderer> ().material.color,
 				VertFrontLeftDown.GetComponent<Renderer> ().material.color,
 				VertFrontRightDown.GetComponent<Renderer> ().material.color,
@@ -191,7 +191,7 @@ public class StatoCubo : MonoBehaviour {
 		Vert3.SetActive (false);
 		Vert4.SetActive (false);
 
-		m_Animatore.Front (VertFrontLeftUp.GetComponent<Renderer> ().material.color,
+		mAnimatore.Front (VertFrontLeftUp.GetComponent<Renderer> ().material.color,
 			VertFrontRightUp.GetComponent<Renderer> ().material.color,
 			VertFrontLeftDown.GetComponent<Renderer> ().material.color,
 			VertFrontRightDown.GetComponent<Renderer> ().material.color,
@@ -212,11 +212,11 @@ public class StatoCubo : MonoBehaviour {
 			SpigUpDown.GetComponent<Renderer> ().material.color,
 			SpigDownUp.GetComponent<Renderer> ().material.color, false);
 
-		m_Orario = false;
+		mOrario = false;
 		for (int volta = 0; volta < 3; volta++) {
 			FrontOrario ();
 		}
-		m_Orario = true;
+		mOrario = true;
 	}
 
 	public void BackOrario(){
@@ -230,8 +230,8 @@ public class StatoCubo : MonoBehaviour {
 		Vert7.SetActive (false);
 		Vert8.SetActive (false);
 
-		if (m_Orario)
-			m_Animatore.Back (VertBackLeftUp.GetComponent<Renderer> ().material.color,
+		if (mOrario)
+			mAnimatore.Back (VertBackLeftUp.GetComponent<Renderer> ().material.color,
 				VertBackRightUp.GetComponent<Renderer> ().material.color,
 				VertBackLeftDown.GetComponent<Renderer> ().material.color,
 				VertBackRightDown.GetComponent<Renderer> ().material.color,
@@ -297,7 +297,7 @@ public class StatoCubo : MonoBehaviour {
 		Vert7.SetActive (false);
 		Vert8.SetActive (false);
 
-		m_Animatore.Back (VertBackLeftUp.GetComponent<Renderer> ().material.color,
+		mAnimatore.Back (VertBackLeftUp.GetComponent<Renderer> ().material.color,
 			VertBackRightUp.GetComponent<Renderer> ().material.color,
 			VertBackLeftDown.GetComponent<Renderer> ().material.color,
 			VertBackRightDown.GetComponent<Renderer> ().material.color,
@@ -318,11 +318,11 @@ public class StatoCubo : MonoBehaviour {
 			SpigUpUp.GetComponent<Renderer> ().material.color,
 			SpigDownDown.GetComponent<Renderer> ().material.color, false);
 
-		m_Orario = false;
+		mOrario = false;
 		for (int volta = 0; volta < 3; volta++) {
 			BackOrario ();
 		}
-		m_Orario = true;
+		mOrario = true;
 	}
 
 	public void RightOrario(){
@@ -336,8 +336,8 @@ public class StatoCubo : MonoBehaviour {
 		Vert6.SetActive (false);
 		Vert8.SetActive (false);
 
-		if (m_Orario)
-			m_Animatore.Right (VertRightLeftUp.GetComponent<Renderer> ().material.color,
+		if (mOrario)
+			mAnimatore.Right (VertRightLeftUp.GetComponent<Renderer> ().material.color,
 				VertRightRightUp.GetComponent<Renderer> ().material.color,
 				VertRightLeftDown.GetComponent<Renderer> ().material.color,
 				VertRightRightDown.GetComponent<Renderer> ().material.color,
@@ -402,7 +402,7 @@ public class StatoCubo : MonoBehaviour {
 		Vert6.SetActive (false);
 		Vert8.SetActive (false);
 
-		m_Animatore.Right (VertRightLeftUp.GetComponent<Renderer> ().material.color,
+		mAnimatore.Right (VertRightLeftUp.GetComponent<Renderer> ().material.color,
 			VertRightRightUp.GetComponent<Renderer> ().material.color,
 			VertRightLeftDown.GetComponent<Renderer> ().material.color,
 			VertRightRightDown.GetComponent<Renderer> ().material.color,
@@ -423,11 +423,11 @@ public class StatoCubo : MonoBehaviour {
 			SpigUpRight.GetComponent<Renderer> ().material.color,
 			SpigDownRight.GetComponent<Renderer> ().material.color, false);
 
-		m_Orario = false;
+		mOrario = false;
 		for (int volta = 0; volta < 3; volta++) {
 			RightOrario ();
 		}
-		m_Orario = true;
+		mOrario = true;
 	}
 
 	public void LeftOrario(){
@@ -441,8 +441,8 @@ public class StatoCubo : MonoBehaviour {
 		Vert5.SetActive (false);
 		Vert7.SetActive (false);
 
-		if (m_Orario)
-			m_Animatore.Left (VertLeftLeftUp.GetComponent<Renderer> ().material.color,
+		if (mOrario)
+			mAnimatore.Left (VertLeftLeftUp.GetComponent<Renderer> ().material.color,
 				VertLeftRightUp.GetComponent<Renderer> ().material.color,
 				VertLeftLeftDown.GetComponent<Renderer> ().material.color,
 				VertLeftRightDown.GetComponent<Renderer> ().material.color,
@@ -508,7 +508,7 @@ public class StatoCubo : MonoBehaviour {
 		Vert5.SetActive (false);
 		Vert7.SetActive (false);
 
-		m_Animatore.Left (VertLeftLeftUp.GetComponent<Renderer> ().material.color,
+		mAnimatore.Left (VertLeftLeftUp.GetComponent<Renderer> ().material.color,
 			VertLeftRightUp.GetComponent<Renderer> ().material.color,
 			VertLeftLeftDown.GetComponent<Renderer> ().material.color,
 			VertLeftRightDown.GetComponent<Renderer> ().material.color,
@@ -529,11 +529,11 @@ public class StatoCubo : MonoBehaviour {
 			SpigUpLeft.GetComponent<Renderer> ().material.color,
 			SpigDownLeft.GetComponent<Renderer> ().material.color, false);
 
-		m_Orario = false;
+		mOrario = false;
 		for (int volta = 0; volta < 3; volta++) {
 			LeftOrario ();
 		}
-		m_Orario = true;
+		mOrario = true;
 	}
 
 	public void UpOrario(){
@@ -547,8 +547,8 @@ public class StatoCubo : MonoBehaviour {
 		Vert5.SetActive (false);
 		Vert6.SetActive (false);
 
-		if (m_Orario)
-			m_Animatore.Up (VertUpLeftUp.GetComponent<Renderer> ().material.color,
+		if (mOrario)
+			mAnimatore.Up (VertUpLeftUp.GetComponent<Renderer> ().material.color,
 				VertUpRightUp.GetComponent<Renderer> ().material.color,
 				VertUpLeftDown.GetComponent<Renderer> ().material.color,
 				VertUpRightDown.GetComponent<Renderer> ().material.color,
@@ -614,7 +614,7 @@ public class StatoCubo : MonoBehaviour {
 		Vert5.SetActive (false);
 		Vert6.SetActive (false);
 
-		m_Animatore.Up (VertUpLeftUp.GetComponent<Renderer> ().material.color,
+		mAnimatore.Up (VertUpLeftUp.GetComponent<Renderer> ().material.color,
 			VertUpRightUp.GetComponent<Renderer> ().material.color,
 			VertUpLeftDown.GetComponent<Renderer> ().material.color,
 			VertUpRightDown.GetComponent<Renderer> ().material.color,
@@ -635,11 +635,11 @@ public class StatoCubo : MonoBehaviour {
 			SpigBackUp.GetComponent<Renderer> ().material.color,
 			SpigFrontUp.GetComponent<Renderer> ().material.color, false);
 
-		m_Orario = false;
+		mOrario = false;
 		for (int volta = 0; volta < 3; volta++) {
 			UpOrario ();
 		}
-		m_Orario = true;
+		mOrario = true;
 	}
 
 	public void DownOrario(){
@@ -653,8 +653,8 @@ public class StatoCubo : MonoBehaviour {
 		Vert7.SetActive (false);
 		Vert8.SetActive (false);
 
-		if (m_Orario)
-			m_Animatore.Down (VertDownLeftUp.GetComponent<Renderer> ().material.color,
+		if (mOrario)
+			mAnimatore.Down (VertDownLeftUp.GetComponent<Renderer> ().material.color,
 				VertDownRightUp.GetComponent<Renderer> ().material.color,
 				VertDownLeftDown.GetComponent<Renderer> ().material.color,
 				VertDownRightDown.GetComponent<Renderer> ().material.color,
@@ -720,7 +720,7 @@ public class StatoCubo : MonoBehaviour {
 		Vert7.SetActive (false);
 		Vert8.SetActive (false);
 
-		m_Animatore.Down (VertDownLeftUp.GetComponent<Renderer> ().material.color,
+		mAnimatore.Down (VertDownLeftUp.GetComponent<Renderer> ().material.color,
 			VertDownRightUp.GetComponent<Renderer> ().material.color,
 			VertDownLeftDown.GetComponent<Renderer> ().material.color,
 			VertDownRightDown.GetComponent<Renderer> ().material.color,
@@ -741,11 +741,52 @@ public class StatoCubo : MonoBehaviour {
 			SpigFrontDown.GetComponent<Renderer> ().material.color,
 			SpigBackDown.GetComponent<Renderer> ().material.color, false);
 		
-		m_Orario = false;
+		mOrario = false;
 		for (int volta = 0; volta < 3; volta++) {
 			DownOrario ();
 		}
-		m_Orario = true;
+		mOrario = true;
+	}
+
+	public void MoveFront(bool orario){
+		if (orario)
+			FrontOrario ();
+		else
+			FrontAntioriario ();
+	}
+
+	public void MoveBack(bool orario){
+		if (orario)
+			BackOrario ();
+		else
+			BackAntioriario ();
+	}
+
+	public void MoveLeft(bool orario){
+		if (orario)
+			LeftOrario ();
+		else
+			LeftAntioriario ();
+	}
+
+	public void MoveRight(bool orario){
+		if (orario)
+			RightOrario ();
+		else
+			RightAntioriario ();
+	}
+
+	public void MoveUp(bool orario){
+		if (orario)
+			UpOrario ();
+		else
+			UpAntioriario ();
+	}
+	public void MoveDown(bool orario){
+		if (orario)
+			DownOrario ();
+		else
+			DownAntioriario ();
 	}
 
 	public void AccendiTuttiCubetti(){

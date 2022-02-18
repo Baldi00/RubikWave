@@ -6,101 +6,106 @@ using UnityEngine.PostProcessing;
 using UnityEngine.SceneManagement;
 
 public class ScrittaMenuPrincipale : MonoBehaviour {
+	
 	[SerializeField]
-	protected string m_InfoString;
+	protected string mInfoString;
 
-	[SerializeField]
-	protected Text m_InfoOggetto;
-	protected Text m_MioTesto;
+	protected Text mInfoOggetto;
+	protected Text mMioTesto;
 
-	[SerializeField]
-	protected GameObject m_GameManager;
+	protected GameManager mGameManager;
+	protected InputManager mInputManager;
+	protected MainMenuManager mMainMenuManager;
 
-	[SerializeField]
-	protected GameObject m_MenuOpzioni;
+	protected GameObject mMenuOpzioni;
+	protected GameObject mMenuControlli;
+	protected GameObject mMenuPrincipale;
+	protected GameObject mMainMenuContainer;
 
-	[SerializeField]
-	protected GameObject m_MenuControlli;
-
-	[SerializeField]
-	protected GameObject m_MenuPrincipale;
-
-	[SerializeField]
-	protected GameObject m_Continua;
+	protected GameObject mContinua;
 
 	public void Start(){
-		m_MioTesto = GetComponent<Text> ();
+		mMioTesto = GetComponent<Text> ();
+		mGameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
+		mInputManager = GameObject.Find ("GameManager").GetComponent<InputManager> ();
+		mMainMenuManager = GameObject.Find ("GameManager").GetComponent<MainMenuManager> ();
+		mMenuOpzioni = mMainMenuManager.GetMenuOpzioni ();
+		mMenuControlli = mMainMenuManager.GetMenuControlli ();
+		mMenuPrincipale = mMainMenuManager.GetMenuPrincipale ();
+		mMainMenuContainer = mMainMenuManager.GetMainMenuContainer ();
+		mInfoOggetto = mMainMenuManager.GetInfoVarieMenuPrincipale().GetComponent<Text> ();
+		mContinua = mMainMenuManager.GetContinua ();
 	}
 
 	public void OnMouseEnter(){
 		transform.localScale = new Vector3 (1.1f, 1.1f, 1f);
 		Color attivato = new Color ();
 		ColorUtility.TryParseHtmlString ("#00FFFFFF", out attivato);
-		m_MioTesto.color = attivato;
+		mMioTesto.color = attivato;
 	}
 
 	public void OnMouseOver(){
 
-		m_InfoOggetto.text = m_InfoString;
+		mInfoOggetto.text = mInfoString;
 			
 
-		if (Input.GetKeyDown (KeyCode.Mouse0) && name.Equals ("Esci")) {
-			if (!m_MenuPrincipale.GetComponent<MenuPrincipale>().GetFirtsStart()) {
+		if (mInputManager.IsLeftMousePressed() && name.Equals ("Esci")) {
+			if (!mMainMenuManager.GetFirtsStart()) {
 				FileManager.salvaSuFile ();
 			}
 			Application.Quit ();
 		}
 
-		if (Input.GetKeyDown (KeyCode.Mouse0) && name.Equals ("Continua")) {
-			m_MenuPrincipale.GetComponent<MenuPrincipale>().SetFirtsStart(false);
-			m_GameManager.GetComponent<GameManager>().SetCameraFreeEnabled(true);
-			m_MenuPrincipale.SetActive (false);
-			m_GameManager.GetComponent<GameManager> ().ToggleGameRunning ();
+		if (mInputManager.IsLeftMousePressed() && name.Equals ("Continua")) {
+			mMainMenuManager.SetFirtsStart(false);
+			mGameManager.SetCameraFreeEnabled(true);
+			mMainMenuContainer.SetActive (false);
+			mGameManager.ToggleGameRunning ();
 			OnMouseExit ();
 		}
 
-		if (Input.GetKeyDown (KeyCode.Mouse0) && name.Equals ("NuovaPartita")) {
+		if (mInputManager.IsLeftMousePressed() && name.Equals ("NuovaPartita")) {
 
 			Color attivato = new Color ();
 			ColorUtility.TryParseHtmlString ("#00CAFFFF", out attivato);
-			m_Continua.GetComponent<Text> ().color = attivato;
-			m_Continua.GetComponent<BoxCollider> ().enabled = true;
+			mContinua.GetComponent<Text> ().color = attivato;
+			mContinua.GetComponent<BoxCollider> ().enabled = true;
 
-			m_GameManager.GetComponent<GameManager> ().ResetCubo ();
-			m_GameManager.GetComponent<GameManager> ().ResetMosseEseguite ();
-			m_GameManager.GetComponent<GameManager> ().ResetTimer ();
+			mGameManager.ResetCubo ();
+			mGameManager.ResetMosseEseguite ();
+			mGameManager.ResetTimer ();
 
-			m_MenuPrincipale.GetComponent<MenuPrincipale>().SetFirtsStart(false);
-			m_GameManager.GetComponent<GameManager>().SetCameraFreeEnabled(true);
-			m_MenuPrincipale.SetActive (false);
-			m_GameManager.GetComponent<GameManager> ().ToggleGameRunning ();
+			mMainMenuManager.SetFirtsStart(false);
+			mGameManager.SetCameraFreeEnabled(true);
+			mMainMenuContainer.SetActive (false);
+			mGameManager.ToggleGameRunning ();
 			OnMouseExit ();
 		}
 
-		if (Input.GetKeyDown (KeyCode.Mouse0) && name.Equals ("Aiutami")) {
-			if (!m_MenuPrincipale.GetComponent<MenuPrincipale> ().GetFirtsStart ()) {
+		if (mInputManager.IsLeftMousePressed() && name.Equals ("Aiutami")) {
+			if (!mMainMenuManager.GetFirtsStart ()) {
 				FileManager.salvaSuFile ();
 			}
 			ThroughScenesParameters.setSceneToLoad(1);
 			SceneManager.LoadScene ("LoadingScreen", LoadSceneMode.Single);
 		}
 
-		if (Input.GetKeyDown (KeyCode.Mouse0) && name.Equals ("Opzioni")) {
-			m_MenuOpzioni.SetActive (true);
-			m_MenuPrincipale.SetActive (false);
+		if (mInputManager.IsLeftMousePressed() && name.Equals ("Opzioni")) {
+			mMenuOpzioni.SetActive (true);
+			mMenuPrincipale.SetActive (false);
 			OnMouseExit ();
 		}
 
-		if (Input.GetKeyDown (KeyCode.Mouse0) && name.Equals ("Controlli")) {
-			m_MenuControlli.SetActive (true);
-			m_MenuPrincipale.SetActive (false);
+		if (mInputManager.IsLeftMousePressed() && name.Equals ("Controlli")) {
+			mMenuControlli.SetActive (true);
+			mMenuPrincipale.SetActive (false);
 			OnMouseExit ();
 		}
 
-		if (Input.GetKeyDown (KeyCode.Mouse0) && name.Equals ("Indietro")) {
-			m_MenuPrincipale.SetActive (true);
-			m_MenuOpzioni.SetActive (false);
-			m_MenuControlli.SetActive (false);
+		if (mInputManager.IsLeftMousePressed() && name.Equals ("Indietro")) {
+			mMenuPrincipale.SetActive (true);
+			mMenuOpzioni.SetActive (false);
+			mMenuControlli.SetActive (false);
 			OnMouseExit ();
 		}
 	}
@@ -108,9 +113,9 @@ public class ScrittaMenuPrincipale : MonoBehaviour {
 	public void OnMouseExit(){
 
 		transform.localScale = new Vector3 (1f, 1f, 1f);
-		m_InfoOggetto.text = "";
+		mInfoOggetto.text = "";
 		Color disattivato = new Color ();
 		ColorUtility.TryParseHtmlString ("#00CAFFFF", out disattivato);
-		m_MioTesto.color = disattivato;
+		mMioTesto.color = disattivato;
 	}
 }

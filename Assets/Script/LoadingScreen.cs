@@ -6,10 +6,10 @@ using UnityEngine.UI;
 
 public class LoadingScreen : MonoBehaviour {
 
-	[SerializeField]
-	private Slider slider;
+	protected Slider mSlider;
 
 	void Start () {
+		mSlider = GameObject.Find ("Slider").GetComponent<Slider> ();
 		StartCoroutine(LoadAsyncScene());
 	}
 	
@@ -18,9 +18,9 @@ public class LoadingScreen : MonoBehaviour {
 		asyncLoad.allowSceneActivation = false;
 
 		while (!asyncLoad.isDone) {
-			slider.value = asyncLoad.progress;
+			mSlider.value = asyncLoad.progress;
 			if (asyncLoad.progress == 0.9f) {
-				slider.value = 1f;
+				mSlider.value = 1f;
 				asyncLoad.allowSceneActivation = true;
 			}
 			yield return null;

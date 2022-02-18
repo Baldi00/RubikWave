@@ -4,16 +4,26 @@ using UnityEngine;
 
 public class Animatore : MonoBehaviour {
 
-	[SerializeField]
-	private int m_Frames = 30;
-	private int m_Steps;
-	private bool m_Orario = true;
-	private int m_DaRoutare = 0;
+	private int mFrames = 15;
+	private int mSteps;
+	private bool mOrario = true;
+	private int mDaRoutare = 0;
 
-	[SerializeField]
-	private GameObject m_FrontAnim, m_BackAnim, m_LeftAnim, m_RightAnim, m_UpAnim, m_DownAnim;
+	private GameObject mFrontAnim, mBackAnim, mLeftAnim, mRightAnim, mUpAnim, mDownAnim;
+	private Vector3 mFrontAnimDefaultPosition = new Vector3 (-3.75f, 3.75f, 0f);
+	private Vector3 mFrontAnimDefaultRotation = new Vector3 (0f, 0f, 0f);
+	private Vector3 mBackAnimDefaultPosition = new Vector3 (-3.75f, 3.75f, 2.5f);
+	private Vector3 mBackAnimDefaultRotation = new Vector3 (0f, 180f, 0f);
+	private Vector3 mLeftAnimDefaultPosition = new Vector3 (-5f, 3.75f, 1.25f);
+	private Vector3 mLeftAnimDefaultRotation = new Vector3 (0f, 90f, 0f);
+	private Vector3 mRightAnimDefaultPosition = new Vector3 (-2.5f, 3.75f, 1.25f);
+	private Vector3 mRightAnimDefaultRotation = new Vector3 (0f, -90f, 0f);
+	private Vector3 mUpAnimDefaultPosition = new Vector3 (-3.75f, 2.5f, 1.25f);
+	private Vector3 mUpAnimDefaultRotation = new Vector3 (-90f, 0f, 0f);
+	private Vector3 mDownAnimDefaultPosition = new Vector3 (-3.75f, 5f, 1.25f);
+	private Vector3 mDownAnimDefaultRotation = new Vector3 (90f, 0f, 0f);
 
-	private StatoCubo m_StatoCubo;
+	private StatoCubo mStatoCubo;
 
 	private GameObject VertFrontLeftUpFrontAnim,VertFrontRightUpFrontAnim,VertFrontLeftDownFrontAnim,VertFrontRightDownFrontAnim,VertLeftRightUpFrontAnim,VertLeftRightDownFrontAnim,VertRightLeftUpFrontAnim,VertRightLeftDownFrontAnim,VertUpLeftDownFrontAnim,VertUpRightDownFrontAnim,VertDownLeftUpFrontAnim,VertDownRightUpFrontAnim;
 	private GameObject VertFrontLeftUpBackAnim,VertFrontRightUpBackAnim,VertFrontLeftDownBackAnim,VertFrontRightDownBackAnim,VertLeftRightUpBackAnim,VertLeftRightDownBackAnim,VertRightLeftUpBackAnim,VertRightLeftDownBackAnim,VertUpLeftDownBackAnim,VertUpRightDownBackAnim,VertDownLeftUpBackAnim,VertDownRightUpBackAnim;
@@ -29,290 +39,310 @@ public class Animatore : MonoBehaviour {
 	private GameObject SpigFrontUpUpAnim,SpigFrontDownUpAnim,SpigFrontLeftUpAnim,SpigFrontRightUpAnim,SpigLeftRightUpAnim,SpigRightLeftUpAnim,SpigUpDownUpAnim,SpigDownUpUpAnim;
 	private GameObject SpigFrontUpDownAnim,SpigFrontDownDownAnim,SpigFrontLeftDownAnim,SpigFrontRightDownAnim,SpigLeftRightDownAnim,SpigRightLeftDownAnim,SpigUpDownDownAnim,SpigDownUpDownAnim;
 
-	private AudioSource m_SuonoRotazione;
+	private AudioSource mSuonoRotazione;
 
 	//Mescola
-	private int m_Index;
-	private int [] m_Mosse;
-	private int m_NumMosse;
-	private bool m_Continua = false;
-	private bool m_StoMescolando = false;
-	private bool m_StoRisolvendo = false;
+	private int mIndex;
+	private int [] mMosse;
+	private int mNumMosse;
+	private bool mContinua = false;
+	private bool mStoMescolando = false;
+	private bool mStoRisolvendo = false;
 
 	void Start () {
-		m_Steps = 0;
+		mSteps = 0;
 
-		VertFrontLeftUpFrontAnim = GameObject.Find("VertFrontLeftUpFrontAnim");
-		VertFrontRightUpFrontAnim = GameObject.Find("VertFrontRightUpFrontAnim");
-		VertFrontLeftDownFrontAnim = GameObject.Find("VertFrontLeftDownFrontAnim");
+		VertFrontLeftUpFrontAnim 	= GameObject.Find("VertFrontLeftUpFrontAnim");
+		VertFrontRightUpFrontAnim 	= GameObject.Find("VertFrontRightUpFrontAnim");
+		VertFrontLeftDownFrontAnim 	= GameObject.Find("VertFrontLeftDownFrontAnim");
 		VertFrontRightDownFrontAnim = GameObject.Find("VertFrontRightDownFrontAnim");
-		VertLeftRightUpFrontAnim = GameObject.Find("VertLeftRightUpFrontAnim");
-		VertLeftRightDownFrontAnim = GameObject.Find("VertLeftRightDownFrontAnim");
-		VertRightLeftUpFrontAnim = GameObject.Find("VertRightLeftUpFrontAnim");
-		VertRightLeftDownFrontAnim = GameObject.Find("VertRightLeftDownFrontAnim");
-		VertUpLeftDownFrontAnim = GameObject.Find("VertUpLeftDownFrontAnim");
-		VertUpRightDownFrontAnim = GameObject.Find("VertUpRightDownFrontAnim");
-		VertDownLeftUpFrontAnim = GameObject.Find("VertDownLeftUpFrontAnim");
-		VertDownRightUpFrontAnim = GameObject.Find("VertDownRightUpFrontAnim");
-		VertFrontLeftUpBackAnim = GameObject.Find("VertFrontLeftUpBackAnim");
-		VertFrontRightUpBackAnim = GameObject.Find("VertFrontRightUpBackAnim");
-		VertFrontLeftDownBackAnim = GameObject.Find("VertFrontLeftDownBackAnim");
-		VertFrontRightDownBackAnim = GameObject.Find("VertFrontRightDownBackAnim");
-		VertLeftRightUpBackAnim = GameObject.Find("VertLeftRightUpBackAnim");
-		VertLeftRightDownBackAnim = GameObject.Find("VertLeftRightDownBackAnim");
-		VertRightLeftUpBackAnim = GameObject.Find("VertRightLeftUpBackAnim");
-		VertRightLeftDownBackAnim = GameObject.Find("VertRightLeftDownBackAnim");
-		VertUpLeftDownBackAnim = GameObject.Find("VertUpLeftDownBackAnim");
-		VertUpRightDownBackAnim = GameObject.Find("VertUpRightDownBackAnim");
-		VertDownLeftUpBackAnim = GameObject.Find("VertDownLeftUpBackAnim");
-		VertDownRightUpBackAnim = GameObject.Find("VertDownRightUpBackAnim");
-		VertFrontLeftUpLeftAnim = GameObject.Find("VertFrontLeftUpLeftAnim");
-		VertFrontRightUpLeftAnim = GameObject.Find("VertFrontRightUpLeftAnim");
-		VertFrontLeftDownLeftAnim = GameObject.Find("VertFrontLeftDownLeftAnim");
-		VertFrontRightDownLeftAnim = GameObject.Find("VertFrontRightDownLeftAnim");
-		VertLeftRightUpLeftAnim = GameObject.Find("VertLeftRightUpLeftAnim");
-		VertLeftRightDownLeftAnim = GameObject.Find("VertLeftRightDownLeftAnim");
-		VertRightLeftUpLeftAnim = GameObject.Find("VertRightLeftUpLeftAnim");
-		VertRightLeftDownLeftAnim = GameObject.Find("VertRightLeftDownLeftAnim");
-		VertUpLeftDownLeftAnim = GameObject.Find("VertUpLeftDownLeftAnim");
-		VertUpRightDownLeftAnim = GameObject.Find("VertUpRightDownLeftAnim");
-		VertDownLeftUpLeftAnim = GameObject.Find("VertDownLeftUpLeftAnim");
-		VertDownRightUpLeftAnim = GameObject.Find("VertDownRightUpLeftAnim");
-		VertFrontLeftUpRightAnim = GameObject.Find("VertFrontLeftUpRightAnim");
-		VertFrontRightUpRightAnim = GameObject.Find("VertFrontRightUpRightAnim");
-		VertFrontLeftDownRightAnim = GameObject.Find("VertFrontLeftDownRightAnim");
+		VertLeftRightUpFrontAnim 	= GameObject.Find("VertLeftRightUpFrontAnim");
+		VertLeftRightDownFrontAnim 	= GameObject.Find("VertLeftRightDownFrontAnim");
+		VertRightLeftUpFrontAnim 	= GameObject.Find("VertRightLeftUpFrontAnim");
+		VertRightLeftDownFrontAnim 	= GameObject.Find("VertRightLeftDownFrontAnim");
+		VertUpLeftDownFrontAnim 	= GameObject.Find("VertUpLeftDownFrontAnim");
+		VertUpRightDownFrontAnim 	= GameObject.Find("VertUpRightDownFrontAnim");
+		VertDownLeftUpFrontAnim 	= GameObject.Find("VertDownLeftUpFrontAnim");
+		VertDownRightUpFrontAnim 	= GameObject.Find("VertDownRightUpFrontAnim");
+		VertFrontLeftUpBackAnim 	= GameObject.Find("VertFrontLeftUpBackAnim");
+		VertFrontRightUpBackAnim 	= GameObject.Find("VertFrontRightUpBackAnim");
+		VertFrontLeftDownBackAnim 	= GameObject.Find("VertFrontLeftDownBackAnim");
+		VertFrontRightDownBackAnim 	= GameObject.Find("VertFrontRightDownBackAnim");
+		VertLeftRightUpBackAnim 	= GameObject.Find("VertLeftRightUpBackAnim");
+		VertLeftRightDownBackAnim 	= GameObject.Find("VertLeftRightDownBackAnim");
+		VertRightLeftUpBackAnim 	= GameObject.Find("VertRightLeftUpBackAnim");
+		VertRightLeftDownBackAnim 	= GameObject.Find("VertRightLeftDownBackAnim");
+		VertUpLeftDownBackAnim 		= GameObject.Find("VertUpLeftDownBackAnim");
+		VertUpRightDownBackAnim 	= GameObject.Find("VertUpRightDownBackAnim");
+		VertDownLeftUpBackAnim 		= GameObject.Find("VertDownLeftUpBackAnim");
+		VertDownRightUpBackAnim 	= GameObject.Find("VertDownRightUpBackAnim");
+		VertFrontLeftUpLeftAnim 	= GameObject.Find("VertFrontLeftUpLeftAnim");
+		VertFrontRightUpLeftAnim 	= GameObject.Find("VertFrontRightUpLeftAnim");
+		VertFrontLeftDownLeftAnim 	= GameObject.Find("VertFrontLeftDownLeftAnim");
+		VertFrontRightDownLeftAnim 	= GameObject.Find("VertFrontRightDownLeftAnim");
+		VertLeftRightUpLeftAnim 	= GameObject.Find("VertLeftRightUpLeftAnim");
+		VertLeftRightDownLeftAnim 	= GameObject.Find("VertLeftRightDownLeftAnim");
+		VertRightLeftUpLeftAnim 	= GameObject.Find("VertRightLeftUpLeftAnim");
+		VertRightLeftDownLeftAnim 	= GameObject.Find("VertRightLeftDownLeftAnim");
+		VertUpLeftDownLeftAnim 		= GameObject.Find("VertUpLeftDownLeftAnim");
+		VertUpRightDownLeftAnim 	= GameObject.Find("VertUpRightDownLeftAnim");
+		VertDownLeftUpLeftAnim 		= GameObject.Find("VertDownLeftUpLeftAnim");
+		VertDownRightUpLeftAnim 	= GameObject.Find("VertDownRightUpLeftAnim");
+		VertFrontLeftUpRightAnim 	= GameObject.Find("VertFrontLeftUpRightAnim");
+		VertFrontRightUpRightAnim 	= GameObject.Find("VertFrontRightUpRightAnim");
+		VertFrontLeftDownRightAnim 	= GameObject.Find("VertFrontLeftDownRightAnim");
 		VertFrontRightDownRightAnim = GameObject.Find("VertFrontRightDownRightAnim");
-		VertLeftRightUpRightAnim = GameObject.Find("VertLeftRightUpRightAnim");
-		VertLeftRightDownRightAnim = GameObject.Find("VertLeftRightDownRightAnim");
-		VertRightLeftUpRightAnim = GameObject.Find("VertRightLeftUpRightAnim");
-		VertRightLeftDownRightAnim = GameObject.Find("VertRightLeftDownRightAnim");
-		VertUpLeftDownRightAnim = GameObject.Find("VertUpLeftDownRightAnim");
-		VertUpRightDownRightAnim = GameObject.Find("VertUpRightDownRightAnim");
-		VertDownLeftUpRightAnim = GameObject.Find("VertDownLeftUpRightAnim");
-		VertDownRightUpRightAnim = GameObject.Find("VertDownRightUpRightAnim");
-		VertFrontLeftUpUpAnim = GameObject.Find("VertFrontLeftUpUpAnim");
-		VertFrontRightUpUpAnim = GameObject.Find("VertFrontRightUpUpAnim");
-		VertFrontLeftDownUpAnim = GameObject.Find("VertFrontLeftDownUpAnim");
-		VertFrontRightDownUpAnim = GameObject.Find("VertFrontRightDownUpAnim");
-		VertLeftRightUpUpAnim = GameObject.Find("VertLeftRightUpUpAnim");
-		VertLeftRightDownUpAnim = GameObject.Find("VertLeftRightDownUpAnim");
-		VertRightLeftUpUpAnim = GameObject.Find("VertRightLeftUpUpAnim");
-		VertRightLeftDownUpAnim = GameObject.Find("VertRightLeftDownUpAnim");
-		VertUpLeftDownUpAnim = GameObject.Find("VertUpLeftDownUpAnim");
-		VertUpRightDownUpAnim = GameObject.Find("VertUpRightDownUpAnim");
-		VertDownLeftUpUpAnim = GameObject.Find("VertDownLeftUpUpAnim");
-		VertDownRightUpUpAnim = GameObject.Find("VertDownRightUpUpAnim");
-		VertFrontLeftUpDownAnim = GameObject.Find("VertFrontLeftUpDownAnim");
-		VertFrontRightUpDownAnim = GameObject.Find("VertFrontRightUpDownAnim");
-		VertFrontLeftDownDownAnim = GameObject.Find("VertFrontLeftDownDownAnim");
-		VertFrontRightDownDownAnim = GameObject.Find("VertFrontRightDownDownAnim");
-		VertLeftRightUpDownAnim = GameObject.Find("VertLeftRightUpDownAnim");
-		VertLeftRightDownDownAnim = GameObject.Find("VertLeftRightDownDownAnim");
-		VertRightLeftUpDownAnim = GameObject.Find("VertRightLeftUpDownAnim");
-		VertRightLeftDownDownAnim = GameObject.Find("VertRightLeftDownDownAnim");
-		VertUpLeftDownDownAnim = GameObject.Find("VertUpLeftDownDownAnim");
-		VertUpRightDownDownAnim = GameObject.Find("VertUpRightDownDownAnim");
-		VertDownLeftUpDownAnim = GameObject.Find("VertDownLeftUpDownAnim");
-		VertDownRightUpDownAnim = GameObject.Find("VertDownRightUpDownAnim");
+		VertLeftRightUpRightAnim 	= GameObject.Find("VertLeftRightUpRightAnim");
+		VertLeftRightDownRightAnim 	= GameObject.Find("VertLeftRightDownRightAnim");
+		VertRightLeftUpRightAnim 	= GameObject.Find("VertRightLeftUpRightAnim");
+		VertRightLeftDownRightAnim 	= GameObject.Find("VertRightLeftDownRightAnim");
+		VertUpLeftDownRightAnim 	= GameObject.Find("VertUpLeftDownRightAnim");
+		VertUpRightDownRightAnim 	= GameObject.Find("VertUpRightDownRightAnim");
+		VertDownLeftUpRightAnim 	= GameObject.Find("VertDownLeftUpRightAnim");
+		VertDownRightUpRightAnim 	= GameObject.Find("VertDownRightUpRightAnim");
+		VertFrontLeftUpUpAnim 		= GameObject.Find("VertFrontLeftUpUpAnim");
+		VertFrontRightUpUpAnim 		= GameObject.Find("VertFrontRightUpUpAnim");
+		VertFrontLeftDownUpAnim 	= GameObject.Find("VertFrontLeftDownUpAnim");
+		VertFrontRightDownUpAnim 	= GameObject.Find("VertFrontRightDownUpAnim");
+		VertLeftRightUpUpAnim 		= GameObject.Find("VertLeftRightUpUpAnim");
+		VertLeftRightDownUpAnim 	= GameObject.Find("VertLeftRightDownUpAnim");
+		VertRightLeftUpUpAnim 		= GameObject.Find("VertRightLeftUpUpAnim");
+		VertRightLeftDownUpAnim 	= GameObject.Find("VertRightLeftDownUpAnim");
+		VertUpLeftDownUpAnim 		= GameObject.Find("VertUpLeftDownUpAnim");
+		VertUpRightDownUpAnim 		= GameObject.Find("VertUpRightDownUpAnim");
+		VertDownLeftUpUpAnim 		= GameObject.Find("VertDownLeftUpUpAnim");
+		VertDownRightUpUpAnim 		= GameObject.Find("VertDownRightUpUpAnim");
+		VertFrontLeftUpDownAnim 	= GameObject.Find("VertFrontLeftUpDownAnim");
+		VertFrontRightUpDownAnim 	= GameObject.Find("VertFrontRightUpDownAnim");
+		VertFrontLeftDownDownAnim 	= GameObject.Find("VertFrontLeftDownDownAnim");
+		VertFrontRightDownDownAnim 	= GameObject.Find("VertFrontRightDownDownAnim");
+		VertLeftRightUpDownAnim 	= GameObject.Find("VertLeftRightUpDownAnim");
+		VertLeftRightDownDownAnim 	= GameObject.Find("VertLeftRightDownDownAnim");
+		VertRightLeftUpDownAnim 	= GameObject.Find("VertRightLeftUpDownAnim");
+		VertRightLeftDownDownAnim 	= GameObject.Find("VertRightLeftDownDownAnim");
+		VertUpLeftDownDownAnim 		= GameObject.Find("VertUpLeftDownDownAnim");
+		VertUpRightDownDownAnim 	= GameObject.Find("VertUpRightDownDownAnim");
+		VertDownLeftUpDownAnim 		= GameObject.Find("VertDownLeftUpDownAnim");
+		VertDownRightUpDownAnim 	= GameObject.Find("VertDownRightUpDownAnim");
 
-		SpigFrontUpFrontAnim = GameObject.Find("SpigFrontUpFrontAnim");
-		SpigFrontDownFrontAnim = GameObject.Find("SpigFrontDownFrontAnim");
-		SpigFrontLeftFrontAnim = GameObject.Find("SpigFrontLeftFrontAnim");
-		SpigFrontRightFrontAnim = GameObject.Find("SpigFrontRightFrontAnim");
-		SpigLeftRightFrontAnim = GameObject.Find("SpigLeftRightFrontAnim");
-		SpigRightLeftFrontAnim = GameObject.Find("SpigRightLeftFrontAnim");
-		SpigUpDownFrontAnim = GameObject.Find("SpigUpDownFrontAnim");
-		SpigDownUpFrontAnim = GameObject.Find("SpigDownUpFrontAnim");
-		SpigFrontUpBackAnim = GameObject.Find("SpigFrontUpBackAnim");
-		SpigFrontDownBackAnim = GameObject.Find("SpigFrontDownBackAnim");
-		SpigFrontLeftBackAnim = GameObject.Find("SpigFrontLeftBackAnim");
-		SpigFrontRightBackAnim = GameObject.Find("SpigFrontRightBackAnim");
-		SpigLeftRightBackAnim = GameObject.Find("SpigLeftRightBackAnim");
-		SpigRightLeftBackAnim = GameObject.Find("SpigRightLeftBackAnim");
-		SpigUpDownBackAnim = GameObject.Find("SpigUpDownBackAnim");
-		SpigDownUpBackAnim = GameObject.Find("SpigDownUpBackAnim");
-		SpigFrontUpLeftAnim = GameObject.Find("SpigFrontUpLeftAnim");
-		SpigFrontDownLeftAnim = GameObject.Find("SpigFrontDownLeftAnim");
-		SpigFrontLeftLeftAnim = GameObject.Find("SpigFrontLeftLeftAnim");
-		SpigFrontRightLeftAnim = GameObject.Find("SpigFrontRightLeftAnim");
-		SpigLeftRightLeftAnim = GameObject.Find("SpigLeftRightLeftAnim");
-		SpigRightLeftLeftAnim = GameObject.Find("SpigRightLeftLeftAnim");
-		SpigUpDownLeftAnim = GameObject.Find("SpigUpDownLeftAnim");
-		SpigDownUpLeftAnim = GameObject.Find("SpigDownUpLeftAnim");
-		SpigFrontUpRightAnim = GameObject.Find("SpigFrontUpRightAnim");
-		SpigFrontDownRightAnim = GameObject.Find("SpigFrontDownRightAnim");
-		SpigFrontLeftRightAnim = GameObject.Find("SpigFrontLeftRightAnim");
-		SpigFrontRightRightAnim = GameObject.Find("SpigFrontRightRightAnim");
-		SpigLeftRightRightAnim = GameObject.Find("SpigLeftRightRightAnim");
-		SpigRightLeftRightAnim = GameObject.Find("SpigRightLeftRightAnim");
-		SpigUpDownRightAnim = GameObject.Find("SpigUpDownRightAnim");
-		SpigDownUpRightAnim = GameObject.Find("SpigDownUpRightAnim");
-		SpigFrontUpUpAnim = GameObject.Find("SpigFrontUpUpAnim");
-		SpigFrontDownUpAnim = GameObject.Find("SpigFrontDownUpAnim");
-		SpigFrontLeftUpAnim = GameObject.Find("SpigFrontLeftUpAnim");
-		SpigFrontRightUpAnim = GameObject.Find("SpigFrontRightUpAnim");
-		SpigLeftRightUpAnim = GameObject.Find("SpigLeftRightUpAnim");
-		SpigRightLeftUpAnim = GameObject.Find("SpigRightLeftUpAnim");
-		SpigUpDownUpAnim = GameObject.Find("SpigUpDownUpAnim");
-		SpigDownUpUpAnim = GameObject.Find("SpigDownUpUpAnim");
-		SpigFrontUpDownAnim = GameObject.Find("SpigFrontUpDownAnim");
-		SpigFrontDownDownAnim = GameObject.Find("SpigFrontDownDownAnim");
-		SpigFrontLeftDownAnim = GameObject.Find("SpigFrontLeftDownAnim");
-		SpigFrontRightDownAnim = GameObject.Find("SpigFrontRightDownAnim");
-		SpigLeftRightDownAnim = GameObject.Find("SpigLeftRightDownAnim");
-		SpigRightLeftDownAnim = GameObject.Find("SpigRightLeftDownAnim");
-		SpigUpDownDownAnim = GameObject.Find("SpigUpDownDownAnim");
-		SpigDownUpDownAnim = GameObject.Find("SpigDownUpDownAnim");
+		SpigFrontUpFrontAnim 		= GameObject.Find("SpigFrontUpFrontAnim");
+		SpigFrontDownFrontAnim 		= GameObject.Find("SpigFrontDownFrontAnim");
+		SpigFrontLeftFrontAnim 		= GameObject.Find("SpigFrontLeftFrontAnim");
+		SpigFrontRightFrontAnim 	= GameObject.Find("SpigFrontRightFrontAnim");
+		SpigLeftRightFrontAnim 		= GameObject.Find("SpigLeftRightFrontAnim");
+		SpigRightLeftFrontAnim 		= GameObject.Find("SpigRightLeftFrontAnim");
+		SpigUpDownFrontAnim 		= GameObject.Find("SpigUpDownFrontAnim");
+		SpigDownUpFrontAnim 		= GameObject.Find("SpigDownUpFrontAnim");
+		SpigFrontUpBackAnim 		= GameObject.Find("SpigFrontUpBackAnim");
+		SpigFrontDownBackAnim 		= GameObject.Find("SpigFrontDownBackAnim");
+		SpigFrontLeftBackAnim 		= GameObject.Find("SpigFrontLeftBackAnim");
+		SpigFrontRightBackAnim 		= GameObject.Find("SpigFrontRightBackAnim");
+		SpigLeftRightBackAnim 		= GameObject.Find("SpigLeftRightBackAnim");
+		SpigRightLeftBackAnim 		= GameObject.Find("SpigRightLeftBackAnim");
+		SpigUpDownBackAnim 			= GameObject.Find("SpigUpDownBackAnim");
+		SpigDownUpBackAnim 			= GameObject.Find("SpigDownUpBackAnim");
+		SpigFrontUpLeftAnim 		= GameObject.Find("SpigFrontUpLeftAnim");
+		SpigFrontDownLeftAnim 		= GameObject.Find("SpigFrontDownLeftAnim");
+		SpigFrontLeftLeftAnim 		= GameObject.Find("SpigFrontLeftLeftAnim");
+		SpigFrontRightLeftAnim 		= GameObject.Find("SpigFrontRightLeftAnim");
+		SpigLeftRightLeftAnim 		= GameObject.Find("SpigLeftRightLeftAnim");
+		SpigRightLeftLeftAnim 		= GameObject.Find("SpigRightLeftLeftAnim");
+		SpigUpDownLeftAnim 			= GameObject.Find("SpigUpDownLeftAnim");
+		SpigDownUpLeftAnim 			= GameObject.Find("SpigDownUpLeftAnim");
+		SpigFrontUpRightAnim 		= GameObject.Find("SpigFrontUpRightAnim");
+		SpigFrontDownRightAnim 		= GameObject.Find("SpigFrontDownRightAnim");
+		SpigFrontLeftRightAnim 		= GameObject.Find("SpigFrontLeftRightAnim");
+		SpigFrontRightRightAnim 	= GameObject.Find("SpigFrontRightRightAnim");
+		SpigLeftRightRightAnim 		= GameObject.Find("SpigLeftRightRightAnim");
+		SpigRightLeftRightAnim 		= GameObject.Find("SpigRightLeftRightAnim");
+		SpigUpDownRightAnim 		= GameObject.Find("SpigUpDownRightAnim");
+		SpigDownUpRightAnim 		= GameObject.Find("SpigDownUpRightAnim");
+		SpigFrontUpUpAnim 			= GameObject.Find("SpigFrontUpUpAnim");
+		SpigFrontDownUpAnim 		= GameObject.Find("SpigFrontDownUpAnim");
+		SpigFrontLeftUpAnim 		= GameObject.Find("SpigFrontLeftUpAnim");
+		SpigFrontRightUpAnim 		= GameObject.Find("SpigFrontRightUpAnim");
+		SpigLeftRightUpAnim 		= GameObject.Find("SpigLeftRightUpAnim");
+		SpigRightLeftUpAnim 		= GameObject.Find("SpigRightLeftUpAnim");
+		SpigUpDownUpAnim 			= GameObject.Find("SpigUpDownUpAnim");
+		SpigDownUpUpAnim 			= GameObject.Find("SpigDownUpUpAnim");
+		SpigFrontUpDownAnim 		= GameObject.Find("SpigFrontUpDownAnim");
+		SpigFrontDownDownAnim 		= GameObject.Find("SpigFrontDownDownAnim");
+		SpigFrontLeftDownAnim 		= GameObject.Find("SpigFrontLeftDownAnim");
+		SpigFrontRightDownAnim 		= GameObject.Find("SpigFrontRightDownAnim");
+		SpigLeftRightDownAnim 		= GameObject.Find("SpigLeftRightDownAnim");
+		SpigRightLeftDownAnim 		= GameObject.Find("SpigRightLeftDownAnim");
+		SpigUpDownDownAnim 			= GameObject.Find("SpigUpDownDownAnim");
+		SpigDownUpDownAnim 			= GameObject.Find("SpigDownUpDownAnim");
 
-		m_FrontAnim.SetActive (false);
-		m_BackAnim.SetActive (false);
-		m_LeftAnim.SetActive (false);
-		m_RightAnim.SetActive (false);
-		m_UpAnim.SetActive (false);
-		m_DownAnim.SetActive (false);
+		mFrontAnim 	= GameObject.Find("FrontAnim");
+		mBackAnim 	= GameObject.Find("BackAnim");
+		mLeftAnim 	= GameObject.Find("LeftAnim");
+		mRightAnim 	= GameObject.Find("RightAnim");
+		mUpAnim 	= GameObject.Find("UpAnim");
+		mDownAnim 	= GameObject.Find("DownAnim");
 
-		m_StatoCubo = GameObject.Find ("GameManager").GetComponent<StatoCubo> ();
-		m_SuonoRotazione = GameObject.Find ("Cubo").GetComponent<AudioSource> ();
+		mFrontAnim.transform.position = mFrontAnimDefaultPosition;
+		mFrontAnim.transform.rotation = Quaternion.Euler(mFrontAnimDefaultRotation);
+		mBackAnim.transform.position = mBackAnimDefaultPosition;
+		mBackAnim.transform.rotation = Quaternion.Euler(mBackAnimDefaultRotation);
+		mLeftAnim.transform.position = mLeftAnimDefaultPosition;
+		mLeftAnim.transform.rotation = Quaternion.Euler(mLeftAnimDefaultRotation);
+		mRightAnim.transform.position = mRightAnimDefaultPosition;
+		mRightAnim.transform.rotation = Quaternion.Euler(mRightAnimDefaultRotation);
+		mUpAnim.transform.position = mUpAnimDefaultPosition;
+		mUpAnim.transform.rotation = Quaternion.Euler(mUpAnimDefaultRotation);
+		mDownAnim.transform.position = mDownAnimDefaultPosition;
+		mDownAnim.transform.rotation = Quaternion.Euler(mDownAnimDefaultRotation);
+
+		mFrontAnim.SetActive (false);
+		mBackAnim.SetActive (false);
+		mLeftAnim.SetActive (false);
+		mRightAnim.SetActive (false);
+		mUpAnim.SetActive (false);
+		mDownAnim.SetActive (false);
+
+		mStatoCubo = GameObject.Find ("GameManager").GetComponent<StatoCubo> ();
+		mSuonoRotazione = GameObject.Find ("Cubo").GetComponent<AudioSource> ();
 	}
 
 	void FixedUpdate () {
-		if (m_Steps > 0) {
+		if (mSteps > 0) {
 
 			Quaternion rotation = Quaternion.identity;
 			float gradi;
 
-			if (m_Orario)
+			if (mOrario)
 				gradi = 90f;
 			else
 				gradi = -90f;
 
-			switch(m_DaRoutare){
+			switch(mDaRoutare){
 			case 1:
-				rotation.eulerAngles = new Vector3 (m_FrontAnim.transform.rotation.eulerAngles.x, m_FrontAnim.transform.rotation.eulerAngles.y, m_FrontAnim.transform.rotation.eulerAngles.z+gradi/m_Frames);
-				m_FrontAnim.transform.rotation = rotation;
+				rotation.eulerAngles = new Vector3 (mFrontAnim.transform.rotation.eulerAngles.x, mFrontAnim.transform.rotation.eulerAngles.y, mFrontAnim.transform.rotation.eulerAngles.z+gradi/mFrames);
+				mFrontAnim.transform.rotation = rotation;
 				break;
 
 			case 2:
-				rotation.eulerAngles = new Vector3 (m_BackAnim.transform.rotation.eulerAngles.x, m_BackAnim.transform.rotation.eulerAngles.y, m_BackAnim.transform.rotation.eulerAngles.z+gradi/m_Frames);
-				m_BackAnim.transform.rotation = rotation;
+				rotation.eulerAngles = new Vector3 (mBackAnim.transform.rotation.eulerAngles.x, mBackAnim.transform.rotation.eulerAngles.y, mBackAnim.transform.rotation.eulerAngles.z+gradi/mFrames);
+				mBackAnim.transform.rotation = rotation;
 				break;
 
 			case 3:
-				rotation.eulerAngles = new Vector3 (m_LeftAnim.transform.rotation.eulerAngles.x, m_LeftAnim.transform.rotation.eulerAngles.y, m_LeftAnim.transform.rotation.eulerAngles.z+gradi/m_Frames);
-				m_LeftAnim.transform.rotation = rotation;
+				rotation.eulerAngles = new Vector3 (mLeftAnim.transform.rotation.eulerAngles.x, mLeftAnim.transform.rotation.eulerAngles.y, mLeftAnim.transform.rotation.eulerAngles.z+gradi/mFrames);
+				mLeftAnim.transform.rotation = rotation;
 				break;
 
 			case 4:
-				rotation.eulerAngles = new Vector3 (m_RightAnim.transform.rotation.eulerAngles.x, m_RightAnim.transform.rotation.eulerAngles.y, m_RightAnim.transform.rotation.eulerAngles.z+gradi/m_Frames);
-				m_RightAnim.transform.rotation = rotation;
+				rotation.eulerAngles = new Vector3 (mRightAnim.transform.rotation.eulerAngles.x, mRightAnim.transform.rotation.eulerAngles.y, mRightAnim.transform.rotation.eulerAngles.z+gradi/mFrames);
+				mRightAnim.transform.rotation = rotation;
 				break;
 
 			case 5:
-				rotation.eulerAngles = new Vector3 (m_UpAnim.transform.rotation.eulerAngles.x, m_UpAnim.transform.rotation.eulerAngles.y, m_UpAnim.transform.rotation.eulerAngles.z+gradi/m_Frames);
-				m_UpAnim.transform.rotation = rotation;
+				rotation.eulerAngles = new Vector3 (mUpAnim.transform.rotation.eulerAngles.x, mUpAnim.transform.rotation.eulerAngles.y, mUpAnim.transform.rotation.eulerAngles.z+gradi/mFrames);
+				mUpAnim.transform.rotation = rotation;
 				break;
 
 			case 6:
-				rotation.eulerAngles = new Vector3 (m_DownAnim.transform.rotation.eulerAngles.x, m_DownAnim.transform.rotation.eulerAngles.y, m_DownAnim.transform.rotation.eulerAngles.z+gradi/m_Frames);
-				m_DownAnim.transform.rotation = rotation;
+				rotation.eulerAngles = new Vector3 (mDownAnim.transform.rotation.eulerAngles.x, mDownAnim.transform.rotation.eulerAngles.y, mDownAnim.transform.rotation.eulerAngles.z+gradi/mFrames);
+				mDownAnim.transform.rotation = rotation;
 				break;
 			}
 
-			m_Steps -= 1;
+			mSteps -= 1;
 				
 
-			if (m_Steps == 0) {
-				m_FrontAnim.SetActive (false);
-				m_BackAnim.SetActive (false);
-				m_LeftAnim.SetActive (false);
-				m_RightAnim.SetActive (false);
-				m_UpAnim.SetActive (false);
-				m_DownAnim.SetActive (false);
+			if (mSteps == 0) {
+				mFrontAnim.SetActive (false);
+				mBackAnim.SetActive (false);
+				mLeftAnim.SetActive (false);
+				mRightAnim.SetActive (false);
+				mUpAnim.SetActive (false);
+				mDownAnim.SetActive (false);
 
-				m_StatoCubo.AccendiTuttiCubetti ();
+				mStatoCubo.AccendiTuttiCubetti ();
 
-				switch(m_DaRoutare){
+				switch(mDaRoutare){
 				case 1:
-					rotation.eulerAngles = new Vector3 (m_FrontAnim.transform.rotation.eulerAngles.x, m_FrontAnim.transform.rotation.eulerAngles.y, m_FrontAnim.transform.rotation.eulerAngles.z-gradi);
-					m_FrontAnim.transform.rotation = rotation;
+					rotation.eulerAngles = new Vector3 (mFrontAnim.transform.rotation.eulerAngles.x, mFrontAnim.transform.rotation.eulerAngles.y, mFrontAnim.transform.rotation.eulerAngles.z-gradi);
+					mFrontAnim.transform.rotation = rotation;
 					break;
 
 				case 2:
-					rotation.eulerAngles = new Vector3 (m_BackAnim.transform.rotation.eulerAngles.x, m_BackAnim.transform.rotation.eulerAngles.y, m_BackAnim.transform.rotation.eulerAngles.z-gradi);
-					m_BackAnim.transform.rotation = rotation;
+					rotation.eulerAngles = new Vector3 (mBackAnim.transform.rotation.eulerAngles.x, mBackAnim.transform.rotation.eulerAngles.y, mBackAnim.transform.rotation.eulerAngles.z-gradi);
+					mBackAnim.transform.rotation = rotation;
 					break;
 
 				case 3:
-					rotation.eulerAngles = new Vector3 (m_LeftAnim.transform.rotation.eulerAngles.x, m_LeftAnim.transform.rotation.eulerAngles.y, m_LeftAnim.transform.rotation.eulerAngles.z-gradi);
-					m_LeftAnim.transform.rotation = rotation;
+					rotation.eulerAngles = new Vector3 (mLeftAnim.transform.rotation.eulerAngles.x, mLeftAnim.transform.rotation.eulerAngles.y, mLeftAnim.transform.rotation.eulerAngles.z-gradi);
+					mLeftAnim.transform.rotation = rotation;
 					break;
 
 				case 4:
-					rotation.eulerAngles = new Vector3 (m_RightAnim.transform.rotation.eulerAngles.x, m_RightAnim.transform.rotation.eulerAngles.y, m_RightAnim.transform.rotation.eulerAngles.z-gradi);
-					m_RightAnim.transform.rotation = rotation;
+					rotation.eulerAngles = new Vector3 (mRightAnim.transform.rotation.eulerAngles.x, mRightAnim.transform.rotation.eulerAngles.y, mRightAnim.transform.rotation.eulerAngles.z-gradi);
+					mRightAnim.transform.rotation = rotation;
 					break;
 
 				case 5:
-					rotation.eulerAngles = new Vector3 (m_UpAnim.transform.rotation.eulerAngles.x, m_UpAnim.transform.rotation.eulerAngles.y, m_UpAnim.transform.rotation.eulerAngles.z-gradi);
-					m_UpAnim.transform.rotation = rotation;
+					rotation.eulerAngles = new Vector3 (mUpAnim.transform.rotation.eulerAngles.x, mUpAnim.transform.rotation.eulerAngles.y, mUpAnim.transform.rotation.eulerAngles.z-gradi);
+					mUpAnim.transform.rotation = rotation;
 					break;
 
 				case 6:
-					rotation.eulerAngles = new Vector3 (m_DownAnim.transform.rotation.eulerAngles.x, m_DownAnim.transform.rotation.eulerAngles.y, m_DownAnim.transform.rotation.eulerAngles.z-gradi);
-					m_DownAnim.transform.rotation = rotation;
+					rotation.eulerAngles = new Vector3 (mDownAnim.transform.rotation.eulerAngles.x, mDownAnim.transform.rotation.eulerAngles.y, mDownAnim.transform.rotation.eulerAngles.z-gradi);
+					mDownAnim.transform.rotation = rotation;
 					break;
 				}
 
-				if (m_Continua) {
-					m_Index++;
-					if (m_Index == m_NumMosse) {
-						m_Continua = false;
-						if (m_StoMescolando) {
-							m_StoMescolando = false;
+				if (mContinua) {
+					mIndex++;
+					if (mIndex == mNumMosse) {
+						mContinua = false;
+						if (mStoMescolando) {
+							mStoMescolando = false;
 						}
-						m_Frames = 15;
+						mFrames = 15;
 					}
 					else {
-						switch (m_Mosse[m_Index]) {
+						switch (mMosse[mIndex]) {
 						case 1:
-							m_StatoCubo.FrontOrario ();
+							mStatoCubo.FrontOrario ();
 							break;
 						case 2:
-							m_StatoCubo.FrontAntioriario ();
+							mStatoCubo.FrontAntioriario ();
 							break;
 						case 3:
-							m_StatoCubo.BackOrario ();
+							mStatoCubo.BackOrario ();
 							break;
 						case 4:
-							m_StatoCubo.BackAntioriario ();
+							mStatoCubo.BackAntioriario ();
 							break;
 						case 5:
-							m_StatoCubo.LeftOrario ();
+							mStatoCubo.LeftOrario ();
 							break;
 						case 6:
-							m_StatoCubo.LeftAntioriario ();
+							mStatoCubo.LeftAntioriario ();
 							break;
 						case 7:
-							m_StatoCubo.RightOrario ();
+							mStatoCubo.RightOrario ();
 							break;
 						case 8:
-							m_StatoCubo.RightAntioriario ();
+							mStatoCubo.RightAntioriario ();
 							break;
 						case 9:
-							m_StatoCubo.UpOrario ();
+							mStatoCubo.UpOrario ();
 							break;
 						case 10:
-							m_StatoCubo.UpAntioriario ();
+							mStatoCubo.UpAntioriario ();
 							break;
 						case 11:
-							m_StatoCubo.DownOrario ();
+							mStatoCubo.DownOrario ();
 							break;
 						case 12:
-							m_StatoCubo.DownAntioriario ();
+							mStatoCubo.DownAntioriario ();
 							break;
 						}
-						m_SuonoRotazione.enabled = false;
-						m_SuonoRotazione.enabled = true;
+						mSuonoRotazione.enabled = false;
+						mSuonoRotazione.enabled = true;
 					}
 				}
 			}
@@ -321,8 +351,8 @@ public class Animatore : MonoBehaviour {
 	}
 
 	public void Front(Color c1, Color c2, Color c3, Color c4, Color c5, Color c6, Color c7, Color c8, Color c9, Color c10, Color c11, Color c12, Color c13, Color c14, Color c15, Color c16, Color c17, Color c18, Color c19, Color c20, bool orario){
-		m_Steps = m_Frames;
-		m_FrontAnim.SetActive (true);
+		mSteps = mFrames;
+		mFrontAnim.SetActive (true);
 
 		VertFrontLeftUpFrontAnim.GetComponent<Renderer>().material.color = c1;
 		VertFrontRightUpFrontAnim.GetComponent<Renderer>().material.color = c2;
@@ -345,14 +375,14 @@ public class Animatore : MonoBehaviour {
 		SpigUpDownFrontAnim.GetComponent<Renderer>().material.color = c19;
 		SpigDownUpFrontAnim.GetComponent<Renderer>().material.color = c20;
 
-		m_Orario = orario;
+		mOrario = orario;
 
-		m_DaRoutare = 1;
+		mDaRoutare = 1;
 	}
 
 	public void Back(Color c1,Color c2,Color c3,Color c4,Color c5,Color c6,Color c7,Color c8,Color c9,Color c10,Color c11,Color c12,Color c13,Color c14,Color c15,Color c16,Color c17,Color c18,Color c19,Color c20,bool orario){
-		m_Steps = m_Frames;
-		m_BackAnim.SetActive(true);
+		mSteps = mFrames;
+		mBackAnim.SetActive(true);
 
 		VertFrontLeftUpBackAnim.GetComponent<Renderer>().material.color = c1;
 		VertFrontRightUpBackAnim.GetComponent<Renderer>().material.color = c2;
@@ -375,14 +405,14 @@ public class Animatore : MonoBehaviour {
 		SpigUpDownBackAnim.GetComponent<Renderer>().material.color = c19;
 		SpigDownUpBackAnim.GetComponent<Renderer>().material.color = c20;
 
-		m_Orario = orario;
+		mOrario = orario;
 
-		m_DaRoutare = 2;
+		mDaRoutare = 2;
 	}
 
 	public void Left(Color c1,Color c2,Color c3,Color c4,Color c5,Color c6,Color c7,Color c8,Color c9,Color c10,Color c11,Color c12,Color c13,Color c14,Color c15,Color c16,Color c17,Color c18,Color c19,Color c20,bool orario){
-		m_Steps = m_Frames;
-		m_LeftAnim.SetActive (true);
+		mSteps = mFrames;
+		mLeftAnim.SetActive (true);
 
 		VertFrontLeftUpLeftAnim.GetComponent<Renderer>().material.color = c1;
 		VertFrontRightUpLeftAnim.GetComponent<Renderer>().material.color = c2;
@@ -405,14 +435,14 @@ public class Animatore : MonoBehaviour {
 		SpigUpDownLeftAnim.GetComponent<Renderer>().material.color = c19;
 		SpigDownUpLeftAnim.GetComponent<Renderer>().material.color = c20;
 
-		m_Orario = orario;
+		mOrario = orario;
 
-		m_DaRoutare = 3;
+		mDaRoutare = 3;
 	}
 
 	public void Right(Color c1,Color c2,Color c3,Color c4,Color c5,Color c6,Color c7,Color c8,Color c9,Color c10,Color c11,Color c12,Color c13,Color c14,Color c15,Color c16,Color c17,Color c18,Color c19,Color c20,bool orario){
-		m_Steps = m_Frames;
-		m_RightAnim.SetActive (true);
+		mSteps = mFrames;
+		mRightAnim.SetActive (true);
 
 		VertFrontLeftUpRightAnim.GetComponent<Renderer>().material.color = c1;
 		VertFrontRightUpRightAnim.GetComponent<Renderer>().material.color = c2;
@@ -435,14 +465,14 @@ public class Animatore : MonoBehaviour {
 		SpigUpDownRightAnim.GetComponent<Renderer>().material.color = c19;
 		SpigDownUpRightAnim.GetComponent<Renderer>().material.color = c20;
 
-		m_Orario = orario;
+		mOrario = orario;
 
-		m_DaRoutare = 4;
+		mDaRoutare = 4;
 	}
 
 	public void Up(Color c1,Color c2,Color c3,Color c4,Color c5,Color c6,Color c7,Color c8,Color c9,Color c10,Color c11,Color c12,Color c13,Color c14,Color c15,Color c16,Color c17,Color c18,Color c19,Color c20,bool orario){
-		m_Steps = m_Frames;
-		m_UpAnim.SetActive (true);
+		mSteps = mFrames;
+		mUpAnim.SetActive (true);
 
 		VertFrontLeftUpUpAnim.GetComponent<Renderer>().material.color = c1;
 		VertFrontRightUpUpAnim.GetComponent<Renderer>().material.color = c2;
@@ -465,14 +495,14 @@ public class Animatore : MonoBehaviour {
 		SpigUpDownUpAnim.GetComponent<Renderer>().material.color = c19;
 		SpigDownUpUpAnim.GetComponent<Renderer>().material.color = c20;
 
-		m_Orario = orario;
+		mOrario = orario;
 
-		m_DaRoutare = 5;
+		mDaRoutare = 5;
 	}
 
 	public void Down(Color c1,Color c2,Color c3,Color c4,Color c5,Color c6,Color c7,Color c8,Color c9,Color c10,Color c11,Color c12,Color c13,Color c14,Color c15,Color c16,Color c17,Color c18,Color c19,Color c20,bool orario){
-		m_Steps = m_Frames;
-		m_DownAnim.SetActive (true);
+		mSteps = mFrames;
+		mDownAnim.SetActive (true);
 
 		VertFrontLeftUpDownAnim.GetComponent<Renderer>().material.color = c1;
 		VertFrontRightUpDownAnim.GetComponent<Renderer>().material.color = c2;
@@ -495,88 +525,88 @@ public class Animatore : MonoBehaviour {
 		SpigUpDownDownAnim.GetComponent<Renderer>().material.color = c19;
 		SpigDownUpDownAnim.GetComponent<Renderer>().material.color = c20;
 
-		m_Orario = orario;
+		mOrario = orario;
 
-		m_DaRoutare = 6;
+		mDaRoutare = 6;
 	}
 
 	public bool isFermo(){
-		if (m_Steps == 0) {
-			return !m_StoMescolando && !m_StoRisolvendo;
+		if (mSteps == 0) {
+			return !mStoMescolando && !mStoRisolvendo;
 		}
 
 		return false;
 	}
 
 	public bool isFermoAnimatorePuoAndare(){
-		return m_Steps == 0 && !m_StoMescolando && m_StoRisolvendo;
+		return mSteps == 0 && !mStoMescolando && mStoRisolvendo;
 	}
 
 	public void SetFrames(int frames){
-		m_Frames = frames;
+		mFrames = frames;
 	}
 
 	public void EseguiPiuMosse(int[] mosse, int velocita){
-		m_Mosse = mosse;
-		m_Index = 0;
-		m_NumMosse = m_Mosse.Length;
-		m_Continua = true;
-		m_Frames = velocita;
-		switch (m_Mosse[m_Index]) {
+		mMosse = mosse;
+		mIndex = 0;
+		mNumMosse = mMosse.Length;
+		mContinua = true;
+		mFrames = velocita;
+		switch (mMosse[mIndex]) {
 		case 1:
-			m_StatoCubo.FrontOrario ();
+			mStatoCubo.FrontOrario ();
 			break;
 		case 2:
-			m_StatoCubo.FrontAntioriario ();
+			mStatoCubo.FrontAntioriario ();
 			break;
 		case 3:
-			m_StatoCubo.BackOrario ();
+			mStatoCubo.BackOrario ();
 			break;
 		case 4:
-			m_StatoCubo.BackAntioriario ();
+			mStatoCubo.BackAntioriario ();
 			break;
 		case 5:
-			m_StatoCubo.LeftOrario ();
+			mStatoCubo.LeftOrario ();
 			break;
 		case 6:
-			m_StatoCubo.LeftAntioriario ();
+			mStatoCubo.LeftAntioriario ();
 			break;
 		case 7:
-			m_StatoCubo.RightOrario ();
+			mStatoCubo.RightOrario ();
 			break;
 		case 8:
-			m_StatoCubo.RightAntioriario ();
+			mStatoCubo.RightAntioriario ();
 			break;
 		case 9:
-			m_StatoCubo.UpOrario ();
+			mStatoCubo.UpOrario ();
 			break;
 		case 10:
-			m_StatoCubo.UpAntioriario ();
+			mStatoCubo.UpAntioriario ();
 			break;
 		case 11:
-			m_StatoCubo.DownOrario ();
+			mStatoCubo.DownOrario ();
 			break;
 		case 12:
-			m_StatoCubo.DownAntioriario ();
+			mStatoCubo.DownAntioriario ();
 			break;
 		}
-		m_SuonoRotazione.enabled = false;
-		m_SuonoRotazione.enabled = true;
+		mSuonoRotazione.enabled = false;
+		mSuonoRotazione.enabled = true;
 	}
 
 	public bool StoMescolando(){
-		return m_StoMescolando;
+		return mStoMescolando;
 	}
 
 	public void SetStatoStoMescolando(bool stoMescolando){
-		m_StoMescolando = stoMescolando;
+		mStoMescolando = stoMescolando;
 	}
 
 	public bool StoRisolvendo(){
-		return m_StoRisolvendo;
+		return mStoRisolvendo;
 	}
 
 	public void SetStatoStoRisolvendo(bool stoRisolvendo){
-		m_StoRisolvendo = stoRisolvendo;
+		mStoRisolvendo = stoRisolvendo;
 	}
 }

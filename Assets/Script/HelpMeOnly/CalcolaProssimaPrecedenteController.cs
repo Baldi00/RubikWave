@@ -6,31 +6,31 @@ using UnityEngine.UI;
 public class CalcolaProssimaPrecedenteController : MonoBehaviour {
 
 	[SerializeField]
-	private GameObject m_Calcola, m_Prossima, m_Precedente;
+	private GameObject mCalcola, mProssima, mPrecedente;
 
 	[SerializeField]
-	private GameObject m_SfondoPrecedente;
+	private GameObject mSfondoPrecedente;
 
 	[SerializeField]
-	protected Text m_InfoOggetto;
+	protected Text mInfoOggetto;
 
 	[SerializeField]
-	protected GameObject m_Congratulazioni;
+	protected GameObject mCongratulazioni;
 
 	[SerializeField]
-	protected HelpMeTutor m_HelpMeTutor;
+	protected HelpMeTutor mHelpMeTutor;
 
-	protected GameManager_HelpMe m_GameManagerHelpMe;
-	protected Animatore m_Animatore;
-	protected AI_HelpMe m_AIHelpMe;
+	protected GameManager_HelpMe mGameManagerHelpMe;
+	protected Animatore mAnimatore;
+	protected AI_HelpMe mAIHelpMe;
 
-	protected StatisticheInGame m_Statistiche;
+	protected StatisticheInGame mStatistiche;
 
 	void Start () {
-		m_GameManagerHelpMe = GameObject.Find ("GameManager").GetComponent<GameManager_HelpMe> ();
-		m_Animatore = GameObject.Find ("Animazioni").GetComponent<Animatore> ();
-		m_AIHelpMe = GameObject.Find ("AI").GetComponent<AI_HelpMe> ();
-		m_Statistiche = GameObject.Find ("CanvasInGameUI").GetComponent<StatisticheInGame> ();
+		mGameManagerHelpMe = GameObject.Find ("GameManager").GetComponent<GameManager_HelpMe> ();
+		mAnimatore = GameObject.Find ("Animazioni").GetComponent<Animatore> ();
+		mAIHelpMe = GameObject.Find ("AI").GetComponent<AI_HelpMe> ();
+		mStatistiche = GameObject.Find ("CanvasInGameUI").GetComponent<StatisticheInGame> ();
 	}
 
 	void OnMouseEnter(){
@@ -38,13 +38,13 @@ public class CalcolaProssimaPrecedenteController : MonoBehaviour {
 		ColorUtility.TryParseHtmlString ("#00FFFFFF", out azzurroChiaro);
 		switch (name) {
 		case "Calcola":
-			m_Calcola.GetComponent<Text>().color = azzurroChiaro;
+			mCalcola.GetComponent<Text>().color = azzurroChiaro;
 			break;
 		case "Prossima":
-			m_Prossima.GetComponent<Text>().color = azzurroChiaro;
+			mProssima.GetComponent<Text>().color = azzurroChiaro;
 			break;
 		case "Precedente":
-			m_Precedente.GetComponent<Text>().color = azzurroChiaro;
+			mPrecedente.GetComponent<Text>().color = azzurroChiaro;
 			break;
 		}
 	}
@@ -53,18 +53,18 @@ public class CalcolaProssimaPrecedenteController : MonoBehaviour {
 
 		switch (name) {
 		case "Calcola":
-			m_InfoOggetto.text = "Calcola le mosse e inizia a risolvere";
+			mInfoOggetto.text = "Calcola le mosse e inizia a risolvere";
 			break;
 		}
 
-		if (Input.GetKey (KeyCode.Mouse0) && m_GameManagerHelpMe.IsGameRunning () && m_Animatore.isFermo ()) {
+		if (Input.GetKey (KeyCode.Mouse0) && mGameManagerHelpMe.IsGameRunning () && mAnimatore.isFermo ()) {
 			if(name.Equals("Calcola")) {
-				m_AIHelpMe.HelpMeCalcola ();
-				m_InfoOggetto.text = "";
+				mAIHelpMe.HelpMeCalcola ();
+				mInfoOggetto.text = "";
 			} else if (name.Equals("Prossima")) {
-				m_HelpMeTutor.ProssimaMossa ();
+				mHelpMeTutor.ProssimaMossa ();
 			} else if (name.Equals("Precedente")) {
-				m_HelpMeTutor.MossaPrecedente ();
+				mHelpMeTutor.MossaPrecedente ();
 			}
 		}
 	}
@@ -75,23 +75,23 @@ public class CalcolaProssimaPrecedenteController : MonoBehaviour {
 
 		switch (name) {
 		case "Calcola":
-			m_Calcola.GetComponent<Text>().color = azzurro;
+			mCalcola.GetComponent<Text>().color = azzurro;
 			break;
 		case "Prossima":
-			m_Prossima.GetComponent<Text>().color = azzurro;
+			mProssima.GetComponent<Text>().color = azzurro;
 			break;
 		case "Precedente":
-			m_Precedente.GetComponent<Text>().color = azzurro;
+			mPrecedente.GetComponent<Text>().color = azzurro;
 			break;
 		}
 
-		m_InfoOggetto.text = "";
+		mInfoOggetto.text = "";
 	}
 
 	public void CambiaModalita(){
-		m_Calcola.SetActive(false);
-		m_Prossima.SetActive(true);
-		m_Precedente.SetActive(true);
-		m_SfondoPrecedente.SetActive (true);
+		mCalcola.SetActive(false);
+		mProssima.SetActive(true);
+		mPrecedente.SetActive(true);
+		mSfondoPrecedente.SetActive (true);
 	}
 }

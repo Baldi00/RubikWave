@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuPrincipale_HelpMe : MenuPrincipale {
+public class MenuPrincipale_HelpMe : MainMenuManager {
 
 
 
 	void Start () {
-		m_FirstStart = false;
+		mFirstStart = false;
 		gameObject.SetActive (false);
 	}
 

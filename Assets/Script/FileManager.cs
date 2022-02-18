@@ -8,14 +8,14 @@ using System.Security.Cryptography;
 public class FileManager : MonoBehaviour {
 
 	private static string FOLDER = Application.persistentDataPath + "/RubikWaveSaves/";
-	private static string m_GiocoFilename = "saveFile";
-	private static string m_OpzioniFileName = "options";
+	private static string mGiocoFilename = "saveFile";
+	private static string mOpzioniFileName = "options";
 
-	private static GameObject m_GameManagerObject;
-	private static GameManager m_GameManagerComponent;
-	private static StatoCubo m_StatoCubo;
+	private static GameObject mGameManagerObject;
+	private static GameManager mGameManagerComponent;
+	private static StatoCubo mStatoCubo;
 
-	private static bool m_Saving = false;
+	private static bool mSaving = false;
 
 	private static void inizializza(){
 
@@ -24,9 +24,9 @@ public class FileManager : MonoBehaviour {
 			Directory.CreateDirectory(FOLDER);
 		}
 
-		m_GameManagerObject = GameObject.Find ("GameManager");
-		m_GameManagerComponent = m_GameManagerObject.GetComponent<GameManager> ();
-		m_StatoCubo = m_GameManagerObject.GetComponent<StatoCubo> ();
+		mGameManagerObject = GameObject.Find ("GameManager");
+		mGameManagerComponent = mGameManagerObject.GetComponent<GameManager> ();
+		mStatoCubo = mGameManagerObject.GetComponent<StatoCubo> ();
 	}
 
 	public static void salvaSuFile(){
@@ -35,82 +35,82 @@ public class FileManager : MonoBehaviour {
 		//PREPARO COLORI
 		string stato = "";
 
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getCentFrontColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getCentBackColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getCentRightColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getCentLeftColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getCentUpColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getCentDownColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigFrontUpColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigFrontLeftColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigFrontRightColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigFrontDownColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigBackUpColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigBackLeftColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigBackRightColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigBackDownColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigRightUpColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigRightLeftColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigRightRightColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigRightDownColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigLeftUpColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigLeftLeftColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigLeftRightColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigLeftDownColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigUpUpColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigUpLeftColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigUpRightColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigUpDownColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigDownUpColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigDownLeftColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigDownRightColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getSpigDownDownColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertFrontRightUpColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertFrontRightDownColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertFrontLeftUpColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertFrontLeftDownColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertBackRightUpColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertBackRightDownColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertBackLeftUpColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertBackLeftDownColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertLeftRightUpColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertLeftRightDownColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertLeftLeftUpColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertLeftLeftDownColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertRightRightUpColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertRightRightDownColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertRightLeftUpColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertRightLeftDownColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertUpRightUpColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertUpRightDownColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertUpLeftUpColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertUpLeftDownColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertDownRightUpColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertDownRightDownColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertDownLeftUpColor()) + ",";
-		stato += "#" + ColorUtility.ToHtmlStringRGBA(m_StatoCubo.getVertDownLeftDownColor()) + "\n";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getCentFrontColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getCentBackColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getCentRightColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getCentLeftColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getCentUpColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getCentDownColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigFrontUpColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigFrontLeftColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigFrontRightColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigFrontDownColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigBackUpColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigBackLeftColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigBackRightColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigBackDownColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigRightUpColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigRightLeftColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigRightRightColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigRightDownColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigLeftUpColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigLeftLeftColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigLeftRightColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigLeftDownColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigUpUpColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigUpLeftColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigUpRightColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigUpDownColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigDownUpColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigDownLeftColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigDownRightColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getSpigDownDownColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertFrontRightUpColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertFrontRightDownColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertFrontLeftUpColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertFrontLeftDownColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertBackRightUpColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertBackRightDownColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertBackLeftUpColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertBackLeftDownColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertLeftRightUpColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertLeftRightDownColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertLeftLeftUpColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertLeftLeftDownColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertRightRightUpColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertRightRightDownColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertRightLeftUpColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertRightLeftDownColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertUpRightUpColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertUpRightDownColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertUpLeftUpColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertUpLeftDownColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertDownRightUpColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertDownRightDownColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertDownLeftUpColor()) + ",";
+		stato += "#" + ColorUtility.ToHtmlStringRGBA(mStatoCubo.getVertDownLeftDownColor()) + "\n";
 
 		//PREPARO MOSSE
-		string mosseEseguite = "" + m_GameManagerComponent.GetNumMosseEseguite() + "\n";
+		string mosseEseguite = "" + mGameManagerComponent.GetNumMosseEseguite() + "\n";
 
 		//PREPARO TEMPO
 		string tempo = "";
-		tempo += m_GameManagerComponent.GetTimerOre() + ",";
-		tempo += m_GameManagerComponent.GetTimerMinuti() + ",";
-		tempo += m_GameManagerComponent.GetTimerSecondi();
+		tempo += mGameManagerComponent.GetTimerOre() + ",";
+		tempo += mGameManagerComponent.GetTimerMinuti() + ",";
+		tempo += mGameManagerComponent.GetTimerSecondi();
 
 		StreamWriter writer = null;
 		bool saved = false;
-		m_Saving = true;
+		mSaving = true;
 		while (!saved) {
 			try {
-				writer = new StreamWriter (FOLDER + m_GiocoFilename, false);
+				writer = new StreamWriter (FOLDER + mGiocoFilename, false);
 				writer.Write (stato);
 				writer.Write (mosseEseguite);
 				writer.Write (tempo);
 				writer.Close ();
 				saved = true;
-				m_Saving = false;
+				mSaving = false;
 			} catch (Exception e) {
 				if (writer != null) {
 					writer.Close ();
@@ -118,7 +118,7 @@ public class FileManager : MonoBehaviour {
 			}
 		}
 
-		SalvaMD5 (m_GiocoFilename);
+		SalvaMD5 (mGiocoFilename);
 		salvaOpzioni ();
 	}
 
@@ -133,9 +133,9 @@ public class FileManager : MonoBehaviour {
 
 				//CONTROLLO MD5
 
-				readerMD5 = new StreamReader(FOLDER + m_GiocoFilename + "MD5");
+				readerMD5 = new StreamReader(FOLDER + mGiocoFilename + "MD5");
 				string MD5Salvato = readerMD5.ReadLine ();
-				string MD5Attuale = CalculateMD5 (FOLDER + m_GiocoFilename);
+				string MD5Attuale = CalculateMD5 (FOLDER + mGiocoFilename);
 				readerMD5.Close ();
 
 				if (!MD5Attuale.Equals (MD5Salvato)) {
@@ -143,7 +143,7 @@ public class FileManager : MonoBehaviour {
 				}
 
 
-				reader = new StreamReader(FOLDER + m_GiocoFilename);
+				reader = new StreamReader(FOLDER + mGiocoFilename);
 
 				//LEGGO COLORI
 
@@ -154,230 +154,230 @@ public class FileManager : MonoBehaviour {
 				int coloreAttuale = 0;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setCentFrontColor(coloreLetto);
+				mStatoCubo.setCentFrontColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setCentBackColor(coloreLetto);
+				mStatoCubo.setCentBackColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setCentRightColor(coloreLetto);
+				mStatoCubo.setCentRightColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setCentLeftColor(coloreLetto);
+				mStatoCubo.setCentLeftColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setCentUpColor(coloreLetto);
+				mStatoCubo.setCentUpColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setCentDownColor(coloreLetto);
+				mStatoCubo.setCentDownColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigFrontUpColor(coloreLetto);
+				mStatoCubo.setSpigFrontUpColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigFrontLeftColor(coloreLetto);
+				mStatoCubo.setSpigFrontLeftColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigFrontRightColor(coloreLetto);
+				mStatoCubo.setSpigFrontRightColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigFrontDownColor(coloreLetto);
+				mStatoCubo.setSpigFrontDownColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigBackUpColor(coloreLetto);
+				mStatoCubo.setSpigBackUpColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigBackLeftColor(coloreLetto);
+				mStatoCubo.setSpigBackLeftColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigBackRightColor(coloreLetto);
+				mStatoCubo.setSpigBackRightColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigBackDownColor(coloreLetto);
+				mStatoCubo.setSpigBackDownColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigRightUpColor(coloreLetto);
+				mStatoCubo.setSpigRightUpColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigRightLeftColor(coloreLetto);
+				mStatoCubo.setSpigRightLeftColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigRightRightColor(coloreLetto);
+				mStatoCubo.setSpigRightRightColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigRightDownColor(coloreLetto);
+				mStatoCubo.setSpigRightDownColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigLeftUpColor(coloreLetto);
+				mStatoCubo.setSpigLeftUpColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigLeftLeftColor(coloreLetto);
+				mStatoCubo.setSpigLeftLeftColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigLeftRightColor(coloreLetto);
+				mStatoCubo.setSpigLeftRightColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigLeftDownColor(coloreLetto);
+				mStatoCubo.setSpigLeftDownColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigUpUpColor(coloreLetto);
+				mStatoCubo.setSpigUpUpColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigUpLeftColor(coloreLetto);
+				mStatoCubo.setSpigUpLeftColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigUpRightColor(coloreLetto);
+				mStatoCubo.setSpigUpRightColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigUpDownColor(coloreLetto);
+				mStatoCubo.setSpigUpDownColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigDownUpColor(coloreLetto);
+				mStatoCubo.setSpigDownUpColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigDownLeftColor(coloreLetto);
+				mStatoCubo.setSpigDownLeftColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigDownRightColor(coloreLetto);
+				mStatoCubo.setSpigDownRightColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setSpigDownDownColor(coloreLetto);
+				mStatoCubo.setSpigDownDownColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertFrontRightUpColor(coloreLetto);
+				mStatoCubo.setVertFrontRightUpColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertFrontRightDownColor(coloreLetto);
+				mStatoCubo.setVertFrontRightDownColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertFrontLeftUpColor(coloreLetto);
+				mStatoCubo.setVertFrontLeftUpColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertFrontLeftDownColor(coloreLetto);
+				mStatoCubo.setVertFrontLeftDownColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertBackRightUpColor(coloreLetto);
+				mStatoCubo.setVertBackRightUpColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertBackRightDownColor(coloreLetto);
+				mStatoCubo.setVertBackRightDownColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertBackLeftUpColor(coloreLetto);
+				mStatoCubo.setVertBackLeftUpColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertBackLeftDownColor(coloreLetto);
+				mStatoCubo.setVertBackLeftDownColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertLeftRightUpColor(coloreLetto);
+				mStatoCubo.setVertLeftRightUpColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertLeftRightDownColor(coloreLetto);
+				mStatoCubo.setVertLeftRightDownColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertLeftLeftUpColor(coloreLetto);
+				mStatoCubo.setVertLeftLeftUpColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertLeftLeftDownColor(coloreLetto);
+				mStatoCubo.setVertLeftLeftDownColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertRightRightUpColor(coloreLetto);
+				mStatoCubo.setVertRightRightUpColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertRightRightDownColor(coloreLetto);
+				mStatoCubo.setVertRightRightDownColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertRightLeftUpColor(coloreLetto);
+				mStatoCubo.setVertRightLeftUpColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertRightLeftDownColor(coloreLetto);
+				mStatoCubo.setVertRightLeftDownColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertUpRightUpColor(coloreLetto);
+				mStatoCubo.setVertUpRightUpColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertUpRightDownColor(coloreLetto);
+				mStatoCubo.setVertUpRightDownColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertUpLeftUpColor(coloreLetto);
+				mStatoCubo.setVertUpLeftUpColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertUpLeftDownColor(coloreLetto);
+				mStatoCubo.setVertUpLeftDownColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertDownRightUpColor(coloreLetto);
+				mStatoCubo.setVertDownRightUpColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertDownRightDownColor(coloreLetto);
+				mStatoCubo.setVertDownRightDownColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertDownLeftUpColor(coloreLetto);
+				mStatoCubo.setVertDownLeftUpColor(coloreLetto);
 				coloreAttuale++;
 
 				ColorUtility.TryParseHtmlString(coloriSplit[coloreAttuale], out coloreLetto);
-				m_StatoCubo.setVertDownLeftDownColor(coloreLetto);
+				mStatoCubo.setVertDownLeftDownColor(coloreLetto);
 
 				//LEGGO MOSSE
-				m_GameManagerComponent.SetNumMosseEseguite(int.Parse(reader.ReadLine ()));
+				mGameManagerComponent.SetNumMosseEseguite(int.Parse(reader.ReadLine ()));
 
 				//LEGGO TEMPO
 				string tempo = reader.ReadLine ();
 				string[] tempoSplit = tempo.Split (',');
 
-				m_GameManagerComponent.SetTimerOre(int.Parse(tempoSplit[0]));
-				m_GameManagerComponent.SetTimerMinuti(int.Parse(tempoSplit[1]));
-				m_GameManagerComponent.SetTimerSecondi(float.Parse(tempoSplit[2]));
+				mGameManagerComponent.SetTimerOre(int.Parse(tempoSplit[0]));
+				mGameManagerComponent.SetTimerMinuti(int.Parse(tempoSplit[1]));
+				mGameManagerComponent.SetTimerSecondi(float.Parse(tempoSplit[2]));
 
 				reader.Close ();
 
@@ -410,22 +410,22 @@ public class FileManager : MonoBehaviour {
 			try {
 
 				//PREPARO GRAFICA
-				string grafica = "" + m_GameManagerObject.GetComponent<SettingsManager>().GetGrafica() + "\n";
+				string grafica = "" + mGameManagerObject.GetComponent<SettingsManager>().GetGrafica() + "\n";
 
 				//PREPARO GRAFICA_VSYNC
-				string vsync = "" + m_GameManagerObject.GetComponent<SettingsManager>().GetGraficaVsync() + "\n";
+				string vsync = "" + mGameManagerObject.GetComponent<SettingsManager>().GetGraficaVsync() + "\n";
 
 				//PREPARO SUONI
-				string suoni = "" + m_GameManagerObject.GetComponent<SettingsManager>().GetSuoni();
+				string suoni = "" + mGameManagerObject.GetComponent<SettingsManager>().GetSuoni();
 
-				m_Saving = true;
-				writer = new StreamWriter (FOLDER + m_OpzioniFileName, false);
+				mSaving = true;
+				writer = new StreamWriter (FOLDER + mOpzioniFileName, false);
 				writer.Write (grafica);
 				writer.Write (vsync);
 				writer.Write (suoni);
 				writer.Close ();
 				saved = true;
-				m_Saving = false;
+				mSaving = false;
 			} catch (Exception e) {
 				if (writer != null) {
 					writer.Close ();
@@ -433,7 +433,7 @@ public class FileManager : MonoBehaviour {
 			}
 		}
 
-		SalvaMD5 (m_OpzioniFileName);
+		SalvaMD5 (mOpzioniFileName);
 	}
 
 	public static bool caricaOpzioni() {
@@ -447,9 +447,9 @@ public class FileManager : MonoBehaviour {
 
 				//CONTROLLO MD5
 
-				readerMD5 = new StreamReader(FOLDER + m_OpzioniFileName + "MD5");
+				readerMD5 = new StreamReader(FOLDER + mOpzioniFileName + "MD5");
 				string MD5Salvato = readerMD5.ReadLine ();
-				string MD5Attuale = CalculateMD5 (FOLDER + m_OpzioniFileName);
+				string MD5Attuale = CalculateMD5 (FOLDER + mOpzioniFileName);
 				readerMD5.Close ();
 
 				if (!MD5Attuale.Equals (MD5Salvato)) {
@@ -457,16 +457,16 @@ public class FileManager : MonoBehaviour {
 				}
 
 
-				reader = new StreamReader(FOLDER + m_OpzioniFileName);
+				reader = new StreamReader(FOLDER + mOpzioniFileName);
 
 				//LEGGO GRAFICA
-				m_GameManagerObject.GetComponent<SettingsManager>().SetGrafica(int.Parse(reader.ReadLine ()));
+				mGameManagerObject.GetComponent<SettingsManager>().SetGrafica(int.Parse(reader.ReadLine ()));
 
 				//LEGGO GRAFICA_VSYNC
-				m_GameManagerObject.GetComponent<SettingsManager>().SetGraficaVsync(int.Parse(reader.ReadLine ()));
+				mGameManagerObject.GetComponent<SettingsManager>().SetGraficaVsync(int.Parse(reader.ReadLine ()));
 
 				//LEGGO SUONI
-				m_GameManagerObject.GetComponent<SettingsManager>().SetSuoni(int.Parse(reader.ReadLine ()));
+				mGameManagerObject.GetComponent<SettingsManager>().SetSuoni(int.Parse(reader.ReadLine ()));
 
 				reader.Close ();
 			}
@@ -486,32 +486,32 @@ public class FileManager : MonoBehaviour {
 	}
 
 	public static bool isGameSavePresent() {
-		return File.Exists (FOLDER + m_GiocoFilename);
+		return File.Exists (FOLDER + mGiocoFilename);
 	}
 
 	public static bool isOptionSavePresent() {
-		return File.Exists (FOLDER + m_OpzioniFileName);
+		return File.Exists (FOLDER + mOpzioniFileName);
 	}
 
 	public static bool isSaving(){
-		return m_Saving;
+		return mSaving;
 	}
 
 	public static void setFilename(string filename) {
-		m_GiocoFilename = filename;
+		mGiocoFilename = filename;
 	}
 
 	private static void SalvaMD5 (string filename){
 		StreamWriter writer = null;
 		bool saved = false;
-		m_Saving = true;
+		mSaving = true;
 		while (!saved) {
 			try {
 				writer = new StreamWriter (FOLDER + filename + "MD5", false);
 				writer.Write (CalculateMD5 (FOLDER + filename));
 				writer.Close ();
 				saved = true;
-				m_Saving = false;
+				mSaving = false;
 			} catch (Exception e) {
 				if (writer != null) {
 					writer.Close ();

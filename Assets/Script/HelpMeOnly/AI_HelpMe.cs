@@ -5,549 +5,548 @@ using UnityEngine;
 public class AI_HelpMe : AI {
 
 	[SerializeField]
-	private HelpMeTutor m_HelpMeTutor;
+	private HelpMeTutor mHelpMeTutor;
 
 	void Update () {
 
-		if (m_Risolvi && m_GameManager.IsGameRunning () && m_Animatore.isFermoAnimatorePuoAndare () && m_GameManager.GetNumMosseEseguite () >= 300) {
+		if (mRisolvi && mGameManager.IsGameRunning () && mAnimatore.isFermoAnimatorePuoAndare () && mGameManager.GetNumMosseEseguite () >= 300) {
 			Reset ();
 			FileManager.caricaDaFile ();
 			FileManager.setFilename ("saveFile");
-			m_HelpMeTutor.FineCalcolo (false);
+			mHelpMeTutor.FineCalcolo (false);
 		}
 
-		if (m_Risolvi && m_GameManager.IsGameRunning () && m_Animatore.isFermoAnimatorePuoAndare () && Fase8Completata ()) {			//Controllo se il cubo è risolto
+		if (mRisolvi && mGameManager.IsGameRunning () && mAnimatore.isFermoAnimatorePuoAndare () && Fase8Completata ()) {			//Controllo se il cubo è risolto
 			AggiornaColori();
-			m_GameManager.ControllaSeHoVinto ();
+			mGameManager.ControllaSeHoVinto ();
 			Reset ();
-			int mosseEseguiteTemp = m_GameManager.GetNumMosseEseguite ();
+			int mosseEseguiteTemp = mGameManager.GetNumMosseEseguite ();
 			FileManager.caricaDaFile ();
 			FileManager.setFilename ("saveFile");
-			m_GameManager.HoFattoPiuMosse (mosseEseguiteTemp);
-			m_HelpMeTutor.FineCalcolo (true);
+			mGameManager.HoFattoPiuMosse (mosseEseguiteTemp);
+			mHelpMeTutor.FineCalcolo (true);
 		}
 
-		if (m_Risolvi && m_GameManager.IsGameRunning () && m_Animatore.isFermoAnimatorePuoAndare ()) {
+		if (mRisolvi && mGameManager.IsGameRunning () && mAnimatore.isFermoAnimatorePuoAndare ()) {
 			AggiornaColori ();
-			if (!m_Fase1Completata) {																				//FASE 1
-				if (m_GameManager.ColorCompare(SpigUpRightColor, m_Bianco)) {
-					if (!m_GameManager.ColorCompare(SpigDownRightColor, m_Bianco)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 7, 7 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 7, 7 });
-						m_GameManager.HoFattoPiuMosse (2);
+			if (!mFase1Completata) {																				//FASE 1
+				if (mGameManager.ColorCompare(SpigUpRightColor, mBianco)) {
+					if (!mGameManager.ColorCompare(SpigDownRightColor, mBianco)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 7, 7 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 7, 7 });
+						mGameManager.HoFattoPiuMosse (2);
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
-				} else if (m_GameManager.ColorCompare(SpigUpUpColor, m_Bianco)) {
-					if (!m_GameManager.ColorCompare(SpigDownDownColor, m_Bianco)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 3, 3 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 3, 3 });
-						m_GameManager.HoFattoPiuMosse (2);
+				} else if (mGameManager.ColorCompare(SpigUpUpColor, mBianco)) {
+					if (!mGameManager.ColorCompare(SpigDownDownColor, mBianco)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 3, 3 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 3, 3 });
+						mGameManager.HoFattoPiuMosse (2);
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
-				} else if (m_GameManager.ColorCompare(SpigUpLeftColor, m_Bianco)) {
-					if (!m_GameManager.ColorCompare(SpigDownLeftColor, m_Bianco)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 5, 5 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 5, 5 });
-						m_GameManager.HoFattoPiuMosse (2);
+				} else if (mGameManager.ColorCompare(SpigUpLeftColor, mBianco)) {
+					if (!mGameManager.ColorCompare(SpigDownLeftColor, mBianco)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 5, 5 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 5, 5 });
+						mGameManager.HoFattoPiuMosse (2);
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
-				} else if (m_GameManager.ColorCompare(SpigUpDownColor, m_Bianco)) {
-					if (!m_GameManager.ColorCompare(SpigDownUpColor, m_Bianco)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 1, 1 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 1, 1 });
-						m_GameManager.HoFattoPiuMosse (2);
+				} else if (mGameManager.ColorCompare(SpigUpDownColor, mBianco)) {
+					if (!mGameManager.ColorCompare(SpigDownUpColor, mBianco)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 1, 1 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 1, 1 });
+						mGameManager.HoFattoPiuMosse (2);
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
-				} else if (m_GameManager.ColorCompare(SpigFrontLeftColor, m_Bianco)) {
-					if (!m_GameManager.ColorCompare(SpigDownLeftColor, m_Bianco)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 5 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 5 });
-						m_GameManager.HoFattoUnaMossa ();
+				} else if (mGameManager.ColorCompare(SpigFrontLeftColor, mBianco)) {
+					if (!mGameManager.ColorCompare(SpigDownLeftColor, mBianco)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 5 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 5 });
+						mGameManager.HoFattoUnaMossa ();
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
-				} else if (m_GameManager.ColorCompare(SpigRightLeftColor, m_Bianco)) {
-					if (!m_GameManager.ColorCompare(SpigDownUpColor, m_Bianco)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 1 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 1 });
-						m_GameManager.HoFattoUnaMossa ();
+				} else if (mGameManager.ColorCompare(SpigRightLeftColor, mBianco)) {
+					if (!mGameManager.ColorCompare(SpigDownUpColor, mBianco)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 1 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 1 });
+						mGameManager.HoFattoUnaMossa ();
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
-				} else if (m_GameManager.ColorCompare(SpigBackLeftColor, m_Bianco)) {
-					if (!m_GameManager.ColorCompare(SpigDownRightColor, m_Bianco)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 7 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 7 });
-						m_GameManager.HoFattoUnaMossa ();
+				} else if (mGameManager.ColorCompare(SpigBackLeftColor, mBianco)) {
+					if (!mGameManager.ColorCompare(SpigDownRightColor, mBianco)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 7 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 7 });
+						mGameManager.HoFattoUnaMossa ();
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
-				} else if (m_GameManager.ColorCompare(SpigLeftLeftColor, m_Bianco)) {
-					if (!m_GameManager.ColorCompare(SpigDownDownColor, m_Bianco)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 3 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 3 });
-						m_GameManager.HoFattoUnaMossa ();
+				} else if (mGameManager.ColorCompare(SpigLeftLeftColor, mBianco)) {
+					if (!mGameManager.ColorCompare(SpigDownDownColor, mBianco)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 3 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 3 });
+						mGameManager.HoFattoUnaMossa ();
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
-				} else if (m_GameManager.ColorCompare(SpigFrontRightColor, m_Bianco)) {
-					if (!m_GameManager.ColorCompare(SpigDownRightColor, m_Bianco)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 8 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 8 });
-						m_GameManager.HoFattoUnaMossa ();
+				} else if (mGameManager.ColorCompare(SpigFrontRightColor, mBianco)) {
+					if (!mGameManager.ColorCompare(SpigDownRightColor, mBianco)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 8 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 8 });
+						mGameManager.HoFattoUnaMossa ();
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
-				} else if (m_GameManager.ColorCompare(SpigRightRightColor, m_Bianco)) {
-					if (!m_GameManager.ColorCompare(SpigDownDownColor, m_Bianco)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 4 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 4 });
-						m_GameManager.HoFattoUnaMossa ();
+				} else if (mGameManager.ColorCompare(SpigRightRightColor, mBianco)) {
+					if (!mGameManager.ColorCompare(SpigDownDownColor, mBianco)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 4 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 4 });
+						mGameManager.HoFattoUnaMossa ();
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
-				} else if (m_GameManager.ColorCompare(SpigBackRightColor, m_Bianco)) {
-					if (!m_GameManager.ColorCompare(SpigDownLeftColor, m_Bianco)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 6 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 6 });
-						m_GameManager.HoFattoUnaMossa ();
+				} else if (mGameManager.ColorCompare(SpigBackRightColor, mBianco)) {
+					if (!mGameManager.ColorCompare(SpigDownLeftColor, mBianco)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 6 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 6 });
+						mGameManager.HoFattoUnaMossa ();
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
-				} else if (m_GameManager.ColorCompare(SpigLeftRightColor, m_Bianco)) {
-					if (!m_GameManager.ColorCompare(SpigDownUpColor, m_Bianco)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 2 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 2 });
-						m_GameManager.HoFattoUnaMossa ();
+				} else if (mGameManager.ColorCompare(SpigLeftRightColor, mBianco)) {
+					if (!mGameManager.ColorCompare(SpigDownUpColor, mBianco)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 2 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 2 });
+						mGameManager.HoFattoUnaMossa ();
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
-				} else if (m_GameManager.ColorCompare(SpigFrontUpColor, m_Bianco) || m_GameManager.ColorCompare(SpigFrontDownColor, m_Bianco)) {
-					if (!m_GameManager.ColorCompare(SpigDownUpColor, m_Bianco)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 1 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 1 });
-						m_GameManager.HoFattoUnaMossa ();
+				} else if (mGameManager.ColorCompare(SpigFrontUpColor, mBianco) || mGameManager.ColorCompare(SpigFrontDownColor, mBianco)) {
+					if (!mGameManager.ColorCompare(SpigDownUpColor, mBianco)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 1 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 1 });
+						mGameManager.HoFattoUnaMossa ();
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
-				} else if (m_GameManager.ColorCompare(SpigRightUpColor, m_Bianco) || m_GameManager.ColorCompare(SpigRightDownColor, m_Bianco)) {
-					if (!m_GameManager.ColorCompare(SpigDownRightColor, m_Bianco)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 7 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 7 });
-						m_GameManager.HoFattoUnaMossa ();
+				} else if (mGameManager.ColorCompare(SpigRightUpColor, mBianco) || mGameManager.ColorCompare(SpigRightDownColor, mBianco)) {
+					if (!mGameManager.ColorCompare(SpigDownRightColor, mBianco)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 7 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 7 });
+						mGameManager.HoFattoUnaMossa ();
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
-				} else if (m_GameManager.ColorCompare(SpigBackUpColor, m_Bianco) || m_GameManager.ColorCompare(SpigBackDownColor, m_Bianco)) {
-					if (!m_GameManager.ColorCompare(SpigDownDownColor, m_Bianco)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 3 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 3 });
-						m_GameManager.HoFattoUnaMossa ();
+				} else if (mGameManager.ColorCompare(SpigBackUpColor, mBianco) || mGameManager.ColorCompare(SpigBackDownColor, mBianco)) {
+					if (!mGameManager.ColorCompare(SpigDownDownColor, mBianco)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 3 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 3 });
+						mGameManager.HoFattoUnaMossa ();
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
-				} else if (m_GameManager.ColorCompare(SpigLeftUpColor, m_Bianco) || m_GameManager.ColorCompare(SpigLeftDownColor, m_Bianco)) {
-					if (!m_GameManager.ColorCompare(SpigDownLeftColor, m_Bianco)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 5 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 5 });
-						m_GameManager.HoFattoUnaMossa ();
+				} else if (mGameManager.ColorCompare(SpigLeftUpColor, mBianco) || mGameManager.ColorCompare(SpigLeftDownColor, mBianco)) {
+					if (!mGameManager.ColorCompare(SpigDownLeftColor, mBianco)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 5 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 5 });
+						mGameManager.HoFattoUnaMossa ();
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
 				} else {
-					m_Fase1Completata = true;
+					mFase1Completata = true;
 				}
-			} else if (!m_Fase2Completata) {																		//FASE 2
-				int TEMP = 1;
-				if (!m_Fase2RossoOK && m_GameManager.ColorCompare(SpigFrontDownColor, m_Rosso) && m_GameManager.ColorCompare(SpigDownUpColor, m_Bianco)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 1, 1 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 1, 1 });
-					m_GameManager.HoFattoPiuMosse (2);
-					m_Fase2RossoOK = true;
-				} else if (!m_Fase2RossoOK && !(m_GameManager.ColorCompare(SpigFrontDownColor, m_Rosso) && m_GameManager.ColorCompare(SpigDownUpColor, m_Bianco))) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-					m_GameManager.HoFattoUnaMossa ();
-				} else if (!m_Fase2BluOK && m_GameManager.ColorCompare(SpigRightDownColor, m_Blu) && m_GameManager.ColorCompare(SpigDownRightColor, m_Bianco)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 7, 7 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 7, 7 });
-					m_GameManager.HoFattoPiuMosse (2);
-					m_Fase2BluOK = true;
-				} else if (!m_Fase2BluOK && !(m_GameManager.ColorCompare(SpigRightDownColor, m_Blu) && m_GameManager.ColorCompare(SpigDownRightColor, m_Bianco))) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-					m_GameManager.HoFattoUnaMossa ();
-				} else if (!m_Fase2ArancioneOK && m_GameManager.ColorCompare(SpigBackDownColor, m_Arancione) && m_GameManager.ColorCompare(SpigDownDownColor, m_Bianco)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 3, 3 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 3, 3 });
-					m_GameManager.HoFattoPiuMosse (2);
-					m_Fase2ArancioneOK = true;
-				} else if (!m_Fase2ArancioneOK && !(m_GameManager.ColorCompare(SpigBackDownColor, m_Arancione) && m_GameManager.ColorCompare(SpigDownDownColor, m_Bianco))) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-					m_GameManager.HoFattoUnaMossa ();
-				} else if (!m_Fase2VerdeOK && m_GameManager.ColorCompare(SpigLeftDownColor, m_Verde) && m_GameManager.ColorCompare(SpigDownLeftColor, m_Bianco)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 5, 5 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 5, 5 });
-					m_GameManager.HoFattoPiuMosse (2);
-					m_Fase2VerdeOK = true;
-				} else if (!m_Fase2VerdeOK && !(m_GameManager.ColorCompare(SpigLeftDownColor, m_Verde) && m_GameManager.ColorCompare(SpigDownLeftColor, m_Bianco))) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-					m_GameManager.HoFattoUnaMossa ();
+			} else if (!mFase2Completata) {																		//FASE 2
+				if (!mFase2RossoOK && mGameManager.ColorCompare(SpigFrontDownColor, mRosso) && mGameManager.ColorCompare(SpigDownUpColor, mBianco)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 1, 1 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 1, 1 });
+					mGameManager.HoFattoPiuMosse (2);
+					mFase2RossoOK = true;
+				} else if (!mFase2RossoOK && !(mGameManager.ColorCompare(SpigFrontDownColor, mRosso) && mGameManager.ColorCompare(SpigDownUpColor, mBianco))) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+					mGameManager.HoFattoUnaMossa ();
+				} else if (!mFase2BluOK && mGameManager.ColorCompare(SpigRightDownColor, mBlu) && mGameManager.ColorCompare(SpigDownRightColor, mBianco)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 7, 7 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 7, 7 });
+					mGameManager.HoFattoPiuMosse (2);
+					mFase2BluOK = true;
+				} else if (!mFase2BluOK && !(mGameManager.ColorCompare(SpigRightDownColor, mBlu) && mGameManager.ColorCompare(SpigDownRightColor, mBianco))) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+					mGameManager.HoFattoUnaMossa ();
+				} else if (!mFase2ArancioneOK && mGameManager.ColorCompare(SpigBackDownColor, mArancione) && mGameManager.ColorCompare(SpigDownDownColor, mBianco)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 3, 3 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 3, 3 });
+					mGameManager.HoFattoPiuMosse (2);
+					mFase2ArancioneOK = true;
+				} else if (!mFase2ArancioneOK && !(mGameManager.ColorCompare(SpigBackDownColor, mArancione) && mGameManager.ColorCompare(SpigDownDownColor, mBianco))) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+					mGameManager.HoFattoUnaMossa ();
+				} else if (!mFase2VerdeOK && mGameManager.ColorCompare(SpigLeftDownColor, mVerde) && mGameManager.ColorCompare(SpigDownLeftColor, mBianco)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 5, 5 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 5, 5 });
+					mGameManager.HoFattoPiuMosse (2);
+					mFase2VerdeOK = true;
+				} else if (!mFase2VerdeOK && !(mGameManager.ColorCompare(SpigLeftDownColor, mVerde) && mGameManager.ColorCompare(SpigDownLeftColor, mBianco))) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+					mGameManager.HoFattoUnaMossa ();
 				} else {
-					m_Fase2Completata = true;
+					mFase2Completata = true;
 				}
-			} else if (!m_Fase3Completata) {																		//FASE 3
+			} else if (!mFase3Completata) {																		//FASE 3
 				if (!Fase3SuperioriOK ()) {																			//Parte 1 - Controllo superiori
-					if (m_GameManager.ColorCompare(VertDownLeftUpColor, m_Bianco)) {			
-						if (m_GameManager.ColorCompare(VertLeftRightDownColor, m_Rosso)) {
-							m_Animatore.EseguiPiuMosse (new int[]{ 5, 11, 11, 6, 12, 5, 11, 6 }, m_VelocitaEsecuzione);
-							m_HelpMeTutor.AggiungiMosse (new int[]{ 5, 11, 11, 6, 12, 5, 11, 6 });
-							m_GameManager.HoFattoPiuMosse (8);
-						} else if (m_GameManager.ColorCompare(VertLeftRightDownColor, m_Blu)) {
-							m_Animatore.EseguiPiuMosse (new int[]{ 11, 1, 11, 11, 2, 12, 1, 11, 2 }, m_VelocitaEsecuzione);
-							m_HelpMeTutor.AggiungiMosse (new int[]{ 11, 1, 11, 11, 2, 12, 1, 11, 2 });
-							m_GameManager.HoFattoPiuMosse (9);
-						} else if (m_GameManager.ColorCompare(VertLeftRightDownColor, m_Arancione)) {
-							m_Animatore.EseguiPiuMosse (new int[]{ 11, 11, 7, 11, 11, 8, 12, 7, 11, 8 }, m_VelocitaEsecuzione);
-							m_HelpMeTutor.AggiungiMosse (new int[]{ 11, 11, 7, 11, 11, 8, 12, 7, 11, 8 });
-							m_GameManager.HoFattoPiuMosse (10);
-						} else if (m_GameManager.ColorCompare(VertLeftRightDownColor, m_Verde)) {
-							m_Animatore.EseguiPiuMosse (new int[]{ 12, 3, 11, 11, 4, 12, 3, 11, 4 }, m_VelocitaEsecuzione);
-							m_HelpMeTutor.AggiungiMosse (new int[]{ 12, 3, 11, 11, 4, 12, 3, 11, 4 });
-							m_GameManager.HoFattoPiuMosse (9);
+					if (mGameManager.ColorCompare(VertDownLeftUpColor, mBianco)) {			
+						if (mGameManager.ColorCompare(VertLeftRightDownColor, mRosso)) {
+							mAnimatore.EseguiPiuMosse (new int[]{ 5, 11, 11, 6, 12, 5, 11, 6 }, mVelocitaEsecuzione);
+							mHelpMeTutor.AggiungiMosse (new int[]{ 5, 11, 11, 6, 12, 5, 11, 6 });
+							mGameManager.HoFattoPiuMosse (8);
+						} else if (mGameManager.ColorCompare(VertLeftRightDownColor, mBlu)) {
+							mAnimatore.EseguiPiuMosse (new int[]{ 11, 1, 11, 11, 2, 12, 1, 11, 2 }, mVelocitaEsecuzione);
+							mHelpMeTutor.AggiungiMosse (new int[]{ 11, 1, 11, 11, 2, 12, 1, 11, 2 });
+							mGameManager.HoFattoPiuMosse (9);
+						} else if (mGameManager.ColorCompare(VertLeftRightDownColor, mArancione)) {
+							mAnimatore.EseguiPiuMosse (new int[]{ 11, 11, 7, 11, 11, 8, 12, 7, 11, 8 }, mVelocitaEsecuzione);
+							mHelpMeTutor.AggiungiMosse (new int[]{ 11, 11, 7, 11, 11, 8, 12, 7, 11, 8 });
+							mGameManager.HoFattoPiuMosse (10);
+						} else if (mGameManager.ColorCompare(VertLeftRightDownColor, mVerde)) {
+							mAnimatore.EseguiPiuMosse (new int[]{ 12, 3, 11, 11, 4, 12, 3, 11, 4 }, mVelocitaEsecuzione);
+							mHelpMeTutor.AggiungiMosse (new int[]{ 12, 3, 11, 11, 4, 12, 3, 11, 4 });
+							mGameManager.HoFattoPiuMosse (9);
 						}
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
 				} else if (!Fase3FrontaliOK ()) {																			//Parte 2 - Controllo frontali
-					if (m_GameManager.ColorCompare(VertFrontLeftDownColor, m_Bianco)) {		
-						if (m_GameManager.ColorCompare(VertDownLeftUpColor, m_Rosso)) {
-							m_Animatore.EseguiPiuMosse (new int[]{ 2, 12, 1 }, m_VelocitaEsecuzione);
-							m_HelpMeTutor.AggiungiMosse (new int[]{ 2, 12, 1 });
-							m_GameManager.HoFattoPiuMosse (3);
-						}else if (m_GameManager.ColorCompare(VertDownLeftUpColor, m_Blu)){
-							m_Animatore.EseguiPiuMosse (new int[]{ 11, 8, 12, 7 }, m_VelocitaEsecuzione);
-							m_HelpMeTutor.AggiungiMosse (new int[]{ 11, 8, 12, 7 });
-							m_GameManager.HoFattoPiuMosse (4);
-						}else if (m_GameManager.ColorCompare(VertDownLeftUpColor, m_Arancione)){
-							m_Animatore.EseguiPiuMosse (new int[]{ 11, 11, 4, 12, 3 }, m_VelocitaEsecuzione);
-							m_HelpMeTutor.AggiungiMosse (new int[]{ 11, 11, 4, 12, 3 });
-							m_GameManager.HoFattoPiuMosse (5);
-						}else if (m_GameManager.ColorCompare(VertDownLeftUpColor, m_Verde)){
-							m_Animatore.EseguiPiuMosse (new int[]{ 12, 6, 12, 5 }, m_VelocitaEsecuzione);
-							m_HelpMeTutor.AggiungiMosse (new int[]{ 12, 6, 12, 5 });
-							m_GameManager.HoFattoPiuMosse (4);
+					if (mGameManager.ColorCompare(VertFrontLeftDownColor, mBianco)) {		
+						if (mGameManager.ColorCompare(VertDownLeftUpColor, mRosso)) {
+							mAnimatore.EseguiPiuMosse (new int[]{ 2, 12, 1 }, mVelocitaEsecuzione);
+							mHelpMeTutor.AggiungiMosse (new int[]{ 2, 12, 1 });
+							mGameManager.HoFattoPiuMosse (3);
+						}else if (mGameManager.ColorCompare(VertDownLeftUpColor, mBlu)){
+							mAnimatore.EseguiPiuMosse (new int[]{ 11, 8, 12, 7 }, mVelocitaEsecuzione);
+							mHelpMeTutor.AggiungiMosse (new int[]{ 11, 8, 12, 7 });
+							mGameManager.HoFattoPiuMosse (4);
+						}else if (mGameManager.ColorCompare(VertDownLeftUpColor, mArancione)){
+							mAnimatore.EseguiPiuMosse (new int[]{ 11, 11, 4, 12, 3 }, mVelocitaEsecuzione);
+							mHelpMeTutor.AggiungiMosse (new int[]{ 11, 11, 4, 12, 3 });
+							mGameManager.HoFattoPiuMosse (5);
+						}else if (mGameManager.ColorCompare(VertDownLeftUpColor, mVerde)){
+							mAnimatore.EseguiPiuMosse (new int[]{ 12, 6, 12, 5 }, mVelocitaEsecuzione);
+							mHelpMeTutor.AggiungiMosse (new int[]{ 12, 6, 12, 5 });
+							mGameManager.HoFattoPiuMosse (4);
 						}
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
 				} else if (!Fase3LateraliOK ()) {																				//Parte 3 - Controllo laterali
-					if (m_GameManager.ColorCompare(VertLeftRightDownColor, m_Bianco)) {
-						if (m_GameManager.ColorCompare(VertFrontLeftDownColor, m_Rosso)) {
-							m_Animatore.EseguiPiuMosse (new int[]{ 5, 11, 6 }, m_VelocitaEsecuzione);
-							m_HelpMeTutor.AggiungiMosse (new int[]{ 5, 11, 6 });
-							m_GameManager.HoFattoPiuMosse (3);
-						} else if (m_GameManager.ColorCompare(VertFrontLeftDownColor, m_Blu)){
-							m_Animatore.EseguiPiuMosse (new int[]{ 11, 1, 11, 2 }, m_VelocitaEsecuzione);
-							m_HelpMeTutor.AggiungiMosse (new int[]{ 11, 1, 11, 2 });
-							m_GameManager.HoFattoPiuMosse (4);
-						} else if (m_GameManager.ColorCompare(VertFrontLeftDownColor, m_Arancione)){
-							m_Animatore.EseguiPiuMosse (new int[]{ 11, 11, 7, 11, 8 }, m_VelocitaEsecuzione);
-							m_HelpMeTutor.AggiungiMosse (new int[]{ 11, 11, 7, 11, 8 });
-							m_GameManager.HoFattoPiuMosse (5);
-						} else if (m_GameManager.ColorCompare(VertFrontLeftDownColor, m_Verde)){
-							m_Animatore.EseguiPiuMosse (new int[]{ 12, 3, 11, 4 }, m_VelocitaEsecuzione);
-							m_HelpMeTutor.AggiungiMosse (new int[]{ 12, 3, 11, 4 });
-							m_GameManager.HoFattoPiuMosse (4);
+					if (mGameManager.ColorCompare(VertLeftRightDownColor, mBianco)) {
+						if (mGameManager.ColorCompare(VertFrontLeftDownColor, mRosso)) {
+							mAnimatore.EseguiPiuMosse (new int[]{ 5, 11, 6 }, mVelocitaEsecuzione);
+							mHelpMeTutor.AggiungiMosse (new int[]{ 5, 11, 6 });
+							mGameManager.HoFattoPiuMosse (3);
+						} else if (mGameManager.ColorCompare(VertFrontLeftDownColor, mBlu)){
+							mAnimatore.EseguiPiuMosse (new int[]{ 11, 1, 11, 2 }, mVelocitaEsecuzione);
+							mHelpMeTutor.AggiungiMosse (new int[]{ 11, 1, 11, 2 });
+							mGameManager.HoFattoPiuMosse (4);
+						} else if (mGameManager.ColorCompare(VertFrontLeftDownColor, mArancione)){
+							mAnimatore.EseguiPiuMosse (new int[]{ 11, 11, 7, 11, 8 }, mVelocitaEsecuzione);
+							mHelpMeTutor.AggiungiMosse (new int[]{ 11, 11, 7, 11, 8 });
+							mGameManager.HoFattoPiuMosse (5);
+						} else if (mGameManager.ColorCompare(VertFrontLeftDownColor, mVerde)){
+							mAnimatore.EseguiPiuMosse (new int[]{ 12, 3, 11, 4 }, mVelocitaEsecuzione);
+							mHelpMeTutor.AggiungiMosse (new int[]{ 12, 3, 11, 4 });
+							mGameManager.HoFattoPiuMosse (4);
 						}
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					} 
-				} else if (m_GameManager.ColorCompare(VertFrontLeftUpColor, m_Bianco) || m_GameManager.ColorCompare(VertLeftRightUpColor, m_Bianco)) {  //Parte 4 - Controllo se alcuni sono sotto
-					m_Animatore.EseguiPiuMosse (new int[]{ 5, 11, 6 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 5, 11, 6 });
-					m_GameManager.HoFattoPiuMosse (3);
-				} else if (m_GameManager.ColorCompare(VertRightLeftUpColor, m_Bianco) || m_GameManager.ColorCompare(VertFrontRightUpColor, m_Bianco)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 1, 11, 2 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 1, 11, 2 });
-					m_GameManager.HoFattoPiuMosse (3);
-				} else if (m_GameManager.ColorCompare(VertBackLeftUpColor, m_Bianco) || m_GameManager.ColorCompare(VertRightRightUpColor, m_Bianco)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 7, 11, 8 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 7, 11, 8 });
-					m_GameManager.HoFattoPiuMosse (3);
-				} else if (m_GameManager.ColorCompare(VertLeftLeftUpColor, m_Bianco) || m_GameManager.ColorCompare(VertBackRightUpColor, m_Bianco)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 3, 11, 4 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 3, 11, 4 });
-					m_GameManager.HoFattoPiuMosse (3);
-				} else if (!m_GameManager.ColorCompare(VertFrontLeftUpColor, m_Rosso)) {  																				//Parte 5 - Controllo se posizioni sbagliate: bianco giusto, lati sbagliati
-					m_Animatore.EseguiPiuMosse (new int[]{ 5, 11, 6 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 5, 11, 6 });
-					m_GameManager.HoFattoPiuMosse (3);
-				} else if (!m_GameManager.ColorCompare(VertRightLeftUpColor, m_Blu)) {  
-					m_Animatore.EseguiPiuMosse (new int[]{ 1, 11, 2 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 1, 11, 2 });
-					m_GameManager.HoFattoPiuMosse (3);
-				} else if (!m_GameManager.ColorCompare(VertBackLeftUpColor, m_Arancione)) {  
-					m_Animatore.EseguiPiuMosse (new int[]{ 7, 11, 8 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 7, 11, 8 });
-					m_GameManager.HoFattoPiuMosse (3);
-				} else if (!m_GameManager.ColorCompare(VertLeftLeftUpColor, m_Verde)) {  
-					m_Animatore.EseguiPiuMosse (new int[]{ 3, 11, 4 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 3, 11, 4 });
-					m_GameManager.HoFattoPiuMosse (3);
+				} else if (mGameManager.ColorCompare(VertFrontLeftUpColor, mBianco) || mGameManager.ColorCompare(VertLeftRightUpColor, mBianco)) {  //Parte 4 - Controllo se alcuni sono sotto
+					mAnimatore.EseguiPiuMosse (new int[]{ 5, 11, 6 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 5, 11, 6 });
+					mGameManager.HoFattoPiuMosse (3);
+				} else if (mGameManager.ColorCompare(VertRightLeftUpColor, mBianco) || mGameManager.ColorCompare(VertFrontRightUpColor, mBianco)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 1, 11, 2 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 1, 11, 2 });
+					mGameManager.HoFattoPiuMosse (3);
+				} else if (mGameManager.ColorCompare(VertBackLeftUpColor, mBianco) || mGameManager.ColorCompare(VertRightRightUpColor, mBianco)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 7, 11, 8 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 7, 11, 8 });
+					mGameManager.HoFattoPiuMosse (3);
+				} else if (mGameManager.ColorCompare(VertLeftLeftUpColor, mBianco) || mGameManager.ColorCompare(VertBackRightUpColor, mBianco)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 3, 11, 4 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 3, 11, 4 });
+					mGameManager.HoFattoPiuMosse (3);
+				} else if (!mGameManager.ColorCompare(VertFrontLeftUpColor, mRosso)) {  																				//Parte 5 - Controllo se posizioni sbagliate: bianco giusto, lati sbagliati
+					mAnimatore.EseguiPiuMosse (new int[]{ 5, 11, 6 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 5, 11, 6 });
+					mGameManager.HoFattoPiuMosse (3);
+				} else if (!mGameManager.ColorCompare(VertRightLeftUpColor, mBlu)) {  
+					mAnimatore.EseguiPiuMosse (new int[]{ 1, 11, 2 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 1, 11, 2 });
+					mGameManager.HoFattoPiuMosse (3);
+				} else if (!mGameManager.ColorCompare(VertBackLeftUpColor, mArancione)) {  
+					mAnimatore.EseguiPiuMosse (new int[]{ 7, 11, 8 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 7, 11, 8 });
+					mGameManager.HoFattoPiuMosse (3);
+				} else if (!mGameManager.ColorCompare(VertLeftLeftUpColor, mVerde)) {  
+					mAnimatore.EseguiPiuMosse (new int[]{ 3, 11, 4 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 3, 11, 4 });
+					mGameManager.HoFattoPiuMosse (3);
 				} else {
 					if (Fase3PavimentoBiancoCompletato ()) {
-						m_Fase3Completata = true;
+						mFase3Completata = true;
 					}
 				}
-			} else if(!m_Fase4Completata){																																			//FASE 4
-				if (m_GameManager.ColorCompare(SpigFrontDownColor, m_Rosso) && m_GameManager.ColorCompare(SpigDownUpColor, m_Verde)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 11, 5, 12, 6, 12, 2, 11, 1 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 11, 5, 12, 6, 12, 2, 11, 1 });
-					m_GameManager.HoFattoPiuMosse (8);
-				} else if (m_GameManager.ColorCompare(SpigFrontDownColor, m_Verde) && m_GameManager.ColorCompare(SpigDownUpColor, m_Arancione)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 3, 12, 4, 12, 6, 11, 5 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 3, 12, 4, 12, 6, 11, 5 });
-					m_GameManager.HoFattoPiuMosse (7);
-				} else if (m_GameManager.ColorCompare(SpigFrontDownColor, m_Arancione) && m_GameManager.ColorCompare(SpigDownUpColor, m_Blu)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 12, 7, 12, 8, 12, 4, 11, 3 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 12, 7, 12, 8, 12, 4, 11, 3 });
-					m_GameManager.HoFattoPiuMosse (8);
-				} else if (m_GameManager.ColorCompare(SpigFrontDownColor, m_Blu) && m_GameManager.ColorCompare(SpigDownUpColor, m_Rosso)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 11, 11, 1, 12, 2, 12, 8, 11, 7 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 11, 11, 1, 12, 2, 12, 8, 11, 7 });
-					m_GameManager.HoFattoPiuMosse (9);
-				} else if (m_GameManager.ColorCompare(SpigFrontDownColor, m_Rosso) && m_GameManager.ColorCompare(SpigDownUpColor, m_Blu)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 12, 8, 11, 7, 11, 1, 12, 2 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 12, 8, 11, 7, 11, 1, 12, 2 });
-					m_GameManager.HoFattoPiuMosse (8);
-				} else if (m_GameManager.ColorCompare(SpigFrontDownColor, m_Blu) && m_GameManager.ColorCompare(SpigDownUpColor, m_Arancione)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 4, 11, 3, 11, 7, 12, 8 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 4, 11, 3, 11, 7, 12, 8 });
-					m_GameManager.HoFattoPiuMosse (7);
-				} else if (m_GameManager.ColorCompare(SpigFrontDownColor, m_Arancione) && m_GameManager.ColorCompare(SpigDownUpColor, m_Verde)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 11, 6, 11, 5, 11, 3, 12, 4 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 11, 6, 11, 5, 11, 3, 12, 4 });
-					m_GameManager.HoFattoPiuMosse (8);
-				} else if (m_GameManager.ColorCompare(SpigFrontDownColor, m_Verde) && m_GameManager.ColorCompare(SpigDownUpColor, m_Rosso)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 11, 11, 2, 11, 1, 11, 5, 12, 6 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 11, 11, 2, 11, 1, 11, 5, 12, 6 });
-					m_GameManager.HoFattoPiuMosse (9);
+			} else if(!mFase4Completata){																																			//FASE 4
+				if (mGameManager.ColorCompare(SpigFrontDownColor, mRosso) && mGameManager.ColorCompare(SpigDownUpColor, mVerde)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 11, 5, 12, 6, 12, 2, 11, 1 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 11, 5, 12, 6, 12, 2, 11, 1 });
+					mGameManager.HoFattoPiuMosse (8);
+				} else if (mGameManager.ColorCompare(SpigFrontDownColor, mVerde) && mGameManager.ColorCompare(SpigDownUpColor, mArancione)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 3, 12, 4, 12, 6, 11, 5 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 3, 12, 4, 12, 6, 11, 5 });
+					mGameManager.HoFattoPiuMosse (7);
+				} else if (mGameManager.ColorCompare(SpigFrontDownColor, mArancione) && mGameManager.ColorCompare(SpigDownUpColor, mBlu)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 12, 7, 12, 8, 12, 4, 11, 3 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 12, 7, 12, 8, 12, 4, 11, 3 });
+					mGameManager.HoFattoPiuMosse (8);
+				} else if (mGameManager.ColorCompare(SpigFrontDownColor, mBlu) && mGameManager.ColorCompare(SpigDownUpColor, mRosso)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 11, 11, 1, 12, 2, 12, 8, 11, 7 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 11, 11, 1, 12, 2, 12, 8, 11, 7 });
+					mGameManager.HoFattoPiuMosse (9);
+				} else if (mGameManager.ColorCompare(SpigFrontDownColor, mRosso) && mGameManager.ColorCompare(SpigDownUpColor, mBlu)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 12, 8, 11, 7, 11, 1, 12, 2 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 12, 8, 11, 7, 11, 1, 12, 2 });
+					mGameManager.HoFattoPiuMosse (8);
+				} else if (mGameManager.ColorCompare(SpigFrontDownColor, mBlu) && mGameManager.ColorCompare(SpigDownUpColor, mArancione)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 4, 11, 3, 11, 7, 12, 8 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 4, 11, 3, 11, 7, 12, 8 });
+					mGameManager.HoFattoPiuMosse (7);
+				} else if (mGameManager.ColorCompare(SpigFrontDownColor, mArancione) && mGameManager.ColorCompare(SpigDownUpColor, mVerde)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 11, 6, 11, 5, 11, 3, 12, 4 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 11, 6, 11, 5, 11, 3, 12, 4 });
+					mGameManager.HoFattoPiuMosse (8);
+				} else if (mGameManager.ColorCompare(SpigFrontDownColor, mVerde) && mGameManager.ColorCompare(SpigDownUpColor, mRosso)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 11, 11, 2, 11, 1, 11, 5, 12, 6 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 11, 11, 2, 11, 1, 11, 5, 12, 6 });
+					mGameManager.HoFattoPiuMosse (9);
 
 				} else if (!Fase4Completata () && Fase4PossoContinuareAGirareSuperiore ()) {
 
-					m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-					m_GameManager.HoFattoUnaMossa ();
+					mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+					mGameManager.HoFattoUnaMossa ();
 
 				} else if(!Fase4Completata()){
 
-					if (!m_GameManager.ColorCompare(SpigFrontRightColor, m_Giallo) && !m_GameManager.ColorCompare(SpigFrontRightColor, m_Rosso) && !m_GameManager.ColorCompare(SpigRightLeftColor, m_Giallo) && !m_GameManager.ColorCompare(SpigRightLeftColor, m_Blu)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 1, 12, 2, 12, 8, 11, 7 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 1, 12, 2, 12, 8, 11, 7 });
-						m_GameManager.HoFattoPiuMosse (7);
-					} else if (!m_GameManager.ColorCompare(SpigRightRightColor, m_Giallo) && !m_GameManager.ColorCompare(SpigRightRightColor, m_Blu) && !m_GameManager.ColorCompare(SpigBackLeftColor, m_Giallo) && !m_GameManager.ColorCompare(SpigBackLeftColor, m_Arancione)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 7, 12, 8, 12, 4, 11, 3 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 7, 12, 8, 12, 4, 11, 3 });
-						m_GameManager.HoFattoPiuMosse (7);
-					} else if (!m_GameManager.ColorCompare(SpigBackRightColor, m_Giallo) && !m_GameManager.ColorCompare(SpigBackRightColor, m_Arancione) && !m_GameManager.ColorCompare(SpigLeftLeftColor, m_Giallo) && !m_GameManager.ColorCompare(SpigLeftLeftColor, m_Verde)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 3, 12, 4, 12, 6, 11, 5 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 3, 12, 4, 12, 6, 11, 5 });
-						m_GameManager.HoFattoPiuMosse (7);
-					} else if (!m_GameManager.ColorCompare(SpigLeftRightColor, m_Giallo) && !m_GameManager.ColorCompare(SpigLeftRightColor, m_Verde) && !m_GameManager.ColorCompare(SpigFrontLeftColor, m_Giallo) && !m_GameManager.ColorCompare(SpigFrontLeftColor, m_Rosso)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 5, 12, 6, 12, 2, 11, 1 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 5, 12, 6, 12, 2, 11, 1 });
-						m_GameManager.HoFattoPiuMosse (7);
+					if (!mGameManager.ColorCompare(SpigFrontRightColor, mGiallo) && !mGameManager.ColorCompare(SpigFrontRightColor, mRosso) && !mGameManager.ColorCompare(SpigRightLeftColor, mGiallo) && !mGameManager.ColorCompare(SpigRightLeftColor, mBlu)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 1, 12, 2, 12, 8, 11, 7 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 1, 12, 2, 12, 8, 11, 7 });
+						mGameManager.HoFattoPiuMosse (7);
+					} else if (!mGameManager.ColorCompare(SpigRightRightColor, mGiallo) && !mGameManager.ColorCompare(SpigRightRightColor, mBlu) && !mGameManager.ColorCompare(SpigBackLeftColor, mGiallo) && !mGameManager.ColorCompare(SpigBackLeftColor, mArancione)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 7, 12, 8, 12, 4, 11, 3 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 7, 12, 8, 12, 4, 11, 3 });
+						mGameManager.HoFattoPiuMosse (7);
+					} else if (!mGameManager.ColorCompare(SpigBackRightColor, mGiallo) && !mGameManager.ColorCompare(SpigBackRightColor, mArancione) && !mGameManager.ColorCompare(SpigLeftLeftColor, mGiallo) && !mGameManager.ColorCompare(SpigLeftLeftColor, mVerde)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 3, 12, 4, 12, 6, 11, 5 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 3, 12, 4, 12, 6, 11, 5 });
+						mGameManager.HoFattoPiuMosse (7);
+					} else if (!mGameManager.ColorCompare(SpigLeftRightColor, mGiallo) && !mGameManager.ColorCompare(SpigLeftRightColor, mVerde) && !mGameManager.ColorCompare(SpigFrontLeftColor, mGiallo) && !mGameManager.ColorCompare(SpigFrontLeftColor, mRosso)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 5, 12, 6, 12, 2, 11, 1 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 5, 12, 6, 12, 2, 11, 1 });
+						mGameManager.HoFattoPiuMosse (7);
 					}
 
 				} else{
-					m_Fase4Completata = true;
+					mFase4Completata = true;
 				}
-			} else if(!m_Fase5Completata){																																			//FASE 5
-				if (m_GameManager.ColorCompare(SpigDownUpColor, m_Giallo) && !m_GameManager.ColorCompare(SpigDownRightColor, m_Giallo) && !m_GameManager.ColorCompare(SpigDownDownColor, m_Giallo) && m_GameManager.ColorCompare(SpigDownLeftColor, m_Giallo)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 3, 11, 7, 12, 8, 4 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 3, 11, 7, 12, 8, 4 });
-					m_GameManager.HoFattoPiuMosse (6);
-				} else if (m_GameManager.ColorCompare(SpigDownUpColor, m_Giallo) && m_GameManager.ColorCompare(SpigDownRightColor, m_Giallo) && !m_GameManager.ColorCompare(SpigDownDownColor, m_Giallo) && !m_GameManager.ColorCompare(SpigDownLeftColor, m_Giallo)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 5, 11, 3, 12, 4, 6 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 5, 11, 3, 12, 4, 6 });
-					m_GameManager.HoFattoPiuMosse (6);
-				} else if (!m_GameManager.ColorCompare(SpigDownUpColor, m_Giallo) && m_GameManager.ColorCompare(SpigDownRightColor, m_Giallo) && m_GameManager.ColorCompare(SpigDownDownColor, m_Giallo) && !m_GameManager.ColorCompare(SpigDownLeftColor, m_Giallo)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 1, 11, 5, 12, 6, 2 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 1, 11, 5, 12, 6, 2 });
-					m_GameManager.HoFattoPiuMosse (6);
-				} else if (!m_GameManager.ColorCompare(SpigDownUpColor, m_Giallo) && !m_GameManager.ColorCompare(SpigDownRightColor, m_Giallo) && m_GameManager.ColorCompare(SpigDownDownColor, m_Giallo) && m_GameManager.ColorCompare(SpigDownLeftColor, m_Giallo)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 7, 11, 1, 12, 2, 8 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 7, 11, 1, 12, 2, 8 });
-					m_GameManager.HoFattoPiuMosse (6);
-				} else if (!m_GameManager.ColorCompare(SpigDownUpColor, m_Giallo) && m_GameManager.ColorCompare(SpigDownRightColor, m_Giallo) && !m_GameManager.ColorCompare(SpigDownDownColor, m_Giallo) && m_GameManager.ColorCompare(SpigDownLeftColor, m_Giallo)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 3, 7, 11, 8, 12, 4 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 3, 7, 11, 8, 12, 4 });
-					m_GameManager.HoFattoPiuMosse (6);
-				} else if (m_GameManager.ColorCompare(SpigDownUpColor, m_Giallo) && !m_GameManager.ColorCompare(SpigDownRightColor, m_Giallo) && m_GameManager.ColorCompare(SpigDownDownColor, m_Giallo) && !m_GameManager.ColorCompare(SpigDownLeftColor, m_Giallo)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 5, 3, 11, 4, 12, 6 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 5, 3, 11, 4, 12, 6 });
-					m_GameManager.HoFattoPiuMosse (6);
-				} else if (!m_GameManager.ColorCompare(SpigDownUpColor, m_Giallo) && !m_GameManager.ColorCompare(SpigDownRightColor, m_Giallo) && !m_GameManager.ColorCompare(SpigDownDownColor, m_Giallo) && !m_GameManager.ColorCompare(SpigDownLeftColor, m_Giallo)) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 3, 11, 7, 12, 8, 4 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 3, 11, 7, 12, 8, 4 });
-					m_GameManager.HoFattoPiuMosse (6);
+			} else if(!mFase5Completata){																																			//FASE 5
+				if (mGameManager.ColorCompare(SpigDownUpColor, mGiallo) && !mGameManager.ColorCompare(SpigDownRightColor, mGiallo) && !mGameManager.ColorCompare(SpigDownDownColor, mGiallo) && mGameManager.ColorCompare(SpigDownLeftColor, mGiallo)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 3, 11, 7, 12, 8, 4 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 3, 11, 7, 12, 8, 4 });
+					mGameManager.HoFattoPiuMosse (6);
+				} else if (mGameManager.ColorCompare(SpigDownUpColor, mGiallo) && mGameManager.ColorCompare(SpigDownRightColor, mGiallo) && !mGameManager.ColorCompare(SpigDownDownColor, mGiallo) && !mGameManager.ColorCompare(SpigDownLeftColor, mGiallo)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 5, 11, 3, 12, 4, 6 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 5, 11, 3, 12, 4, 6 });
+					mGameManager.HoFattoPiuMosse (6);
+				} else if (!mGameManager.ColorCompare(SpigDownUpColor, mGiallo) && mGameManager.ColorCompare(SpigDownRightColor, mGiallo) && mGameManager.ColorCompare(SpigDownDownColor, mGiallo) && !mGameManager.ColorCompare(SpigDownLeftColor, mGiallo)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 1, 11, 5, 12, 6, 2 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 1, 11, 5, 12, 6, 2 });
+					mGameManager.HoFattoPiuMosse (6);
+				} else if (!mGameManager.ColorCompare(SpigDownUpColor, mGiallo) && !mGameManager.ColorCompare(SpigDownRightColor, mGiallo) && mGameManager.ColorCompare(SpigDownDownColor, mGiallo) && mGameManager.ColorCompare(SpigDownLeftColor, mGiallo)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 7, 11, 1, 12, 2, 8 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 7, 11, 1, 12, 2, 8 });
+					mGameManager.HoFattoPiuMosse (6);
+				} else if (!mGameManager.ColorCompare(SpigDownUpColor, mGiallo) && mGameManager.ColorCompare(SpigDownRightColor, mGiallo) && !mGameManager.ColorCompare(SpigDownDownColor, mGiallo) && mGameManager.ColorCompare(SpigDownLeftColor, mGiallo)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 3, 7, 11, 8, 12, 4 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 3, 7, 11, 8, 12, 4 });
+					mGameManager.HoFattoPiuMosse (6);
+				} else if (mGameManager.ColorCompare(SpigDownUpColor, mGiallo) && !mGameManager.ColorCompare(SpigDownRightColor, mGiallo) && mGameManager.ColorCompare(SpigDownDownColor, mGiallo) && !mGameManager.ColorCompare(SpigDownLeftColor, mGiallo)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 5, 3, 11, 4, 12, 6 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 5, 3, 11, 4, 12, 6 });
+					mGameManager.HoFattoPiuMosse (6);
+				} else if (!mGameManager.ColorCompare(SpigDownUpColor, mGiallo) && !mGameManager.ColorCompare(SpigDownRightColor, mGiallo) && !mGameManager.ColorCompare(SpigDownDownColor, mGiallo) && !mGameManager.ColorCompare(SpigDownLeftColor, mGiallo)) {
+					mAnimatore.EseguiPiuMosse (new int[]{ 3, 11, 7, 12, 8, 4 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 3, 11, 7, 12, 8, 4 });
+					mGameManager.HoFattoPiuMosse (6);
 				} else {
-					m_Fase5Completata = true;
+					mFase5Completata = true;
 				}
-			} else if (!m_Fase6Completata){																																			//FASE 6
+			} else if (!mFase6Completata){																																			//FASE 6
 				if(Fase6UnoAcceso()){	//Croce + basso sinistra
-					if (m_GameManager.ColorCompare(VertDownLeftDownColor, m_Giallo) && !m_GameManager.ColorCompare(VertDownLeftUpColor, m_Giallo) && !m_GameManager.ColorCompare(VertDownRightDownColor, m_Giallo) && !m_GameManager.ColorCompare(VertDownRightUpColor, m_Giallo)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 7, 11, 8, 11, 7, 11, 11, 8 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 7, 11, 8, 11, 7, 11, 11, 8 });
-						m_GameManager.HoFattoPiuMosse (8);
+					if (mGameManager.ColorCompare(VertDownLeftDownColor, mGiallo) && !mGameManager.ColorCompare(VertDownLeftUpColor, mGiallo) && !mGameManager.ColorCompare(VertDownRightDownColor, mGiallo) && !mGameManager.ColorCompare(VertDownRightUpColor, mGiallo)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 7, 11, 8, 11, 7, 11, 11, 8 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 7, 11, 8, 11, 7, 11, 11, 8 });
+						mGameManager.HoFattoPiuMosse (8);
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
-				} else if (!m_GameManager.ColorCompare(VertDownLeftDownColor, m_Giallo) && !m_GameManager.ColorCompare(VertDownLeftUpColor, m_Giallo) && !m_GameManager.ColorCompare(VertDownRightDownColor, m_Giallo) && !m_GameManager.ColorCompare(VertDownRightUpColor, m_Giallo)){ //Croce
-					if (m_GameManager.ColorCompare(VertLeftRightDownColor, m_Giallo) && m_GameManager.ColorCompare(VertLeftLeftDownColor, m_Giallo)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 7, 11, 8, 11, 7, 11, 11, 8 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 7, 11, 8, 11, 7, 11, 11, 8 });
-						m_GameManager.HoFattoPiuMosse (8);
+				} else if (!mGameManager.ColorCompare(VertDownLeftDownColor, mGiallo) && !mGameManager.ColorCompare(VertDownLeftUpColor, mGiallo) && !mGameManager.ColorCompare(VertDownRightDownColor, mGiallo) && !mGameManager.ColorCompare(VertDownRightUpColor, mGiallo)){ //Croce
+					if (mGameManager.ColorCompare(VertLeftRightDownColor, mGiallo) && mGameManager.ColorCompare(VertLeftLeftDownColor, mGiallo)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 7, 11, 8, 11, 7, 11, 11, 8 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 7, 11, 8, 11, 7, 11, 11, 8 });
+						mGameManager.HoFattoPiuMosse (8);
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
 				} else if (Fase6TSpessa()){ //T spessa punta giu
-					if (!m_GameManager.ColorCompare(VertDownLeftDownColor, m_Giallo) && !m_GameManager.ColorCompare(VertDownRightDownColor, m_Giallo)) {
-						if (m_GameManager.ColorCompare(VertBackLeftDownColor, m_Giallo) && m_GameManager.ColorCompare(VertBackRightDownColor, m_Giallo)) {
-							m_Animatore.EseguiPiuMosse (new int[]{ 7, 11, 8, 11, 7, 11, 11, 8 }, m_VelocitaEsecuzione);
-							m_HelpMeTutor.AggiungiMosse (new int[]{ 7, 11, 8, 11, 7, 11, 11, 8 });
-							m_GameManager.HoFattoPiuMosse (8);
+					if (!mGameManager.ColorCompare(VertDownLeftDownColor, mGiallo) && !mGameManager.ColorCompare(VertDownRightDownColor, mGiallo)) {
+						if (mGameManager.ColorCompare(VertBackLeftDownColor, mGiallo) && mGameManager.ColorCompare(VertBackRightDownColor, mGiallo)) {
+							mAnimatore.EseguiPiuMosse (new int[]{ 7, 11, 8, 11, 7, 11, 11, 8 }, mVelocitaEsecuzione);
+							mHelpMeTutor.AggiungiMosse (new int[]{ 7, 11, 8, 11, 7, 11, 11, 8 });
+							mGameManager.HoFattoPiuMosse (8);
 						} else {
-							m_Animatore.EseguiPiuMosse (new int[]{ 11, 7, 11, 8, 11, 7, 11, 11, 8 }, m_VelocitaEsecuzione);
-							m_HelpMeTutor.AggiungiMosse (new int[]{ 11, 7, 11, 8, 11, 7, 11, 11, 8 });
-							m_GameManager.HoFattoPiuMosse (9);
+							mAnimatore.EseguiPiuMosse (new int[]{ 11, 7, 11, 8, 11, 7, 11, 11, 8 }, mVelocitaEsecuzione);
+							mHelpMeTutor.AggiungiMosse (new int[]{ 11, 7, 11, 8, 11, 7, 11, 11, 8 });
+							mGameManager.HoFattoPiuMosse (9);
 						}
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
-				} else if (m_GameManager.ColorCompare(VertDownLeftUpColor, m_Giallo) && !m_GameManager.ColorCompare(VertDownRightUpColor, m_Giallo) && !m_GameManager.ColorCompare(VertDownLeftDownColor, m_Giallo) && m_GameManager.ColorCompare(VertDownRightDownColor, m_Giallo)){ //Quadrati intersecati giusti
-					m_Animatore.EseguiPiuMosse (new int[]{ 7, 11, 8, 11, 7, 11, 11, 8 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 7, 11, 8, 11, 7, 11, 11, 8 });
-					m_GameManager.HoFattoPiuMosse (8);
-				} else if (!m_GameManager.ColorCompare(VertDownLeftUpColor, m_Giallo) && m_GameManager.ColorCompare(VertDownRightUpColor, m_Giallo) && m_GameManager.ColorCompare(VertDownLeftDownColor, m_Giallo) && !m_GameManager.ColorCompare(VertDownRightDownColor, m_Giallo)){ //Quadrati intersecati sbagliati
-					m_Animatore.EseguiPiuMosse (new int[]{ 11, 7, 11, 8, 11, 7, 11, 11, 8 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 11, 7, 11, 8, 11, 7, 11, 11, 8 });
-					m_GameManager.HoFattoPiuMosse (9);
+				} else if (mGameManager.ColorCompare(VertDownLeftUpColor, mGiallo) && !mGameManager.ColorCompare(VertDownRightUpColor, mGiallo) && !mGameManager.ColorCompare(VertDownLeftDownColor, mGiallo) && mGameManager.ColorCompare(VertDownRightDownColor, mGiallo)){ //Quadrati intersecati giusti
+					mAnimatore.EseguiPiuMosse (new int[]{ 7, 11, 8, 11, 7, 11, 11, 8 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 7, 11, 8, 11, 7, 11, 11, 8 });
+					mGameManager.HoFattoPiuMosse (8);
+				} else if (!mGameManager.ColorCompare(VertDownLeftUpColor, mGiallo) && mGameManager.ColorCompare(VertDownRightUpColor, mGiallo) && mGameManager.ColorCompare(VertDownLeftDownColor, mGiallo) && !mGameManager.ColorCompare(VertDownRightDownColor, mGiallo)){ //Quadrati intersecati sbagliati
+					mAnimatore.EseguiPiuMosse (new int[]{ 11, 7, 11, 8, 11, 7, 11, 11, 8 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 11, 7, 11, 8, 11, 7, 11, 11, 8 });
+					mGameManager.HoFattoPiuMosse (9);
 				} else {
-					m_Fase6Completata = true;
+					mFase6Completata = true;
 				}
-			} else if (!m_Fase7Completata){																																			//FASE 7
+			} else if (!mFase7Completata){																																			//FASE 7
 				if (!Fase7TuttiDiversi() && !Fase7TuttiUguali()) {
-					if (m_GameManager.ColorCompare(VertFrontLeftDownColor, VertFrontRightDownColor)) {
-						if (m_GameManager.ColorCompare(VertFrontLeftDownColor, m_Rosso)) {
-							m_Animatore.EseguiPiuMosse (new int[]{ 5, 4, 5, 1, 1, 6, 3, 5, 1, 1, 5, 5 }, m_VelocitaEsecuzione);
-							m_HelpMeTutor.AggiungiMosse (new int[]{ 5, 4, 5, 1, 1, 6, 3, 5, 1, 1, 5, 5 });
-							m_GameManager.HoFattoPiuMosse (12);
-						} else if(m_GameManager.ColorCompare(VertFrontLeftDownColor, m_Verde)) {
-							m_Animatore.EseguiPiuMosse (new int[]{ 12, 3, 8, 3, 5, 5, 4, 7, 3, 5, 5, 3, 3 }, m_VelocitaEsecuzione);
-							m_HelpMeTutor.AggiungiMosse (new int[]{ 12, 3, 8, 3, 5, 5, 4, 7, 3, 5, 5, 3, 3 });
-							m_GameManager.HoFattoPiuMosse (13);
-						} else if(m_GameManager.ColorCompare(VertFrontLeftDownColor, m_Arancione)) {
-							m_Animatore.EseguiPiuMosse (new int[]{ 11, 11, 7, 2, 7, 3, 3, 8, 1, 7, 3, 3, 7, 7 }, m_VelocitaEsecuzione);
-							m_HelpMeTutor.AggiungiMosse (new int[]{ 11, 11, 7, 2, 7, 3, 3, 8, 1, 7, 3, 3, 7, 7 });
-							m_GameManager.HoFattoPiuMosse (14);
-						} else if(m_GameManager.ColorCompare(VertFrontLeftDownColor, m_Blu)) {
-							m_Animatore.EseguiPiuMosse (new int[]{ 11, 1, 6, 1, 7, 7, 2, 5, 1, 7, 7, 1, 1 }, m_VelocitaEsecuzione);
-							m_HelpMeTutor.AggiungiMosse (new int[]{ 11, 1, 6, 1, 7, 7, 2, 5, 1, 7, 7, 1, 1 });
-							m_GameManager.HoFattoPiuMosse (13);
+					if (mGameManager.ColorCompare(VertFrontLeftDownColor, VertFrontRightDownColor)) {
+						if (mGameManager.ColorCompare(VertFrontLeftDownColor, mRosso)) {
+							mAnimatore.EseguiPiuMosse (new int[]{ 5, 4, 5, 1, 1, 6, 3, 5, 1, 1, 5, 5 }, mVelocitaEsecuzione);
+							mHelpMeTutor.AggiungiMosse (new int[]{ 5, 4, 5, 1, 1, 6, 3, 5, 1, 1, 5, 5 });
+							mGameManager.HoFattoPiuMosse (12);
+						} else if(mGameManager.ColorCompare(VertFrontLeftDownColor, mVerde)) {
+							mAnimatore.EseguiPiuMosse (new int[]{ 12, 3, 8, 3, 5, 5, 4, 7, 3, 5, 5, 3, 3 }, mVelocitaEsecuzione);
+							mHelpMeTutor.AggiungiMosse (new int[]{ 12, 3, 8, 3, 5, 5, 4, 7, 3, 5, 5, 3, 3 });
+							mGameManager.HoFattoPiuMosse (13);
+						} else if(mGameManager.ColorCompare(VertFrontLeftDownColor, mArancione)) {
+							mAnimatore.EseguiPiuMosse (new int[]{ 11, 11, 7, 2, 7, 3, 3, 8, 1, 7, 3, 3, 7, 7 }, mVelocitaEsecuzione);
+							mHelpMeTutor.AggiungiMosse (new int[]{ 11, 11, 7, 2, 7, 3, 3, 8, 1, 7, 3, 3, 7, 7 });
+							mGameManager.HoFattoPiuMosse (14);
+						} else if(mGameManager.ColorCompare(VertFrontLeftDownColor, mBlu)) {
+							mAnimatore.EseguiPiuMosse (new int[]{ 11, 1, 6, 1, 7, 7, 2, 5, 1, 7, 7, 1, 1 }, mVelocitaEsecuzione);
+							mHelpMeTutor.AggiungiMosse (new int[]{ 11, 1, 6, 1, 7, 7, 2, 5, 1, 7, 7, 1, 1 });
+							mGameManager.HoFattoPiuMosse (13);
 						}
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
 				} else if (Fase7TuttiDiversi() && !Fase7TuttiUguali()) {
-					m_Animatore.EseguiPiuMosse (new int[]{ 7, 2, 7, 3, 3, 8, 1, 7, 3, 3, 7, 7 }, m_VelocitaEsecuzione);
-					m_HelpMeTutor.AggiungiMosse (new int[]{ 7, 2, 7, 3, 3, 8, 1, 7, 3, 3, 7, 7 });
-					m_GameManager.HoFattoPiuMosse (12);
+					mAnimatore.EseguiPiuMosse (new int[]{ 7, 2, 7, 3, 3, 8, 1, 7, 3, 3, 7, 7 }, mVelocitaEsecuzione);
+					mHelpMeTutor.AggiungiMosse (new int[]{ 7, 2, 7, 3, 3, 8, 1, 7, 3, 3, 7, 7 });
+					mGameManager.HoFattoPiuMosse (12);
 				} else {
-					m_Fase7Completata = true;
+					mFase7Completata = true;
 				}
-			} else if (!m_Fase8Completata){																																			//FASE 8
+			} else if (!mFase8Completata){																																			//FASE 8
 				if (!Fase8Completata ()) {
 					if(Fase8NonCiSonoLineeComplete()){
-						m_Animatore.EseguiPiuMosse (new int[]{ 3, 3, 12, 8, 5, 3, 3, 7, 6, 12, 3, 3}, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 3, 3, 12, 8, 5, 3, 3, 7, 6, 12, 3, 3});
-						m_GameManager.HoFattoPiuMosse (12);
-					} else if (m_GameManager.ColorCompare(SpigFrontDownColor, m_Rosso) && m_GameManager.ColorCompare(VertFrontLeftDownColor, m_Rosso) && m_GameManager.ColorCompare(VertFrontRightDownColor, m_Rosso)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 3, 3, 12, 8, 5, 3, 3, 7, 6, 12, 3, 3}, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 3, 3, 12, 8, 5, 3, 3, 7, 6, 12, 3, 3});
-						m_GameManager.HoFattoPiuMosse (12);
-					} else if (m_GameManager.ColorCompare(SpigFrontDownColor, m_Verde) && m_GameManager.ColorCompare(VertFrontLeftDownColor, m_Verde) && m_GameManager.ColorCompare(VertFrontRightDownColor, m_Verde)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 12, 7, 7, 12, 2, 3, 7, 7, 1, 4, 12, 7, 7}, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 12, 7, 7, 12, 2, 3, 7, 7, 1, 4, 12, 7, 7});
-						m_GameManager.HoFattoPiuMosse (13);
-					} else if (m_GameManager.ColorCompare(SpigFrontDownColor, m_Arancione) && m_GameManager.ColorCompare(VertFrontLeftDownColor, m_Arancione) && m_GameManager.ColorCompare(VertFrontRightDownColor, m_Arancione)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11, 11, 1, 1, 12, 6, 7, 1, 1, 5, 8, 12, 1, 1}, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11, 11, 1, 1, 12, 6, 7, 1, 1, 5, 8, 12, 1, 1});
-						m_GameManager.HoFattoPiuMosse (14);
-					} else if (m_GameManager.ColorCompare(SpigFrontDownColor, m_Blu) && m_GameManager.ColorCompare(VertFrontLeftDownColor, m_Blu) && m_GameManager.ColorCompare(VertFrontRightDownColor, m_Blu)) {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11, 5, 5, 12, 4, 1, 5, 5, 3, 2, 12, 5, 5}, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11, 5, 5, 12, 4, 1, 5, 5, 3, 2, 12, 5, 5});
-						m_GameManager.HoFattoPiuMosse (13);
+						mAnimatore.EseguiPiuMosse (new int[]{ 3, 3, 12, 8, 5, 3, 3, 7, 6, 12, 3, 3}, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 3, 3, 12, 8, 5, 3, 3, 7, 6, 12, 3, 3});
+						mGameManager.HoFattoPiuMosse (12);
+					} else if (mGameManager.ColorCompare(SpigFrontDownColor, mRosso) && mGameManager.ColorCompare(VertFrontLeftDownColor, mRosso) && mGameManager.ColorCompare(VertFrontRightDownColor, mRosso)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 3, 3, 12, 8, 5, 3, 3, 7, 6, 12, 3, 3}, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 3, 3, 12, 8, 5, 3, 3, 7, 6, 12, 3, 3});
+						mGameManager.HoFattoPiuMosse (12);
+					} else if (mGameManager.ColorCompare(SpigFrontDownColor, mVerde) && mGameManager.ColorCompare(VertFrontLeftDownColor, mVerde) && mGameManager.ColorCompare(VertFrontRightDownColor, mVerde)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 12, 7, 7, 12, 2, 3, 7, 7, 1, 4, 12, 7, 7}, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 12, 7, 7, 12, 2, 3, 7, 7, 1, 4, 12, 7, 7});
+						mGameManager.HoFattoPiuMosse (13);
+					} else if (mGameManager.ColorCompare(SpigFrontDownColor, mArancione) && mGameManager.ColorCompare(VertFrontLeftDownColor, mArancione) && mGameManager.ColorCompare(VertFrontRightDownColor, mArancione)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 11, 11, 1, 1, 12, 6, 7, 1, 1, 5, 8, 12, 1, 1}, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11, 11, 1, 1, 12, 6, 7, 1, 1, 5, 8, 12, 1, 1});
+						mGameManager.HoFattoPiuMosse (14);
+					} else if (mGameManager.ColorCompare(SpigFrontDownColor, mBlu) && mGameManager.ColorCompare(VertFrontLeftDownColor, mBlu) && mGameManager.ColorCompare(VertFrontRightDownColor, mBlu)) {
+						mAnimatore.EseguiPiuMosse (new int[]{ 11, 5, 5, 12, 4, 1, 5, 5, 3, 2, 12, 5, 5}, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11, 5, 5, 12, 4, 1, 5, 5, 3, 2, 12, 5, 5});
+						mGameManager.HoFattoPiuMosse (13);
 					} else {
-						m_Animatore.EseguiPiuMosse (new int[]{ 11 }, m_VelocitaEsecuzione);
-						m_HelpMeTutor.AggiungiMosse (new int[]{ 11 });
-						m_GameManager.HoFattoUnaMossa ();
+						mAnimatore.EseguiPiuMosse (new int[]{ 11 }, mVelocitaEsecuzione);
+						mHelpMeTutor.AggiungiMosse (new int[]{ 11 });
+						mGameManager.HoFattoUnaMossa ();
 					}
 				} else {
-					m_Fase8Completata = true;
+					mFase8Completata = true;
 				}
 			} else {
 				Reset ();
@@ -557,61 +556,61 @@ public class AI_HelpMe : AI {
 
 	public void HelpMeCalcola(){
 
-		m_HelpMeTutor.setCalcErrorVisibility (false);
+		mHelpMeTutor.setCalcErrorVisibility (false);
 
 		//CONTROLLO PRIMA DI INIZIARE
 
 		List<Color> spigoli = new List<Color>();
-		spigoli.Add(m_StatoCubo.getSpigFrontUpColor());
-		spigoli.Add(m_StatoCubo.getSpigFrontLeftColor());
-		spigoli.Add(m_StatoCubo.getSpigFrontRightColor());
-		spigoli.Add(m_StatoCubo.getSpigFrontDownColor());
-		spigoli.Add(m_StatoCubo.getSpigBackUpColor());
-		spigoli.Add(m_StatoCubo.getSpigBackLeftColor());
-		spigoli.Add(m_StatoCubo.getSpigBackRightColor());
-		spigoli.Add(m_StatoCubo.getSpigBackDownColor());
-		spigoli.Add(m_StatoCubo.getSpigRightUpColor());
-		spigoli.Add(m_StatoCubo.getSpigRightLeftColor());
-		spigoli.Add(m_StatoCubo.getSpigRightRightColor());
-		spigoli.Add(m_StatoCubo.getSpigRightDownColor());
-		spigoli.Add(m_StatoCubo.getSpigLeftUpColor());
-		spigoli.Add(m_StatoCubo.getSpigLeftLeftColor());
-		spigoli.Add(m_StatoCubo.getSpigLeftRightColor());
-		spigoli.Add(m_StatoCubo.getSpigLeftDownColor());
-		spigoli.Add(m_StatoCubo.getSpigUpUpColor());
-		spigoli.Add(m_StatoCubo.getSpigUpLeftColor());
-		spigoli.Add(m_StatoCubo.getSpigUpRightColor());
-		spigoli.Add(m_StatoCubo.getSpigUpDownColor());
-		spigoli.Add(m_StatoCubo.getSpigDownUpColor());
-		spigoli.Add(m_StatoCubo.getSpigDownLeftColor());
-		spigoli.Add(m_StatoCubo.getSpigDownRightColor());
-		spigoli.Add(m_StatoCubo.getSpigDownDownColor());
+		spigoli.Add(mStatoCubo.getSpigFrontUpColor());
+		spigoli.Add(mStatoCubo.getSpigFrontLeftColor());
+		spigoli.Add(mStatoCubo.getSpigFrontRightColor());
+		spigoli.Add(mStatoCubo.getSpigFrontDownColor());
+		spigoli.Add(mStatoCubo.getSpigBackUpColor());
+		spigoli.Add(mStatoCubo.getSpigBackLeftColor());
+		spigoli.Add(mStatoCubo.getSpigBackRightColor());
+		spigoli.Add(mStatoCubo.getSpigBackDownColor());
+		spigoli.Add(mStatoCubo.getSpigRightUpColor());
+		spigoli.Add(mStatoCubo.getSpigRightLeftColor());
+		spigoli.Add(mStatoCubo.getSpigRightRightColor());
+		spigoli.Add(mStatoCubo.getSpigRightDownColor());
+		spigoli.Add(mStatoCubo.getSpigLeftUpColor());
+		spigoli.Add(mStatoCubo.getSpigLeftLeftColor());
+		spigoli.Add(mStatoCubo.getSpigLeftRightColor());
+		spigoli.Add(mStatoCubo.getSpigLeftDownColor());
+		spigoli.Add(mStatoCubo.getSpigUpUpColor());
+		spigoli.Add(mStatoCubo.getSpigUpLeftColor());
+		spigoli.Add(mStatoCubo.getSpigUpRightColor());
+		spigoli.Add(mStatoCubo.getSpigUpDownColor());
+		spigoli.Add(mStatoCubo.getSpigDownUpColor());
+		spigoli.Add(mStatoCubo.getSpigDownLeftColor());
+		spigoli.Add(mStatoCubo.getSpigDownRightColor());
+		spigoli.Add(mStatoCubo.getSpigDownDownColor());
 
 		List<Color> vertici = new List<Color>();
-		vertici.Add(m_StatoCubo.getVertFrontRightUpColor());
-		vertici.Add(m_StatoCubo.getVertFrontRightDownColor());
-		vertici.Add(m_StatoCubo.getVertFrontLeftUpColor());
-		vertici.Add(m_StatoCubo.getVertFrontLeftDownColor());
-		vertici.Add(m_StatoCubo.getVertBackRightUpColor());
-		vertici.Add(m_StatoCubo.getVertBackRightDownColor());
-		vertici.Add(m_StatoCubo.getVertBackLeftUpColor());
-		vertici.Add(m_StatoCubo.getVertBackLeftDownColor());
-		vertici.Add(m_StatoCubo.getVertLeftRightUpColor());
-		vertici.Add(m_StatoCubo.getVertLeftRightDownColor());
-		vertici.Add(m_StatoCubo.getVertLeftLeftUpColor());
-		vertici.Add(m_StatoCubo.getVertLeftLeftDownColor());
-		vertici.Add(m_StatoCubo.getVertRightRightUpColor());
-		vertici.Add(m_StatoCubo.getVertRightRightDownColor());
-		vertici.Add(m_StatoCubo.getVertRightLeftUpColor());
-		vertici.Add(m_StatoCubo.getVertRightLeftDownColor());
-		vertici.Add(m_StatoCubo.getVertUpRightUpColor());
-		vertici.Add(m_StatoCubo.getVertUpRightDownColor());
-		vertici.Add(m_StatoCubo.getVertUpLeftUpColor());
-		vertici.Add(m_StatoCubo.getVertUpLeftDownColor());
-		vertici.Add(m_StatoCubo.getVertDownRightUpColor());
-		vertici.Add(m_StatoCubo.getVertDownRightDownColor());
-		vertici.Add(m_StatoCubo.getVertDownLeftUpColor());
-		vertici.Add(m_StatoCubo.getVertDownLeftDownColor());
+		vertici.Add(mStatoCubo.getVertFrontRightUpColor());
+		vertici.Add(mStatoCubo.getVertFrontRightDownColor());
+		vertici.Add(mStatoCubo.getVertFrontLeftUpColor());
+		vertici.Add(mStatoCubo.getVertFrontLeftDownColor());
+		vertici.Add(mStatoCubo.getVertBackRightUpColor());
+		vertici.Add(mStatoCubo.getVertBackRightDownColor());
+		vertici.Add(mStatoCubo.getVertBackLeftUpColor());
+		vertici.Add(mStatoCubo.getVertBackLeftDownColor());
+		vertici.Add(mStatoCubo.getVertLeftRightUpColor());
+		vertici.Add(mStatoCubo.getVertLeftRightDownColor());
+		vertici.Add(mStatoCubo.getVertLeftLeftUpColor());
+		vertici.Add(mStatoCubo.getVertLeftLeftDownColor());
+		vertici.Add(mStatoCubo.getVertRightRightUpColor());
+		vertici.Add(mStatoCubo.getVertRightRightDownColor());
+		vertici.Add(mStatoCubo.getVertRightLeftUpColor());
+		vertici.Add(mStatoCubo.getVertRightLeftDownColor());
+		vertici.Add(mStatoCubo.getVertUpRightUpColor());
+		vertici.Add(mStatoCubo.getVertUpRightDownColor());
+		vertici.Add(mStatoCubo.getVertUpLeftUpColor());
+		vertici.Add(mStatoCubo.getVertUpLeftDownColor());
+		vertici.Add(mStatoCubo.getVertDownRightUpColor());
+		vertici.Add(mStatoCubo.getVertDownRightDownColor());
+		vertici.Add(mStatoCubo.getVertDownLeftUpColor());
+		vertici.Add(mStatoCubo.getVertDownLeftDownColor());
 
 		int contSpigRosso, contSpigArancione, contSpigVerde, contSpigBlu, contSpigBianco, contSpigGiallo;
 		contSpigRosso=contSpigArancione=contSpigVerde=contSpigBlu=contSpigBianco=contSpigGiallo=0;
@@ -620,32 +619,32 @@ public class AI_HelpMe : AI {
 		contVertRosso=contVertArancione=contVertVerde=contVertBlu=contVertBianco=contVertGiallo=0;
 
 		for(int i=0;i<spigoli.Count;i++){
-			if (m_GameManager.ColorCompare (spigoli [i], m_StatoCubo.getCentFrontColor ())) {
+			if (mGameManager.ColorCompare (spigoli [i], mStatoCubo.getCentFrontColor ())) {
 				contSpigRosso++;
-			} else if (m_GameManager.ColorCompare (spigoli [i], m_StatoCubo.getCentBackColor ())) {
+			} else if (mGameManager.ColorCompare (spigoli [i], mStatoCubo.getCentBackColor ())) {
 				contSpigArancione++;
-			} else if (m_GameManager.ColorCompare (spigoli [i], m_StatoCubo.getCentLeftColor ())) {
+			} else if (mGameManager.ColorCompare (spigoli [i], mStatoCubo.getCentLeftColor ())) {
 				contSpigVerde++;
-			} else if (m_GameManager.ColorCompare (spigoli [i], m_StatoCubo.getCentRightColor ())) {
+			} else if (mGameManager.ColorCompare (spigoli [i], mStatoCubo.getCentRightColor ())) {
 				contSpigBlu++;
-			} else if (m_GameManager.ColorCompare (spigoli [i], m_StatoCubo.getCentUpColor ())) {
+			} else if (mGameManager.ColorCompare (spigoli [i], mStatoCubo.getCentUpColor ())) {
 				contSpigBianco++;
-			} else if (m_GameManager.ColorCompare (spigoli [i], m_StatoCubo.getCentDownColor ())) {
+			} else if (mGameManager.ColorCompare (spigoli [i], mStatoCubo.getCentDownColor ())) {
 				contSpigGiallo++;
 			}
 
 
-			if (m_GameManager.ColorCompare (vertici [i], m_StatoCubo.getCentFrontColor ())) {
+			if (mGameManager.ColorCompare (vertici [i], mStatoCubo.getCentFrontColor ())) {
 				contVertRosso++;
-			} else if (m_GameManager.ColorCompare (vertici [i], m_StatoCubo.getCentBackColor ())) {
+			} else if (mGameManager.ColorCompare (vertici [i], mStatoCubo.getCentBackColor ())) {
 				contVertArancione++;
-			} else if (m_GameManager.ColorCompare (vertici [i], m_StatoCubo.getCentLeftColor ())) {
+			} else if (mGameManager.ColorCompare (vertici [i], mStatoCubo.getCentLeftColor ())) {
 				contVertVerde++;
-			} else if (m_GameManager.ColorCompare (vertici [i], m_StatoCubo.getCentRightColor ())) {
+			} else if (mGameManager.ColorCompare (vertici [i], mStatoCubo.getCentRightColor ())) {
 				contVertBlu++;
-			} else if (m_GameManager.ColorCompare (vertici [i], m_StatoCubo.getCentUpColor ())) {
+			} else if (mGameManager.ColorCompare (vertici [i], mStatoCubo.getCentUpColor ())) {
 				contVertBianco++;
-			} else if (m_GameManager.ColorCompare (vertici [i], m_StatoCubo.getCentDownColor ())) {
+			} else if (mGameManager.ColorCompare (vertici [i], mStatoCubo.getCentDownColor ())) {
 				contVertGiallo++;
 			}
 		}
@@ -656,7 +655,7 @@ public class AI_HelpMe : AI {
 		   contSpigBlu == 4 && contVertBlu == 4 &&
 		   contSpigBianco == 4 && contVertBianco == 4 &&
 		   contSpigGiallo == 4 && contVertGiallo == 4)) {
-			m_HelpMeTutor.FineCalcolo (false);
+			mHelpMeTutor.FineCalcolo (false);
 			return;
 		}
 
@@ -664,9 +663,9 @@ public class AI_HelpMe : AI {
 
 		FileManager.setFilename ("HelpMeSaveFile");
 		FileManager.salvaSuFile ();
-		m_Risolvi = true;
-		m_GameManager.ResetMosseEseguite ();
-		m_Statistiche.TimeReset ();
-		m_Animatore.SetStatoStoRisolvendo (true);
+		mRisolvi = true;
+		mGameManager.ResetMosseEseguite ();
+		mStatistiche.TimeReset ();
+		mAnimatore.SetStatoStoRisolvendo (true);
 	}
 }

@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class ScrittaMenuPrincipale_HelpMe : ScrittaMenuPrincipale {
 
-	public void OnMouseOver(){
+	public new void OnMouseOver(){
 
-		m_InfoOggetto.text = m_InfoString;
+		mInfoOggetto.text = mInfoString;
 
 
 		if (Input.GetKeyDown (KeyCode.Mouse0) && name.Equals ("Esci")) {
@@ -16,8 +16,8 @@ public class ScrittaMenuPrincipale_HelpMe : ScrittaMenuPrincipale {
 		}
 
 		if (Input.GetKeyDown (KeyCode.Mouse0) && name.Equals ("Continua")) {
-			m_MenuPrincipale.SetActive (false);
-			m_GameManager.GetComponent<GameManager_HelpMe> ().ToggleGameRunning ();
+			mMenuPrincipale.SetActive (false);
+			mGameManager.GetComponent<GameManager_HelpMe> ().ToggleGameRunning ();
 			OnMouseExit ();
 		}
 
@@ -34,21 +34,21 @@ public class ScrittaMenuPrincipale_HelpMe : ScrittaMenuPrincipale {
 		}
 
 		if (Input.GetKeyDown (KeyCode.Mouse0) && name.Equals ("Opzioni")) {
-			m_MenuOpzioni.SetActive (true);
-			m_MenuPrincipale.SetActive (false);
+			mMenuOpzioni.SetActive (true);
+			mMenuPrincipale.SetActive (false);
 			OnMouseExit ();
 		}
 
 		if (Input.GetKeyDown (KeyCode.Mouse0) && name.Equals ("Controlli")) {
-			m_MenuControlli.SetActive (true);
-			m_MenuPrincipale.SetActive (false);
+			mMenuControlli.SetActive (true);
+			mMenuPrincipale.SetActive (false);
 			OnMouseExit ();
 		}
 
 		if (Input.GetKeyDown (KeyCode.Mouse0) && name.Equals ("Indietro")) {
-			m_MenuPrincipale.SetActive (true);
-			m_MenuOpzioni.SetActive (false);
-			m_MenuControlli.SetActive (false);
+			mMenuPrincipale.SetActive (true);
+			mMenuOpzioni.SetActive (false);
+			mMenuControlli.SetActive (false);
 			OnMouseExit ();
 		}
 	}
