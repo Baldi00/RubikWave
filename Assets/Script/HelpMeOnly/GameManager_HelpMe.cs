@@ -48,8 +48,8 @@ public class GameManager_HelpMe : GameManager {
 	}
 
 	void Start () {
-		mStatoCubo = GetComponent<StatoCubo> ();
-		mAnimatore = GameObject.Find ("Animazioni").GetComponent<Animatore>();
+		mStatoCubo = GetComponent<CubeManager> ();
+		mAnimatore = GameObject.Find ("GameManager").GetComponent<AnimationManager>();
 		mGameRunning = true;
 		FileManager.caricaOpzioni ();
 	}

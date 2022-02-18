@@ -12,12 +12,12 @@ public class StatisticheInGame : MonoBehaviour {
 	protected Text mTempoTrascorso;
 
 	protected GameManager mGameManager;
-	protected Animatore mAnimatore;
+	protected AnimationManager mAnimatore;
 
 	// Use this for initialization
 	void Start () {
 		mGameManager = GameObject.Find ("GameManager").GetComponent<GameManager>();
-		mAnimatore = GameObject.Find ("Animazioni").GetComponent<Animatore>();
+		mAnimatore = GameObject.Find ("GameManager").GetComponent<AnimationManager>();
 
 		GameObject ui = Utilities.GetGameObjectChildByName (gameObject, "UI");
 		mNumMosse = Utilities.GetGameObjectChildByName (ui, "NumMosse").GetComponent<Text> ();

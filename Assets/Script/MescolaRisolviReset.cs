@@ -14,16 +14,14 @@ public class MescolaRisolviReset : MonoBehaviour {
 
 	protected GameManager mGameManager;
 	protected InputManager mInputManager;
-	protected Animatore mAnimatore;
-	protected AI mAI;
+	protected AnimationManager mAnimatore;
 
 	protected StatisticheInGame mStatistiche;
 
 	void Start () {
 		mGameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
 		mInputManager = GameObject.Find ("GameManager").GetComponent<InputManager> ();
-		mAnimatore = GameObject.Find ("Animazioni").GetComponent<Animatore> ();
-		mAI = GameObject.Find ("AI").GetComponent<AI> ();
+		mAnimatore = GameObject.Find ("GameManager").GetComponent<AnimationManager> ();
 		mStatistiche = GameObject.Find ("CanvasInGameUI").GetComponent<StatisticheInGame> ();
 
 		mCongratulazioni = mGameManager.GetCongratulazioni();
@@ -77,7 +75,7 @@ public class MescolaRisolviReset : MonoBehaviour {
 				mStatistiche.TimeReset ();
 				mGameManager.ResetMosseEseguite ();
 				mCongratulazioni.SetActive (false);
-				mAI.Reset ();
+				mGameManager.AIReset ();
 
 				int numMosseMescola = mGameManager.GetNumMosseMescola ();
 				int velocitaMescola = mGameManager.GetVelocitaMescola ();
@@ -90,13 +88,13 @@ public class MescolaRisolviReset : MonoBehaviour {
 				mAnimatore.EseguiPiuMosse (mMosseInizializzazione, velocitaMescola);
 
 			} else if (mIndex == 1) {
-				mAI.Risolvi ();
+				mGameManager.AISolve ();
 			} else if (mIndex == 2) {
 				mCongratulazioni.SetActive (false);
 				mGameManager.ResetMosseEseguite ();
 				mStatistiche.TimeReset ();
 				mGameManager.ResetCubo ();
-				mAI.Reset ();
+				mGameManager.AIReset ();
 			}
 		} else if (mInputManager.IsChangeSolveResetShufflePressed() && mGameManager.IsGameRunning ()) {
 			mIndex++;

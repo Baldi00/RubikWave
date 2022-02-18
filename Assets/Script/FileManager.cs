@@ -13,7 +13,7 @@ public class FileManager : MonoBehaviour {
 
 	private static GameObject mGameManagerObject;
 	private static GameManager mGameManagerComponent;
-	private static StatoCubo mStatoCubo;
+	private static CubeManager mStatoCubo;
 
 	private static bool mSaving = false;
 
@@ -26,7 +26,7 @@ public class FileManager : MonoBehaviour {
 
 		mGameManagerObject = GameObject.Find ("GameManager");
 		mGameManagerComponent = mGameManagerObject.GetComponent<GameManager> ();
-		mStatoCubo = mGameManagerObject.GetComponent<StatoCubo> ();
+		mStatoCubo = mGameManagerObject.GetComponent<CubeManager> ();
 	}
 
 	public static void salvaSuFile(){
@@ -112,6 +112,7 @@ public class FileManager : MonoBehaviour {
 				saved = true;
 				mSaving = false;
 			} catch (Exception e) {
+				Debug.Log (e.ToString());
 				if (writer != null) {
 					writer.Close ();
 				}
@@ -384,6 +385,7 @@ public class FileManager : MonoBehaviour {
 				caricaOpzioni();
 			}
 		} catch (Exception e) {
+			Debug.Log (e.ToString());
 			if (reader != null) {
 				reader.Close ();
 			}
@@ -427,6 +429,7 @@ public class FileManager : MonoBehaviour {
 				saved = true;
 				mSaving = false;
 			} catch (Exception e) {
+				Debug.Log (e.ToString());
 				if (writer != null) {
 					writer.Close ();
 				}
@@ -471,6 +474,7 @@ public class FileManager : MonoBehaviour {
 				reader.Close ();
 			}
 		} catch (Exception e) {
+			Debug.Log (e.ToString());
 			if (reader != null) {
 				reader.Close ();
 			}
@@ -513,6 +517,7 @@ public class FileManager : MonoBehaviour {
 				saved = true;
 				mSaving = false;
 			} catch (Exception e) {
+				Debug.Log (e.ToString());
 				if (writer != null) {
 					writer.Close ();
 				}

@@ -58,7 +58,7 @@ public class SettingsManager : MonoBehaviour {
 
 	public void SetVsyncOff(){
 		QualitySettings.vSyncCount = 0;
-		//Application.targetFrameRate = 60;
+		Application.targetFrameRate = 60;
 		mScrittaVsyncOff.SetAcceso (true);
 	}
 

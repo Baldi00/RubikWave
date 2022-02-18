@@ -30,13 +30,13 @@ public class MovimentatoreCamera : MonoBehaviour {
 
 	void LateUpdate(){
 		transform.position = Vector3.Lerp (transform.position, mCurrentPosition.position, Time.deltaTime * mSpeed);
-		transform.rotation =  Quaternion.Slerp(transform.rotation, mCurrentPosition.rotation, Time.deltaTime * mSpeed);
+		transform.rotation =  Quaternion.Lerp(transform.rotation, mCurrentPosition.rotation, Time.deltaTime * mSpeed);
 	}
 
 	public bool isFermo(){
 		Transform actualCameraPosition = (Transform) mCameraPositions [mPosizione];
 		return 
-			Vector3.Distance (transform.position, actualCameraPosition.position) < 2 &&
+			Vector3.Distance (transform.position, actualCameraPosition.position) < 50 &&
 			Quaternion.Angle (transform.rotation, actualCameraPosition.rotation) < 10;
 	}
 

@@ -6,7 +6,7 @@ public class FaceCollidersAndHighlightManager : MonoBehaviour {
 	
 	protected GameObject [] mColliders;
 
-	protected Animatore mAnimatore;
+	protected AnimationManager mAnimatore;
 	protected GameManager mGameManager;
 	protected InputManager mInputManager;
 	protected MovimentatoreCamera mMovimentatoreCamera = null;
@@ -24,7 +24,7 @@ public class FaceCollidersAndHighlightManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		mColliders = GameObject.FindGameObjectsWithTag ("FaceCollider");
-		mAnimatore = GameObject.Find ("Animazioni").GetComponent<Animatore>();
+		mAnimatore = GameObject.Find ("GameManager").GetComponent<AnimationManager>();
 		mGameManager = GameObject.Find("GameManager").GetComponent<GameManager> ();
 		mInputManager = GameObject.Find("GameManager").GetComponent<InputManager> ();
 		mMovimentatoreCamera = GameObject.Find ("CameraFree").GetComponent<MovimentatoreCamera>();

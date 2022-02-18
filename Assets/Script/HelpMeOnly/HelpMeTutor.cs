@@ -8,7 +8,7 @@ public class HelpMeTutor : MonoBehaviour {
 	private CalcolaProssimaPrecedenteController mCalProPreController;
 
 	[SerializeField]
-	private Animatore mAnimatore;
+	private AnimationManager mAnimatore;
 
 	[SerializeField]
 	private int mVelocitaEsecuzione;

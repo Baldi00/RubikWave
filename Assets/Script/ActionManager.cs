@@ -5,19 +5,17 @@ using UnityEngine;
 public class ActionManager : MonoBehaviour {
 	
 	protected MovimentatoreCamera mCamera = null;
-	protected StatoCubo mStatoCubo = null;
-	protected Animatore mAnimatore = null;
+	protected CubeManager mStatoCubo = null;
+	protected AnimationManager mAnimatore = null;
 	protected AudioSource mSuonoRotazione;
 	protected GameManager mGameManager;
 	protected InputManager mInputManager;
 
-	protected int mMinDistance = 115;
-
 	// Use this for initialization
 	void Start () {
 		mCamera = GameObject.Find ("CameraFree").GetComponent<MovimentatoreCamera>();
-		mStatoCubo = GameObject.Find ("GameManager").GetComponent<StatoCubo>();
-		mAnimatore = GameObject.Find ("Animazioni").GetComponent<Animatore>();
+		mStatoCubo = GameObject.Find ("GameManager").GetComponent<CubeManager>();
+		mAnimatore = GameObject.Find ("GameManager").GetComponent<AnimationManager>();
 		mSuonoRotazione = GameObject.Find ("Cubo").GetComponent<AudioSource> ();
 		mGameManager = GameObject.Find("GameManager").GetComponent<GameManager> ();
 		mInputManager = GameObject.Find("GameManager").GetComponent<InputManager> ();
@@ -31,64 +29,90 @@ public class ActionManager : MonoBehaviour {
 			int actionPosition = mGameManager.GetActionPosition ();
 			int cameraPosition = mGameManager.GetCameraPosition ();
 			bool cameraRotated = mGameManager.IsCameraRotated ();
+			bool gamepadTriggerMoving = mInputManager.IsGamepadTriggerMoving ();
 
-			if (!cameraRotated) {
-				if (checkRotateLeft) {
-					if (actionPosition == 1)
-						mStatoCubo.MoveLeft (cameraPosition == 2 || cameraPosition == 6);
-					else if (actionPosition == 2)
-						mStatoCubo.MoveRight (cameraPosition == 4 || cameraPosition == 8);
-					else if (actionPosition == 3)
-						mStatoCubo.MoveFront (cameraPosition == 1 || cameraPosition == 5);
-					else if (actionPosition == 4)
-						mStatoCubo.MoveBack (cameraPosition == 3 || cameraPosition == 7);
-					else if (actionPosition == 5)
-						mStatoCubo.UpAntioriario ();
-					else if (actionPosition == 6)
-						mStatoCubo.DownOrario ();
-				} else if (checkRotateRight) {
-					if (actionPosition == 1)
-						mStatoCubo.MoveLeft (!(cameraPosition == 2 || cameraPosition == 6));
-					else if (actionPosition == 2)
-						mStatoCubo.MoveRight (!(cameraPosition == 4 || cameraPosition == 8));
-					else if (actionPosition == 3)
-						mStatoCubo.MoveFront (!(cameraPosition == 1 || cameraPosition == 5));
-					else if (actionPosition == 4)
-						mStatoCubo.MoveBack (!(cameraPosition == 3 || cameraPosition == 7));
-					else if (actionPosition == 5)
-						mStatoCubo.UpOrario ();
-					else if (actionPosition == 6)
-						mStatoCubo.DownAntioriario ();
+			if (gamepadTriggerMoving) {
+				if (cameraPosition == 1) {
+					if (mInputManager.IsGamepadLeftStickUpLeft ()) mStatoCubo.MoveLeft (false);
+					else if (mInputManager.IsGamepadLeftStickDownRight ()) mStatoCubo.MoveLeft (true);
+					else if (mInputManager.IsGamepadLeftStickUpRight ()) mStatoCubo.MoveBack (false);
+					else if (mInputManager.IsGamepadLeftStickDownLeft ()) mStatoCubo.MoveBack (true);
+					else if (mInputManager.IsGamepadLeftStickLeft ()) mStatoCubo.MoveUp (true);
+					else if (mInputManager.IsGamepadLeftStickRight ()) mStatoCubo.MoveUp (false);
+					else if (mInputManager.IsGamepadRightStickUpLeft ()) mStatoCubo.MoveRight (true);
+					else if (mInputManager.IsGamepadRightStickDownRight ()) mStatoCubo.MoveRight (false);
+					else if (mInputManager.IsGamepadRightStickUpRight ()) mStatoCubo.MoveFront (true);
+					else if (mInputManager.IsGamepadRightStickDownLeft ()) mStatoCubo.MoveFront (false);
+					else if (mInputManager.IsGamepadRightStickLeft ()) mStatoCubo.MoveUp (true);
+					else if (mInputManager.IsGamepadRightStickRight ()) mStatoCubo.MoveUp (false);
 				}
-			} else {
-				if (checkRotateRight) {
-					if (actionPosition == 1)
-						mStatoCubo.MoveLeft (cameraPosition == 2 || cameraPosition == 6);
-					else if (actionPosition == 2)
-						mStatoCubo.MoveRight (cameraPosition == 4 || cameraPosition == 8);
-					else if (actionPosition == 3)
-						mStatoCubo.MoveFront (cameraPosition == 1 || cameraPosition == 5);
-					else if (actionPosition == 4)
-						mStatoCubo.MoveBack (cameraPosition == 3 || cameraPosition == 7);
-					else if (actionPosition == 5)
-						mStatoCubo.UpAntioriario ();
-					else if (actionPosition == 6)
-						mStatoCubo.DownOrario ();
-				} else if (checkRotateLeft) {
-					if (actionPosition == 1)
-						mStatoCubo.MoveLeft (!(cameraPosition == 2 || cameraPosition == 6));
-					else if (actionPosition == 2)
-						mStatoCubo.MoveRight (!(cameraPosition == 4 || cameraPosition == 8));
-					else if (actionPosition == 3)
-						mStatoCubo.MoveFront (!(cameraPosition == 1 || cameraPosition == 5));
-					else if (actionPosition == 4)
-						mStatoCubo.MoveBack (!(cameraPosition == 3 || cameraPosition == 7));
-					else if (actionPosition == 5)
-						mStatoCubo.UpOrario ();
-					else if (actionPosition == 6)
-						mStatoCubo.DownAntioriario ();
+			}
+
+			if (checkRotateLeft || checkRotateRight) {
+				if (!cameraRotated) {
+					if (checkRotateLeft) {
+						if (actionPosition == 1)
+							mStatoCubo.MoveLeft (cameraPosition == 2 || cameraPosition == 6);
+						else if (actionPosition == 2)
+							mStatoCubo.MoveRight (cameraPosition == 4 || cameraPosition == 8);
+						else if (actionPosition == 3)
+							mStatoCubo.MoveFront (cameraPosition == 1 || cameraPosition == 5);
+						else if (actionPosition == 4)
+							mStatoCubo.MoveBack (cameraPosition == 3 || cameraPosition == 7);
+						else if (actionPosition == 5)
+							mStatoCubo.UpAntioriario ();
+						else if (actionPosition == 6)
+							mStatoCubo.DownOrario ();
+					} else if (checkRotateRight) {
+						if (actionPosition == 1)
+							mStatoCubo.MoveLeft (!(cameraPosition == 2 || cameraPosition == 6));
+						else if (actionPosition == 2)
+							mStatoCubo.MoveRight (!(cameraPosition == 4 || cameraPosition == 8));
+						else if (actionPosition == 3)
+							mStatoCubo.MoveFront (!(cameraPosition == 1 || cameraPosition == 5));
+						else if (actionPosition == 4)
+							mStatoCubo.MoveBack (!(cameraPosition == 3 || cameraPosition == 7));
+						else if (actionPosition == 5)
+							mStatoCubo.UpOrario ();
+						else if (actionPosition == 6)
+							mStatoCubo.DownAntioriario ();
+					}
+				} else {
+					if (checkRotateRight) {
+						if (actionPosition == 1)
+							mStatoCubo.MoveLeft (cameraPosition == 2 || cameraPosition == 6);
+						else if (actionPosition == 2)
+							mStatoCubo.MoveRight (cameraPosition == 4 || cameraPosition == 8);
+						else if (actionPosition == 3)
+							mStatoCubo.MoveFront (cameraPosition == 1 || cameraPosition == 5);
+						else if (actionPosition == 4)
+							mStatoCubo.MoveBack (cameraPosition == 3 || cameraPosition == 7);
+						else if (actionPosition == 5)
+							mStatoCubo.UpAntioriario ();
+						else if (actionPosition == 6)
+							mStatoCubo.DownOrario ();
+					} else if (checkRotateLeft) {
+						if (actionPosition == 1)
+							mStatoCubo.MoveLeft (!(cameraPosition == 2 || cameraPosition == 6));
+						else if (actionPosition == 2)
+							mStatoCubo.MoveRight (!(cameraPosition == 4 || cameraPosition == 8));
+						else if (actionPosition == 3)
+							mStatoCubo.MoveFront (!(cameraPosition == 1 || cameraPosition == 5));
+						else if (actionPosition == 4)
+							mStatoCubo.MoveBack (!(cameraPosition == 3 || cameraPosition == 7));
+						else if (actionPosition == 5)
+							mStatoCubo.UpOrario ();
+						else if (actionPosition == 6)
+							mStatoCubo.DownAntioriario ();
+					}
 				}
-				
+
+				if (actionPosition != 0) {
+					mSuonoRotazione.enabled = false;
+					mSuonoRotazione.enabled = true;
+					mGameManager.HoFattoUnaMossa ();
+					mGameManager.ControllaSeHoVinto ();
+				}
 			}
 		}
 
@@ -375,8 +399,8 @@ public class ActionManager : MonoBehaviour {
 		}*/
 	}
 
-	public void CalculateActionToPerform(Vector3 start, Vector3 end, string name){
-		/*
+	/*public void CalculateActionToPerform(Vector3 start, Vector3 end, string name){
+		
 		float distance = CalculateNormalizedDistance (start, end);
 		Debug.Log (distance);
 		if (distance > mMinDistance) {
@@ -606,10 +630,10 @@ public class ActionManager : MonoBehaviour {
 				mGameManager.HoFattoUnaMossa ();
 				mGameManager.ControllaSeHoVinto ();
 			}
-		}*/
-	}
+		}
+	}*/
 
-	public float CalculateNormalizedDistance(Vector3 start, Vector3 end){
+	/*public float CalculateNormalizedDistance(Vector3 start, Vector3 end){
 		int actualWidth = Screen.currentResolution.width;
 		int actualHeight = Screen.currentResolution.height;
 
@@ -632,7 +656,7 @@ public class ActionManager : MonoBehaviour {
 	public bool Is90Degrees(Vector3 start, Vector3 end){
 		float angle = Vector2.Angle (new Vector2 (1f, 0f), new Vector2 (end.x - start.x, end.y - start.y));
 		return angle > 60 && angle < 120;
-	}
+	}*/
 
 
 }

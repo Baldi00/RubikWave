@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AI : MonoBehaviour {
-	protected StatoCubo mStatoCubo;
+	protected CubeManager mStatoCubo;
 	protected GameManager mGameManager;
 	protected StatisticheInGame mStatistiche;
-	protected Animatore mAnimatore;
+	protected AnimationManager mAnimatore;
 	
 	protected GameObject CentFront,CentBack,CentRight,CentLeft,CentUp,CentDown;
 
@@ -42,10 +42,10 @@ public class AI : MonoBehaviour {
 	void Start () {
 		mRisolvi = false;
 
-		mStatoCubo = GameObject.Find ("GameManager").GetComponent<StatoCubo> ();
+		mStatoCubo = GameObject.Find ("GameManager").GetComponent<CubeManager> ();
 		mGameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
 		mStatistiche = GameObject.Find ("CanvasInGameUI").GetComponent<StatisticheInGame> ();
-		mAnimatore = GameObject.Find ("Animazioni").GetComponent<Animatore> ();
+		mAnimatore = GameObject.Find ("GameManager").GetComponent<AnimationManager> ();
 
 		CentFront = GameObject.Find ("CentFront");
 		CentBack = GameObject.Find ("CentBack");
@@ -618,7 +618,7 @@ public class AI : MonoBehaviour {
 		}
 	}
 
-	public bool Fase1QuattroBiachiConGialloInMezzo(){  	//Condizione fine fase 1
+	protected bool Fase1QuattroBiachiConGialloInMezzo(){  	//Condizione fine fase 1
 		return 	
 			mGameManager.ColorCompare(SpigDownUpColor, mBianco) &&
 			mGameManager.ColorCompare(SpigDownLeftColor, mBianco) && 
@@ -626,7 +626,7 @@ public class AI : MonoBehaviour {
 			mGameManager.ColorCompare(SpigDownRightColor, mBianco);
 	}
 
-	public bool Fase2CroceBiancaCompletata(){			//Condizione fine fase 2
+	protected bool Fase2CroceBiancaCompletata(){			//Condizione fine fase 2
 		return
 			mGameManager.ColorCompare(SpigUpUpColor, mBianco) &&
 			mGameManager.ColorCompare(SpigUpLeftColor, mBianco) && 
@@ -638,7 +638,7 @@ public class AI : MonoBehaviour {
 			mGameManager.ColorCompare(SpigLeftUpColor, mVerde);
 	}
 
-	public bool Fase3PavimentoBiancoCompletato(){		//Condizione fine fase 3
+	protected bool Fase3PavimentoBiancoCompletato(){		//Condizione fine fase 3
 		return 
 			mGameManager.ColorCompare(SpigUpUpColor, mBianco) &&
 			mGameManager.ColorCompare(SpigUpLeftColor, mBianco) && 
@@ -650,7 +650,7 @@ public class AI : MonoBehaviour {
 			mGameManager.ColorCompare(VertUpRightDownColor, mBianco);
 	}
 
-	public bool Fase3FrontaliOK(){
+	protected bool Fase3FrontaliOK(){
 		return
 			!mGameManager.ColorCompare(VertFrontLeftDownColor, mBianco) &&
 			!mGameManager.ColorCompare(VertLeftLeftDownColor, mBianco) &&
@@ -659,7 +659,7 @@ public class AI : MonoBehaviour {
 
 	}
 
-	public bool Fase3LateraliOK(){
+	protected bool Fase3LateraliOK(){
 		return
 			!mGameManager.ColorCompare(VertLeftRightDownColor, mBianco) &&
 			!mGameManager.ColorCompare(VertFrontRightDownColor, mBianco) &&
@@ -668,7 +668,7 @@ public class AI : MonoBehaviour {
 
 	}
 
-	public bool Fase3SuperioriOK(){
+	protected bool Fase3SuperioriOK(){
 		return
 			!mGameManager.ColorCompare(VertDownLeftUpColor, mBianco) &&
 			!mGameManager.ColorCompare(VertDownLeftDownColor, mBianco) &&
@@ -677,7 +677,7 @@ public class AI : MonoBehaviour {
 
 	}
 
-	public bool Fase4Completata(){							//Condizione fine fase 4
+	protected bool Fase4Completata(){							//Condizione fine fase 4
 		return
 			mGameManager.ColorCompare(SpigFrontLeftColor, mRosso) &&
 			mGameManager.ColorCompare(SpigFrontRightColor, mRosso) &&
@@ -689,7 +689,7 @@ public class AI : MonoBehaviour {
 			mGameManager.ColorCompare(SpigBackRightColor, mArancione);
 	}
 
-	public bool Fase4PossoContinuareAGirareSuperiore(){
+	protected bool Fase4PossoContinuareAGirareSuperiore(){
 		return
 			(!mGameManager.ColorCompare(SpigFrontDownColor, mGiallo) && !mGameManager.ColorCompare(SpigDownUpColor, mGiallo)) ||
 			(!mGameManager.ColorCompare(SpigRightDownColor, mGiallo) && !mGameManager.ColorCompare(SpigDownRightColor, mGiallo)) ||
@@ -697,7 +697,7 @@ public class AI : MonoBehaviour {
 			(!mGameManager.ColorCompare(SpigLeftDownColor, mGiallo) && !mGameManager.ColorCompare(SpigDownLeftColor, mGiallo));
 	}
 
-	public bool Fase5Completata(){							//Condizione fine fase 5
+	protected bool Fase5Completata(){							//Condizione fine fase 5
 		return
 			mGameManager.ColorCompare(SpigDownLeftColor, mGiallo) &&
 			mGameManager.ColorCompare(SpigDownUpColor, mGiallo) &&
@@ -705,7 +705,7 @@ public class AI : MonoBehaviour {
 			mGameManager.ColorCompare(SpigDownDownColor, mGiallo);
 	}
 
-	public bool Fase6UnoAcceso(){
+	protected bool Fase6UnoAcceso(){
 		return
 			(mGameManager.ColorCompare(VertDownLeftUpColor, mGiallo) && !mGameManager.ColorCompare(VertDownRightUpColor, mGiallo) && !mGameManager.ColorCompare(VertDownLeftDownColor, mGiallo) && !mGameManager.ColorCompare(VertDownRightDownColor, mGiallo)) ||
 			(!mGameManager.ColorCompare(VertDownLeftUpColor, mGiallo) && mGameManager.ColorCompare(VertDownRightUpColor, mGiallo) && !mGameManager.ColorCompare(VertDownLeftDownColor, mGiallo) && !mGameManager.ColorCompare(VertDownRightDownColor, mGiallo)) ||
@@ -713,7 +713,7 @@ public class AI : MonoBehaviour {
 			(!mGameManager.ColorCompare(VertDownLeftUpColor, mGiallo) && !mGameManager.ColorCompare(VertDownRightUpColor, mGiallo) && !mGameManager.ColorCompare(VertDownLeftDownColor, mGiallo) && mGameManager.ColorCompare(VertDownRightDownColor, mGiallo));
 	}
 
-	public bool Fase6TSpessa(){
+	protected bool Fase6TSpessa(){
 		return
 			(mGameManager.ColorCompare(VertDownLeftUpColor, mGiallo) && mGameManager.ColorCompare(VertDownRightUpColor, mGiallo) && !mGameManager.ColorCompare(VertDownLeftDownColor, mGiallo) && !mGameManager.ColorCompare(VertDownRightDownColor, mGiallo)) ||
 			(!mGameManager.ColorCompare(VertDownLeftUpColor, mGiallo) && mGameManager.ColorCompare(VertDownRightUpColor, mGiallo) && !mGameManager.ColorCompare(VertDownLeftDownColor, mGiallo) && mGameManager.ColorCompare(VertDownRightDownColor, mGiallo)) ||
@@ -721,7 +721,7 @@ public class AI : MonoBehaviour {
 			(mGameManager.ColorCompare(VertDownLeftUpColor, mGiallo) && !mGameManager.ColorCompare(VertDownRightUpColor, mGiallo) && mGameManager.ColorCompare(VertDownLeftDownColor, mGiallo) && !mGameManager.ColorCompare(VertDownRightDownColor, mGiallo));
 	}
 
-	public bool Fase6Completata(){							//Condizione fine fase 6
+	protected bool Fase6Completata(){							//Condizione fine fase 6
 		return
 			mGameManager.ColorCompare(SpigDownLeftColor, mGiallo) &&
 			mGameManager.ColorCompare(SpigDownUpColor, mGiallo) &&
@@ -733,7 +733,7 @@ public class AI : MonoBehaviour {
 			mGameManager.ColorCompare(VertDownRightDownColor, mGiallo);
 	}
 
-	public bool Fase7TuttiDiversi(){
+	protected bool Fase7TuttiDiversi(){
 		return
 			!mGameManager.ColorCompare(VertFrontLeftDownColor, VertFrontRightDownColor) &&
 			!mGameManager.ColorCompare(VertLeftLeftDownColor, VertLeftRightDownColor) &&
@@ -741,7 +741,7 @@ public class AI : MonoBehaviour {
 			!mGameManager.ColorCompare(VertRightLeftDownColor, VertRightRightDownColor);
 	}
 
-	public bool Fase7TuttiUguali(){							//Condizione fine fase 7
+	protected bool Fase7TuttiUguali(){							//Condizione fine fase 7
 		return
 			mGameManager.ColorCompare(VertFrontLeftDownColor, VertFrontRightDownColor) &&
 			mGameManager.ColorCompare(VertLeftLeftDownColor, VertLeftRightDownColor) &&
@@ -749,7 +749,7 @@ public class AI : MonoBehaviour {
 			mGameManager.ColorCompare(VertRightLeftDownColor, VertRightRightDownColor);
 	}
 
-	public bool Fase8NonCiSonoLineeComplete(){
+	protected bool Fase8NonCiSonoLineeComplete(){
 		return
 			!mGameManager.ColorCompare(VertFrontLeftDownColor, SpigFrontDownColor) &&
 			!mGameManager.ColorCompare(VertRightLeftDownColor, SpigRightDownColor) &&
@@ -757,7 +757,7 @@ public class AI : MonoBehaviour {
 			!mGameManager.ColorCompare(VertLeftLeftDownColor, SpigLeftDownColor);
 	}
 
-	public bool Fase8Completata(){							//Condizione fine fase 7
+	protected bool Fase8Completata(){							//Condizione fine fase 7
 		return mStatoCubo.IsStatoIniziale();
 	}
 

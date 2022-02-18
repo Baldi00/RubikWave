@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.PostProcessing;
 
 public class GameManager : MonoBehaviour {
 
-	protected StatoCubo mStatoCubo;
+	protected CubeManager mStatoCubo;
 
 	protected int mNumMosseMescola = 50;
 	protected int mVelocitaMescola = 5;
 	protected int mNumMosseEseguite = 0;
-	protected Animatore mAnimatore;
+	protected AnimationManager mAnimatore;
 
 	protected bool mGameRunning;
 
@@ -33,12 +34,14 @@ public class GameManager : MonoBehaviour {
 	protected int mActionPosition;
 
 	protected InputManager mInputManager;
+	protected AI mAI;
 
 
 	void Start () {
-		mStatoCubo = GetComponent<StatoCubo> ();
-		mAnimatore = GameObject.Find ("Animazioni").GetComponent<Animatore>();
+		mStatoCubo = GetComponent<CubeManager> ();
+		mAnimatore = GameObject.Find ("GameManager").GetComponent<AnimationManager>();
 		mInputManager = gameObject.GetComponent<InputManager>();
+		mAI = GameObject.Find ("AI").GetComponent<AI>();
 		mMainMenuManager = gameObject.GetComponent<MainMenuManager>();
 		mMenuPrincipalePrincipaleContinua = mMainMenuManager.GetContinua();
 		mCongratulazioni = GameObject.Find ("Congratulazioni");
@@ -65,7 +68,7 @@ public class GameManager : MonoBehaviour {
 			mMenuPrincipalePrincipaleContinua.GetComponent<Text>().color = disattivato;
 			mMenuPrincipalePrincipaleContinua.GetComponent<BoxCollider> ().enabled = false;
 
-			GetComponent<SettingsManager> ().SetAlto ();
+			//GetComponent<SettingsManager> ().SetAlto ();
 			GetComponent<SettingsManager> ().SetVsyncOn ();
 			GetComponent<SettingsManager> ().SetSuoniOn ();
 		}
@@ -88,6 +91,14 @@ public class GameManager : MonoBehaviour {
 
 
 	void Update () {
+
+		/*PostProcessingBehaviour pb = mCameraFree.GetComponent<PostProcessingBehaviour> ();
+		AntialiasingModel.Settings anti = pb.profile.antialiasing.settings; 
+		anti.method = AntialiasingModel.Method.Fxaa;
+		anti.fxaaSettings.preset = AntialiasingModel.FxaaPreset.ExtremeQuality;
+		pb.profile.antialiasing.settings = anti;
+		pb.profile.antialiasing.enabled = true;*/
+
 		if (mCheckVittoria && mAnimatore.isFermo () && mGameRunning) {
 			if (HoVinto ()) {
 				if (!mhoGiaVintoUnaVolta) {
@@ -230,5 +241,13 @@ public class GameManager : MonoBehaviour {
 
 	public GameObject GetCongratulazioni() {
 		return mCongratulazioni;
+	}
+
+	public void AISolve() {
+		mAI.Risolvi ();
+	}
+
+	public void AIReset() {
+		mAI.Reset ();
 	}
 }

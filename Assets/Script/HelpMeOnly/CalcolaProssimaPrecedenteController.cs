@@ -21,14 +21,14 @@ public class CalcolaProssimaPrecedenteController : MonoBehaviour {
 	protected HelpMeTutor mHelpMeTutor;
 
 	protected GameManager_HelpMe mGameManagerHelpMe;
-	protected Animatore mAnimatore;
+	protected AnimationManager mAnimatore;
 	protected AI_HelpMe mAIHelpMe;
 
 	protected StatisticheInGame mStatistiche;
 
 	void Start () {
 		mGameManagerHelpMe = GameObject.Find ("GameManager").GetComponent<GameManager_HelpMe> ();
-		mAnimatore = GameObject.Find ("Animazioni").GetComponent<Animatore> ();
+		mAnimatore = GameObject.Find ("GameManager").GetComponent<AnimationManager> ();
 		mAIHelpMe = GameObject.Find ("AI").GetComponent<AI_HelpMe> ();
 		mStatistiche = GameObject.Find ("CanvasInGameUI").GetComponent<StatisticheInGame> ();
 	}

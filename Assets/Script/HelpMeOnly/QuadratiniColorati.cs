@@ -10,10 +10,10 @@ public class QuadratiniColorati : MonoBehaviour {
 	[SerializeField]
 	GameManager_HelpMe mGameManagerHelpMe;
 
-	private Animatore mAnimatore;
+	private AnimationManager mAnimatore;
 
 	void Start(){
-		mAnimatore = GameObject.Find ("Animazioni").GetComponent<Animatore> ();
+		mAnimatore = GameObject.Find ("GameManager").GetComponent<AnimationManager> ();
 	}
 
 	void Update () {
