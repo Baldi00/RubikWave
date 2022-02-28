@@ -8,7 +8,7 @@ public class InputManager : MonoBehaviour {
 	protected bool mA, mD, mW, mS, mR, mE, mQ, mLeftArrow, mRightArrow, mUpArrow, mDownArrow;
 	protected bool mEscape, mM0Down, mM0Up, mM1, mScrollUp, mScrollDown;
 	protected bool mGamepadA, mGamepadB, mGamepadX, mGamepadY, mGamepadUpArrow, mGamepadDownArrow, mGamepadLeftArrow, mGamepadRightArrow;
-	protected bool mGamepadEscape, mLeftShoulder, mRightShoulder;
+	protected bool mGamepadEscape, mGamepadLeftShoulder, mGamepadRightShoulder;
 	protected bool mGamepadLeftStickUp, mGamepadLeftStickDown, mGamepadLeftStickLeft, mGamepadLeftStickRight;
 	protected bool mGamepadRightStickUp, mGamepadRightStickDown, mGamepadRightStickLeft, mGamepadRightStickRight;
 	protected bool mGamepadLeftStickUpLeft, mGamepadLeftStickUpRight, mGamepadLeftStickDownLeft, mGamepadLeftStickDownRight;
@@ -38,7 +38,6 @@ public class InputManager : MonoBehaviour {
 		mM0Up = Input.GetKeyUp (KeyCode.Mouse0);
 		mM1 = Input.GetKeyDown (KeyCode.Mouse1);
 
-
 		if (!playerIndexSet || !prevState.IsConnected)
 		{
 			for (int i = 0; i < 4; ++i)
@@ -56,8 +55,8 @@ public class InputManager : MonoBehaviour {
 		prevState = state;
 		state = GamePad.GetState(playerIndex);
 
-		mLeftShoulder = prevState.Buttons.LeftShoulder == ButtonState.Released && state.Buttons.LeftShoulder== ButtonState.Pressed;
-		mRightShoulder = prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed;
+		mGamepadLeftShoulder = prevState.Buttons.LeftShoulder == ButtonState.Released && state.Buttons.LeftShoulder== ButtonState.Pressed;
+		mGamepadRightShoulder = prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed;
 
 		mGamepadA = prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed;
 		mGamepadB = prevState.Buttons.B == ButtonState.Released && state.Buttons.B == ButtonState.Pressed;
@@ -86,41 +85,41 @@ public class InputManager : MonoBehaviour {
 		mGamepadRightStickLeft = stickRightX < -0.5f && stickRightY > -0.1f && stickRightY < 0.1f;
 		mGamepadRightStickRight = stickRightX > 0.5f && stickRightY > -0.1f && stickRightY < 0.1f;
 
-		mGamepadLeftStickUpLeft = stickLeftX > -0.9f && stickLeftX < -0.5f && stickLeftY > 0f;
-		mGamepadLeftStickUpRight = stickLeftX > 0.5f && stickLeftX < 0.9f && stickLeftY > 0f;
-		mGamepadLeftStickDownLeft = stickLeftX > -0.9f && stickLeftX < -0.5f && stickLeftY < 0f;
-		mGamepadLeftStickDownRight = stickLeftX > 0.5f && stickLeftX < 0.9f && stickLeftY < 0f;
+		mGamepadLeftStickUpLeft = stickLeftX < 0f && stickLeftY > 0f;
+		mGamepadLeftStickUpRight = stickLeftX > 0f && stickLeftY > 0f;
+		mGamepadLeftStickDownLeft = stickLeftX < 0f && stickLeftY < 0f;
+		mGamepadLeftStickDownRight = stickLeftX > 0f && stickLeftY < 0f;
 
-		mGamepadRightStickUpLeft = stickRightX > -0.9f && stickRightX < -0.5f && stickRightY > 0f;
-		mGamepadRightStickUpRight = stickRightX > 0.5f && stickRightX < 0.9f && stickRightY > 0f;
-		mGamepadRightStickDownLeft = stickRightX > -0.9f && stickRightX < -0.5f && stickRightY < 0f;
-		mGamepadRightStickDownRight = stickRightX > 0.5f && stickRightX < 0.9f && stickRightY < 0f;
+		mGamepadRightStickUpLeft = stickRightX < 0f && stickRightY > 0f;
+		mGamepadRightStickUpRight = stickRightX > 0f && stickRightY > 0f;
+		mGamepadRightStickDownLeft = stickRightX < 0f && stickRightY < 0f;
+		mGamepadRightStickDownRight = stickRightX > 0f && stickRightY < 0f;
 
 		mGamepadLeftTrigger = state.Triggers.Left > 0.5f;
 		mGamepadRightTrigger = state.Triggers.Right > 0.5f;
 
-		/*if(mGamepadLeftStickUp) Debug.Log("mGamepadLeftStickUp");
-		if(mGamepadLeftStickDown) Debug.Log("mGamepadLeftStickDown");
-		if(mGamepadLeftStickLeft) Debug.Log("mGamepadLeftStickLeft");
-		if(mGamepadLeftStickRight) Debug.Log("mGamepadLeftStickRight");
+        //if (mGamepadLeftStickUp) Debug.Log("mGamepadLeftStickUp");
+        //if (mGamepadLeftStickDown) Debug.Log("mGamepadLeftStickDown");
+        //if (mGamepadLeftStickLeft) Debug.Log("mGamepadLeftStickLeft");
+        //if (mGamepadLeftStickRight) Debug.Log("mGamepadLeftStickRight");
 
-		if(mGamepadRightStickUp) Debug.Log("mGamepadRightStickUp");
-		if(mGamepadRightStickDown) Debug.Log("mGamepadRightStickDown");
-		if(mGamepadRightStickLeft) Debug.Log("mGamepadRightStickLeft");
-		if(mGamepadRightStickRight) Debug.Log("mGamepadRightStickRight");
+        //if (mGamepadRightStickUp) Debug.Log("mGamepadRightStickUp");
+        //if (mGamepadRightStickDown) Debug.Log("mGamepadRightStickDown");
+        //if (mGamepadRightStickLeft) Debug.Log("mGamepadRightStickLeft");
+        //if (mGamepadRightStickRight) Debug.Log("mGamepadRightStickRight");
 
-		if(mGamepadLeftStickUpLeft) Debug.Log("mGamepadLeftStickUpLeft");
-		if(mGamepadLeftStickUpRight) Debug.Log("mGamepadLeftStickUpRight");
-		if(mGamepadLeftStickDownLeft) Debug.Log("mGamepadLeftStickDownLeft");
-		if(mGamepadLeftStickDownRight) Debug.Log("mGamepadLeftStickDownRight");
+        //if(mGamepadLeftStickUpLeft) Debug.Log("mGamepadLeftStickUpLeft");
+        //if(mGamepadLeftStickUpRight) Debug.Log("mGamepadLeftStickUpRight");
+        //if(mGamepadLeftStickDownLeft) Debug.Log("mGamepadLeftStickDownLeft");
+        //if(mGamepadLeftStickDownRight) Debug.Log("mGamepadLeftStickDownRight");
 
-		if(mGamepadRightStickUpLeft) Debug.Log("mGamepadRightStickUpLeft");
-		if(mGamepadRightStickUpRight) Debug.Log("mGamepadRightStickUpRight");
-		if(mGamepadRightStickDownLeft) Debug.Log("mGamepadRightStickDownLeft");
-		if(mGamepadRightStickDownRight) Debug.Log("mGamepadRightStickDownRight");*/
+        //if(mGamepadRightStickUpLeft) Debug.Log("mGamepadRightStickUpLeft");
+        //if(mGamepadRightStickUpRight) Debug.Log("mGamepadRightStickUpRight");
+        //if(mGamepadRightStickDownLeft) Debug.Log("mGamepadRightStickDownLeft");
+        //if(mGamepadRightStickDownRight) Debug.Log("mGamepadRightStickDownRight");
 
 
-		/*
+        /*
 		if (Input.GetKey ("joystick button 0")) {
 			GamePad.SetVibration (playerIndex, .1f, .1f);
 		}
@@ -129,25 +128,29 @@ public class InputManager : MonoBehaviour {
 		}*/
 
 
-		float scroll = Input.GetAxis("Mouse ScrollWheel");
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
 		mScrollUp = scroll > 0;
 		mScrollDown = scroll < 0;
 	}
 
-	public bool IsCameraLeftPressed(){
-		return mA || mLeftArrow || mLeftShoulder || mGamepadLeftArrow;
+	public bool IsGamepadConnected() {
+		return prevState.IsConnected;
+    }
+
+	public bool IsLeftPressed(){
+		return mA || mLeftArrow || mGamepadLeftArrow;
 	}
 
-	public bool IsCameraRightPressed(){
-		return mD || mRightArrow || mRightShoulder || mGamepadRightArrow;
+	public bool IsRightPressed(){
+		return mD || mRightArrow || mGamepadRightArrow;
 	}
 
-	public bool IsCameraUpPressed(){
+	public bool IsUpPressed(){
 		return mW || mUpArrow || mGamepadUpArrow;
 	}
 
-	public bool IsCameraDownPressed(){
-		return mS || mDownArrow || mGamepadDownArrow || mGamepadLeftTrigger || mGamepadRightTrigger;
+	public bool IsDownPressed(){
+		return mS || mDownArrow || mGamepadDownArrow;
 	}
 
 	public bool IsCameraRotatePressed(){
@@ -174,12 +177,19 @@ public class InputManager : MonoBehaviour {
 		return mScrollDown;
 	}
 
+	public bool IsSolveResetShuffleGamepadPressed() {
+		return mGamepadY;
+	}
+	public bool IsChangeSolveResetShuffleGamepadPressed() {
+		return mGamepadX;
+	}
+
 	public bool IsSolveResetShufflePressed(){
 		return mM0Down;
 	}
 
-	public bool IsChangeSolveResetShufflePressed(){
-		return mM1;
+	public bool IsChangeSolveResetShufflePressed() {
+		return mM1 || mGamepadX;
 	}
 
 	public bool IsLeftMousePressed(){
@@ -254,10 +264,29 @@ public class InputManager : MonoBehaviour {
 		return mGamepadRightStickDownRight;
 	}
 
-	public bool IsGamepadTriggerMoving(){
-		return mGamepadLeftStickLeft || mGamepadLeftStickRight || mGamepadRightStickLeft || mGamepadRightStickRight ||
-		mGamepadLeftStickUpLeft || mGamepadLeftStickUpRight || mGamepadLeftStickDownLeft || mGamepadLeftStickDownRight ||
-		mGamepadRightStickUpLeft || mGamepadRightStickUpRight || mGamepadRightStickDownLeft || mGamepadRightStickDownRight;
+	public bool IsGamepadLeftShoulder(){
+		return mGamepadLeftShoulder;
 	}
+	public bool IsGamepadRightShoulder(){
+		return mGamepadRightShoulder;
+	}
+	public bool IsGamepadLeftTrigger(){
+		return mGamepadLeftTrigger;
+	}
+	public bool IsGamepadRightTrigger(){
+		return mGamepadRightTrigger;
+	}
+
+	public bool IsGamepadTriggerMoving(){
+		return mGamepadLeftStickLeft || mGamepadLeftStickRight || mGamepadLeftStickUp || mGamepadLeftStickDown ||
+		mGamepadRightStickLeft || mGamepadRightStickRight || mGamepadRightStickUp || mGamepadRightStickDown ||
+		mGamepadLeftStickUpLeft || mGamepadLeftStickUpRight || mGamepadLeftStickDownLeft || mGamepadLeftStickDownRight ||
+		mGamepadRightStickUpLeft || mGamepadRightStickUpRight || mGamepadRightStickDownLeft || mGamepadRightStickDownRight ||
+		mGamepadRightTrigger || mGamepadLeftTrigger || mGamepadRightShoulder || mGamepadLeftShoulder;
+	}
+
+	public bool IsGamepadBPressed() {
+		return mGamepadB;
+    }
 
 }

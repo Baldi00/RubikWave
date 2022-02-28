@@ -73,8 +73,8 @@ public class SwipeCollidersManager : MonoBehaviour {
 					}
 				}
 
-				if(found)
-					mActionManager.CalculateActionToPerform (mStartPosition, mEndPosition, name);
+				//if(found)
+				//	mActionManager.CalculateActionToPerform (mStartPosition, mEndPosition, name);
 
 				mStartPosition = new Vector3 (-1f, -1f);
 				mEndPosition = new Vector3 (-1f, -1f);

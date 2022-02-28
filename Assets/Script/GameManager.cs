@@ -69,8 +69,8 @@ public class GameManager : MonoBehaviour {
 			mMenuPrincipalePrincipaleContinua.GetComponent<BoxCollider> ().enabled = false;
 
 			//GetComponent<SettingsManager> ().SetAlto ();
-			GetComponent<SettingsManager> ().SetVsyncOn ();
-			GetComponent<SettingsManager> ().SetSuoniOn ();
+			//GetComponent<SettingsManager> ().SetVsyncOn ();
+			//GetComponent<SettingsManager> ().SetSuoniOn ();
 		}
 
 		if (ThroughScenesParameters.getSceneToLoad() == 0) {

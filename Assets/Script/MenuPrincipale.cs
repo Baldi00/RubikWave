@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime.InteropServices;
 
 public class MenuPrincipale : MonoBehaviour {
 
@@ -14,6 +15,9 @@ public class MenuPrincipale : MonoBehaviour {
 	protected GameObject m_BlackFadeIn;
 
 	protected bool m_FirstStart = true;
+
+	[DllImport("user32.dll")]
+	static extern bool SetCursorPos(int X, int Y);
 
 	void Update () {
 

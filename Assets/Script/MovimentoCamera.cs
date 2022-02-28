@@ -25,10 +25,10 @@ public class MovimentoCamera : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		bool checkSinistra = mInputManager.IsCameraLeftPressed ();
-		bool checkDestra = mInputManager.IsCameraRightPressed ();
-		bool checkSu = mInputManager.IsCameraUpPressed ();
-		bool checkGiu = mInputManager.IsCameraDownPressed ();
+		bool checkSinistra = mInputManager.IsLeftPressed ();
+		bool checkDestra = mInputManager.IsRightPressed ();
+		bool checkSu = mInputManager.IsUpPressed ();
+		bool checkGiu = mInputManager.IsDownPressed ();
 		bool checkRuota = mInputManager.IsCameraRotatePressed ();
 
 		if ((checkSinistra || checkDestra || checkSu || checkGiu || checkRuota || mToGoDown) && mMovimentatore.isFermo () && mGameManager.IsGameRunning()) {

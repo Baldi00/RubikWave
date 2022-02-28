@@ -30,21 +30,113 @@ public class ActionManager : MonoBehaviour {
 			int cameraPosition = mGameManager.GetCameraPosition ();
 			bool cameraRotated = mGameManager.IsCameraRotated ();
 			bool gamepadTriggerMoving = mInputManager.IsGamepadTriggerMoving ();
+			bool moveDone = false;
 
 			if (gamepadTriggerMoving) {
 				if (cameraPosition == 1) {
-					if (mInputManager.IsGamepadLeftStickUpLeft ()) mStatoCubo.MoveLeft (false);
-					else if (mInputManager.IsGamepadLeftStickDownRight ()) mStatoCubo.MoveLeft (true);
-					else if (mInputManager.IsGamepadLeftStickUpRight ()) mStatoCubo.MoveBack (false);
-					else if (mInputManager.IsGamepadLeftStickDownLeft ()) mStatoCubo.MoveBack (true);
-					else if (mInputManager.IsGamepadLeftStickLeft ()) mStatoCubo.MoveUp (true);
-					else if (mInputManager.IsGamepadLeftStickRight ()) mStatoCubo.MoveUp (false);
-					else if (mInputManager.IsGamepadRightStickUpLeft ()) mStatoCubo.MoveRight (true);
-					else if (mInputManager.IsGamepadRightStickDownRight ()) mStatoCubo.MoveRight (false);
-					else if (mInputManager.IsGamepadRightStickUpRight ()) mStatoCubo.MoveFront (true);
-					else if (mInputManager.IsGamepadRightStickDownLeft ()) mStatoCubo.MoveFront (false);
-					else if (mInputManager.IsGamepadRightStickLeft ()) mStatoCubo.MoveUp (true);
-					else if (mInputManager.IsGamepadRightStickRight ()) mStatoCubo.MoveUp (false);
+					if (mInputManager.IsGamepadLeftStickUpLeft()){ mStatoCubo.MoveLeft (false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickDownRight()){ mStatoCubo.MoveLeft(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickUpRight()){ mStatoCubo.MoveFront(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickDownLeft()){ mStatoCubo.MoveFront(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickUpRight()){ mStatoCubo.MoveBack(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickDownLeft()){ mStatoCubo.MoveBack(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickUpLeft()){ mStatoCubo.MoveRight(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickDownRight()){ mStatoCubo.MoveRight(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftShoulder()){ mStatoCubo.MoveUp(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightShoulder()){ mStatoCubo.MoveUp(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftTrigger()){ mStatoCubo.MoveDown(false); moveDone = true; }
+					else if (mInputManager.IsGamepadRightTrigger()){ mStatoCubo.MoveDown(true); moveDone = true; }
+				} else if (cameraPosition == 2) {
+					if (mInputManager.IsGamepadLeftStickUpLeft()){ mStatoCubo.MoveBack (false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickDownRight()){ mStatoCubo.MoveBack(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickUpRight()){ mStatoCubo.MoveLeft(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickDownLeft()){ mStatoCubo.MoveLeft(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickUpRight()){ mStatoCubo.MoveRight(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickDownLeft()){ mStatoCubo.MoveRight(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickUpLeft()){ mStatoCubo.MoveFront(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickDownRight()){ mStatoCubo.MoveFront(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftShoulder()){ mStatoCubo.MoveUp(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightShoulder()){ mStatoCubo.MoveUp(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftTrigger()){ mStatoCubo.MoveDown(false); moveDone = true; }
+					else if (mInputManager.IsGamepadRightTrigger()){ mStatoCubo.MoveDown(true); moveDone = true; }
+				} else if (cameraPosition == 3) {
+					if (mInputManager.IsGamepadLeftStickUpLeft()){ mStatoCubo.MoveRight (false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickDownRight()){ mStatoCubo.MoveRight(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickUpRight()){ mStatoCubo.MoveBack(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickDownLeft()){ mStatoCubo.MoveBack(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickUpRight()){ mStatoCubo.MoveFront(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickDownLeft()){ mStatoCubo.MoveFront(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickUpLeft()){ mStatoCubo.MoveLeft(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickDownRight()){ mStatoCubo.MoveLeft(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftShoulder()){ mStatoCubo.MoveUp(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightShoulder()){ mStatoCubo.MoveUp(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftTrigger()){ mStatoCubo.MoveDown(false); moveDone = true; }
+					else if (mInputManager.IsGamepadRightTrigger()){ mStatoCubo.MoveDown(true); moveDone = true; }
+				} else if (cameraPosition == 4) {
+					if (mInputManager.IsGamepadLeftStickUpLeft()){ mStatoCubo.MoveFront (false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickDownRight()){ mStatoCubo.MoveFront(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickUpRight()){ mStatoCubo.MoveRight(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickDownLeft()){ mStatoCubo.MoveRight(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickUpRight()){ mStatoCubo.MoveLeft(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickDownLeft()){ mStatoCubo.MoveLeft(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickUpLeft()){ mStatoCubo.MoveBack(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickDownRight()){ mStatoCubo.MoveBack(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftShoulder()){ mStatoCubo.MoveUp(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightShoulder()){ mStatoCubo.MoveUp(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftTrigger()){ mStatoCubo.MoveDown(false); moveDone = true; }
+					else if (mInputManager.IsGamepadRightTrigger()){ mStatoCubo.MoveDown(true); moveDone = true; }
+				} else if (cameraPosition == 5) {
+					if (mInputManager.IsGamepadLeftStickUpLeft()){ mStatoCubo.MoveFront (false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickDownRight()){ mStatoCubo.MoveFront(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickUpRight()){ mStatoCubo.MoveLeft(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickDownLeft()){ mStatoCubo.MoveLeft(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickUpRight()){ mStatoCubo.MoveRight(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickDownLeft()){ mStatoCubo.MoveRight(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickUpLeft()){ mStatoCubo.MoveBack(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickDownRight()){ mStatoCubo.MoveBack(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftShoulder()){ mStatoCubo.MoveDown(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightShoulder()){ mStatoCubo.MoveDown(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftTrigger()){ mStatoCubo.MoveUp(false); moveDone = true; }
+					else if (mInputManager.IsGamepadRightTrigger()){ mStatoCubo.MoveUp(true); moveDone = true; }
+				} else if (cameraPosition == 6) {
+					if (mInputManager.IsGamepadLeftStickUpLeft()){ mStatoCubo.MoveLeft (false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickDownRight()){ mStatoCubo.MoveLeft(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickUpRight()){ mStatoCubo.MoveBack(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickDownLeft()){ mStatoCubo.MoveBack(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickUpRight()){ mStatoCubo.MoveFront(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickDownLeft()){ mStatoCubo.MoveFront(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickUpLeft()){ mStatoCubo.MoveRight(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickDownRight()){ mStatoCubo.MoveRight(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftShoulder()){ mStatoCubo.MoveDown(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightShoulder()){ mStatoCubo.MoveDown(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftTrigger()){ mStatoCubo.MoveUp(false); moveDone = true; }
+					else if (mInputManager.IsGamepadRightTrigger()){ mStatoCubo.MoveUp(true); moveDone = true; }
+				} else if (cameraPosition == 7) {
+					if (mInputManager.IsGamepadLeftStickUpLeft()){ mStatoCubo.MoveBack (false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickDownRight()){ mStatoCubo.MoveBack(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickUpRight()){ mStatoCubo.MoveRight(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickDownLeft()){ mStatoCubo.MoveRight(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickUpRight()){ mStatoCubo.MoveLeft(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickDownLeft()){ mStatoCubo.MoveLeft(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickUpLeft()){ mStatoCubo.MoveFront(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickDownRight()){ mStatoCubo.MoveFront(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftShoulder()){ mStatoCubo.MoveDown(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightShoulder()){ mStatoCubo.MoveDown(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftTrigger()){ mStatoCubo.MoveUp(false); moveDone = true; }
+					else if (mInputManager.IsGamepadRightTrigger()){ mStatoCubo.MoveUp(true); moveDone = true; }
+				} else if (cameraPosition == 8) {
+					if (mInputManager.IsGamepadLeftStickUpLeft()){ mStatoCubo.MoveRight (false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickDownRight()){ mStatoCubo.MoveRight(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickUpRight()){ mStatoCubo.MoveFront(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickDownLeft()){ mStatoCubo.MoveFront(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickUpRight()){ mStatoCubo.MoveBack(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftStickDownLeft()){ mStatoCubo.MoveBack(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickUpLeft()){ mStatoCubo.MoveLeft(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightStickDownRight()){ mStatoCubo.MoveLeft(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftShoulder()){ mStatoCubo.MoveDown(true); moveDone = true; }
+					else if (mInputManager.IsGamepadRightShoulder()){ mStatoCubo.MoveDown(false); moveDone = true; }
+					else if (mInputManager.IsGamepadLeftTrigger()){ mStatoCubo.MoveUp(false); moveDone = true; }
+					else if (mInputManager.IsGamepadRightTrigger()){ mStatoCubo.MoveUp(true); moveDone = true; }
 				}
 			}
 
@@ -106,557 +198,17 @@ public class ActionManager : MonoBehaviour {
 							mStatoCubo.DownAntioriario ();
 					}
 				}
-
-				if (actionPosition != 0) {
-					mSuonoRotazione.enabled = false;
-					mSuonoRotazione.enabled = true;
-					mGameManager.HoFattoUnaMossa ();
-					mGameManager.ControllaSeHoVinto ();
-				}
-			}
-		}
-
-
-		/*if (mCamera.isFermo () && mAnimatore.isFermo () && mGameManager.IsGameRunning()) {
-			bool checkRotateLeft = mInputManager.IsActionStraightPressed();
-			bool checkRotateRight = mInputManager.IsActionReversePressed();
-
-			if (checkRotateLeft || checkRotateRight) {
-				int cameraPosition = mGameManager.GetCameraPosition ();
-				bool cameraRotated = mGameManager.IsCameraRotated ();
-				int actionPosition = mGameManager.GetActionPosition ();
-
-				switch (actionPosition) {
-				case 0:
-					switch (cameraPosition) {
-					case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: 
-						if (!cameraRotated) {
-							if (checkRotateLeft)
-								mStatoCubo.UpAntioriario ();
-							else
-								mStatoCubo.UpOrario ();
-						} else {
-							if (checkRotateLeft)
-								mStatoCubo.DownAntioriario ();
-							else
-								mStatoCubo.DownOrario ();
-						}
-						break;
-					}
-					break;
-				case 1:
-					if (!cameraRotated) {
-						switch (cameraPosition) {
-						case 1: case 5:
-							if (checkRotateLeft)
-								mStatoCubo.BackAntioriario ();
-							else
-								mStatoCubo.BackOrario ();
-							break;
-						case 2: case 6:
-							if (checkRotateLeft)
-								mStatoCubo.RightAntioriario ();
-							else
-								mStatoCubo.RightOrario ();
-							break;
-						case 3: case 7:
-							if (checkRotateLeft)
-								mStatoCubo.FrontAntioriario ();
-							else
-								mStatoCubo.FrontOrario ();
-							break;
-						case 4: case 8:
-							if (checkRotateLeft)
-								mStatoCubo.LeftAntioriario ();
-							else
-								mStatoCubo.LeftOrario ();
-							break;
-						}
-					} else {
-						switch (cameraPosition) {
-						case 1: case 5:
-							if (checkRotateLeft)
-								mStatoCubo.RightAntioriario ();
-							else
-								mStatoCubo.RightOrario ();
-							break;
-						case 2: case 6:
-							if (checkRotateLeft)
-								mStatoCubo.FrontAntioriario ();
-							else
-								mStatoCubo.FrontOrario ();
-							break;
-						case 3: case 7:
-							if (checkRotateLeft)
-								mStatoCubo.LeftAntioriario ();
-							else
-								mStatoCubo.LeftOrario ();
-							break;
-						case 4: case 8:
-							if (checkRotateLeft)
-								mStatoCubo.BackAntioriario ();
-							else
-								mStatoCubo.BackOrario ();
-							break;
-						}
-					}
-					break;
-				case 2:
-					if (!cameraRotated) {
-						switch (cameraPosition) {
-						case 1: case 5:
-							if (checkRotateLeft)
-								mStatoCubo.LeftAntioriario ();
-							else
-								mStatoCubo.LeftOrario ();
-							break;
-						case 2: case 6:
-							if (checkRotateLeft)
-								mStatoCubo.BackAntioriario ();
-							else
-								mStatoCubo.BackOrario ();
-							break;
-						case 3: case 7:
-							if (checkRotateLeft)
-								mStatoCubo.RightAntioriario ();
-							else
-								mStatoCubo.RightOrario ();
-							break;
-						case 4: case 8:
-							if (checkRotateLeft)
-								mStatoCubo.FrontAntioriario ();
-							else
-								mStatoCubo.FrontOrario ();
-							break;
-						}
-					} else {
-						switch (cameraPosition) {
-						case 1: case 5:
-							if (checkRotateLeft)
-								mStatoCubo.FrontAntioriario ();
-							else
-								mStatoCubo.FrontOrario ();
-							break;
-						case 2: case 6:
-							if (checkRotateLeft)
-								mStatoCubo.LeftAntioriario ();
-							else
-								mStatoCubo.LeftOrario ();
-							break;
-						case 3: case 7:
-							if (checkRotateLeft)
-								mStatoCubo.BackAntioriario ();
-							else
-								mStatoCubo.BackOrario ();
-							break;
-						case 4: case 8:
-							if (checkRotateLeft)
-								mStatoCubo.RightAntioriario ();
-							else
-								mStatoCubo.RightOrario ();
-							break;
-						}
-					}
-					break;
-				case 3:
-					if (!cameraRotated) {
-						switch (cameraPosition) {
-						case 1: case 5:
-							if (checkRotateLeft)
-								mStatoCubo.FrontOrario ();
-							else
-								mStatoCubo.FrontAntioriario ();
-							break;
-						case 2: case 6:
-							if (checkRotateLeft)
-								mStatoCubo.LeftOrario ();
-							else
-								mStatoCubo.LeftAntioriario ();
-							break;
-						case 3: case 7:
-							if (checkRotateLeft)
-								mStatoCubo.BackOrario ();
-							else
-								mStatoCubo.BackAntioriario ();
-							break;
-						case 4: case 8:
-							if (checkRotateLeft)
-								mStatoCubo.RightOrario ();
-							else
-								mStatoCubo.RightAntioriario ();
-							break;
-						}
-					} else {
-						switch (cameraPosition) {
-						case 1: case 5:
-							if (checkRotateLeft)
-								mStatoCubo.LeftOrario ();
-							else
-								mStatoCubo.LeftAntioriario ();
-							break;
-						case 2: case 6:
-							if (checkRotateLeft)
-								mStatoCubo.BackOrario ();
-							else
-								mStatoCubo.BackAntioriario ();
-							break;
-						case 3: case 7:
-							if (checkRotateLeft)
-								mStatoCubo.RightOrario ();
-							else
-								mStatoCubo.RightAntioriario ();
-							break;
-						case 4: case 8:
-							if (checkRotateLeft)
-								mStatoCubo.FrontOrario ();
-							else
-								mStatoCubo.FrontAntioriario ();
-							break;
-						}
-					}
-					break;
-				case 4:
-					if (!cameraRotated) {
-						switch (cameraPosition) {
-						case 1: case 5:
-							if (checkRotateLeft)
-								mStatoCubo.RightOrario ();
-							else
-								mStatoCubo.RightAntioriario ();
-							break;
-						case 2: case 6:
-							if (checkRotateLeft)
-								mStatoCubo.FrontOrario ();
-							else
-								mStatoCubo.FrontAntioriario ();
-							break;
-						case 3: case 7:
-							if (checkRotateLeft)
-								mStatoCubo.LeftOrario ();
-							else
-								mStatoCubo.LeftAntioriario ();
-							break;
-						case 4: case 8:
-							if (checkRotateLeft)
-								mStatoCubo.BackOrario ();
-							else
-								mStatoCubo.BackAntioriario ();
-							break;
-						}
-					} else {
-						switch (cameraPosition) {
-						case 1: case 5:
-							if (checkRotateLeft)
-								mStatoCubo.BackOrario ();
-							else
-								mStatoCubo.BackAntioriario ();
-							break;
-						case 2: case 6:
-							if (checkRotateLeft)
-								mStatoCubo.RightOrario ();
-							else
-								mStatoCubo.RightAntioriario ();
-							break;
-						case 3: case 7:
-							if (checkRotateLeft)
-								mStatoCubo.FrontOrario ();
-							else
-								mStatoCubo.FrontAntioriario ();
-							break;
-						case 4: case 8:
-							if (checkRotateLeft)
-								mStatoCubo.LeftOrario ();
-							else
-								mStatoCubo.LeftAntioriario ();
-							break;
-						}
-					}
-					break;
-				case 5:
-					switch (cameraPosition) {
-					case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: 
-						if (!cameraRotated) {
-							if (checkRotateLeft)
-								mStatoCubo.DownOrario ();
-							else
-								mStatoCubo.DownAntioriario ();
-						} else {
-							if (checkRotateLeft)
-								mStatoCubo.UpOrario ();
-							else
-								mStatoCubo.UpAntioriario ();
-						}
-						break;
-					}
-					break;
-				}
-
-				mSuonoRotazione.enabled = false;
-				mSuonoRotazione.enabled = true;
-				mGameManager.HoFattoUnaMossa ();
-				mGameManager.ControllaSeHoVinto ();
-			}
-		}*/
-	}
-
-	/*public void CalculateActionToPerform(Vector3 start, Vector3 end, string name){
-		
-		float distance = CalculateNormalizedDistance (start, end);
-		Debug.Log (distance);
-		if (distance > mMinDistance) {
-			bool toRight = start.x < end.x;
-			bool toUp = start.y < end.y;
-			int cameraPosition = mGameManager.GetCameraPosition ();
-			bool cameraRotated = mGameManager.IsCameraRotated ();
-			bool actionDone = false;
-
-			if (!cameraRotated) {
-				if (cameraPosition == 1) {
-					if(name.Equals("SwipeUpUpLeft") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.BackAntioriario (); else mStatoCubo.BackOrario(); actionDone = true; }
-					else if(name.Equals("SwipeUpUpRight") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.RightOrario (); else mStatoCubo.RightAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeUpDownLeft") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.LeftAntioriario (); else mStatoCubo.LeftOrario(); actionDone = true; }
-					else if(name.Equals("SwipeUpDownRight") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.FrontOrario (); else mStatoCubo.FrontAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftUp") && Is30Degrees(start, end)){ if(!toUp && toRight) mStatoCubo.UpAntioriario (); else mStatoCubo.UpOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftLeft") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.BackAntioriario (); else mStatoCubo.BackOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftRight") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.FrontOrario (); else mStatoCubo.FrontAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftDown") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownOrario (); else mStatoCubo.DownAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightUp") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpAntioriario (); else mStatoCubo.UpOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightLeft") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.LeftAntioriario (); else mStatoCubo.LeftOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightRight") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.RightOrario (); else mStatoCubo.RightAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightDown") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownOrario (); else mStatoCubo.DownAntioriario(); actionDone = true; }
-				} else if (cameraPosition == 2) {
-					if(name.Equals("SwipeUpUpLeft") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.RightAntioriario (); else mStatoCubo.RightOrario(); actionDone = true; }
-					else if(name.Equals("SwipeUpUpRight") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.FrontOrario (); else mStatoCubo.FrontAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeUpDownLeft") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.BackAntioriario (); else mStatoCubo.BackOrario(); actionDone = true; }
-					else if(name.Equals("SwipeUpDownRight") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.LeftOrario (); else mStatoCubo.LeftAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftUp") && Is30Degrees(start, end)){ if(!toUp && toRight) mStatoCubo.UpAntioriario (); else mStatoCubo.UpOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftLeft") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.RightAntioriario (); else mStatoCubo.RightOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftRight") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.LeftOrario (); else mStatoCubo.LeftAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftDown") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownOrario (); else mStatoCubo.DownAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightUp") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpAntioriario (); else mStatoCubo.UpOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightLeft") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.BackAntioriario (); else mStatoCubo.BackOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightRight") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.FrontOrario (); else mStatoCubo.FrontAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightDown") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownOrario (); else mStatoCubo.DownAntioriario(); actionDone = true; }
-				} else if (cameraPosition == 3) {
-					if(name.Equals("SwipeUpUpLeft") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.FrontAntioriario (); else mStatoCubo.FrontOrario(); actionDone = true; }
-					else if(name.Equals("SwipeUpUpRight") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.LeftOrario (); else mStatoCubo.LeftAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeUpDownLeft") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.RightAntioriario (); else mStatoCubo.RightOrario(); actionDone = true; }
-					else if(name.Equals("SwipeUpDownRight") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.BackOrario (); else mStatoCubo.BackAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftUp") && Is30Degrees(start, end)){ if(!toUp && toRight) mStatoCubo.UpAntioriario (); else mStatoCubo.UpOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftLeft") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.FrontAntioriario (); else mStatoCubo.FrontOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftRight") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.BackOrario (); else mStatoCubo.BackAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftDown") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownOrario (); else mStatoCubo.DownAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightUp") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpAntioriario (); else mStatoCubo.UpOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightLeft") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.RightAntioriario (); else mStatoCubo.RightOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightRight") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.LeftOrario (); else mStatoCubo.LeftAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightDown") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownOrario (); else mStatoCubo.DownAntioriario(); actionDone = true; }
-				} else if (cameraPosition == 4) {
-					if(name.Equals("SwipeUpUpLeft") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.LeftAntioriario (); else mStatoCubo.LeftOrario(); actionDone = true; }
-					else if(name.Equals("SwipeUpUpRight") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.BackOrario (); else mStatoCubo.BackAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeUpDownLeft") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.FrontAntioriario (); else mStatoCubo.FrontOrario(); actionDone = true; }
-					else if(name.Equals("SwipeUpDownRight") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.RightOrario (); else mStatoCubo.RightAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftUp") && Is30Degrees(start, end)){ if(!toUp && toRight) mStatoCubo.UpAntioriario (); else mStatoCubo.UpOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftLeft") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.LeftAntioriario (); else mStatoCubo.LeftOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftRight") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.RightOrario (); else mStatoCubo.RightAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftDown") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownOrario (); else mStatoCubo.DownAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightUp") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpAntioriario (); else mStatoCubo.UpOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightLeft") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.FrontAntioriario (); else mStatoCubo.FrontOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightRight") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.BackOrario (); else mStatoCubo.BackAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightDown") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownOrario (); else mStatoCubo.DownAntioriario(); actionDone = true; }
-				} else if (cameraPosition == 5) {
-					if(name.Equals("SwipeDownDownLeftReverse") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.BackAntioriario (); else mStatoCubo.BackOrario(); actionDone = true; }
-					else if(name.Equals("SwipeDownDownRightReverse") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.RightOrario (); else mStatoCubo.RightAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeDownUpLeftReverse") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.LeftAntioriario (); else mStatoCubo.LeftOrario(); actionDone = true; }
-					else if(name.Equals("SwipeDownUpRightReverse") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.FrontOrario (); else mStatoCubo.FrontAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftUpReverse") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.UpAntioriario (); else mStatoCubo.UpOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftLeftReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.BackAntioriario (); else mStatoCubo.BackOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftRightReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.FrontOrario (); else mStatoCubo.FrontAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftDownReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownOrario (); else mStatoCubo.DownAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightUpReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpAntioriario (); else mStatoCubo.UpOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightLeftReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.LeftAntioriario (); else mStatoCubo.LeftOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightRightReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.RightOrario (); else mStatoCubo.RightAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightDownReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownOrario (); else mStatoCubo.DownAntioriario(); actionDone = true; }
-				} else if (cameraPosition == 6) {
-					if(name.Equals("SwipeDownDownLeftReverse") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.RightAntioriario (); else mStatoCubo.RightOrario(); actionDone = true; }
-					else if(name.Equals("SwipeDownDownRightReverse") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.FrontOrario (); else mStatoCubo.FrontAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeDownUpLeftReverse") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.BackAntioriario (); else mStatoCubo.BackOrario(); actionDone = true; }
-					else if(name.Equals("SwipeDownUpRightReverse") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.LeftOrario (); else mStatoCubo.LeftAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftUpReverse") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.UpAntioriario (); else mStatoCubo.UpOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftLeftReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.RightAntioriario (); else mStatoCubo.RightOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftRightReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.LeftOrario (); else mStatoCubo.LeftAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftDownReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownOrario (); else mStatoCubo.DownAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightUpReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpAntioriario (); else mStatoCubo.UpOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightLeftReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.BackAntioriario (); else mStatoCubo.BackOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightRightReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.FrontOrario (); else mStatoCubo.FrontAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightDownReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownOrario (); else mStatoCubo.DownAntioriario(); actionDone = true; }
-				} else if (cameraPosition == 7) {
-					if(name.Equals("SwipeDownDownLeftReverse") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.FrontAntioriario (); else mStatoCubo.FrontOrario(); actionDone = true; }
-					else if(name.Equals("SwipeDownDownRightReverse") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.LeftOrario (); else mStatoCubo.LeftAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeDownUpLeftReverse") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.RightAntioriario (); else mStatoCubo.RightOrario(); actionDone = true; }
-					else if(name.Equals("SwipeDownUpRightReverse") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.BackOrario (); else mStatoCubo.BackAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftUpReverse") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.UpAntioriario (); else mStatoCubo.UpOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftLeftReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.FrontAntioriario (); else mStatoCubo.FrontOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftRightReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.BackOrario (); else mStatoCubo.BackAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftDownReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownOrario (); else mStatoCubo.DownAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightUpReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpAntioriario (); else mStatoCubo.UpOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightLeftReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.RightAntioriario (); else mStatoCubo.RightOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightRightReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.LeftOrario (); else mStatoCubo.LeftAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightDownReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownOrario (); else mStatoCubo.DownAntioriario(); actionDone = true; }
-				} else if (cameraPosition == 8) {
-					if(name.Equals("SwipeDownDownLeftReverse") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.LeftAntioriario (); else mStatoCubo.LeftOrario(); actionDone = true; }
-					else if(name.Equals("SwipeDownDownRightReverse") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.BackOrario (); else mStatoCubo.BackAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeDownUpLeftReverse") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.FrontAntioriario (); else mStatoCubo.FrontOrario(); actionDone = true; }
-					else if(name.Equals("SwipeDownUpRightReverse") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.RightOrario (); else mStatoCubo.RightAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftUpReverse") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.UpAntioriario (); else mStatoCubo.UpOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftLeftReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.LeftAntioriario (); else mStatoCubo.LeftOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftRightReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.RightOrario (); else mStatoCubo.RightAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftDownReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownOrario (); else mStatoCubo.DownAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightUpReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpAntioriario (); else mStatoCubo.UpOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightLeftReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.FrontAntioriario (); else mStatoCubo.FrontOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightRightReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.BackOrario (); else mStatoCubo.BackAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightDownReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownOrario (); else mStatoCubo.DownAntioriario(); actionDone = true; }
-				}
-			} else {
-				if (cameraPosition == 1) {
-					if(name.Equals("SwipeDownDownRightReverse") && Is30Degrees(start, end)){ if(!toUp && !toRight) mStatoCubo.BackAntioriario (); else mStatoCubo.BackOrario(); actionDone = true; }
-					else if(name.Equals("SwipeDownDownLeftReverse") && Is30Degrees(start, end)){ if(!toUp && toRight) mStatoCubo.RightOrario (); else mStatoCubo.RightAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeDownUpRightReverse") && Is30Degrees(start, end)){ if(!toUp && toRight) mStatoCubo.LeftAntioriario (); else mStatoCubo.LeftOrario(); actionDone = true; }
-					else if(name.Equals("SwipeDownUpLeftReverse") && Is30Degrees(start, end)){ if(!toUp && !toRight) mStatoCubo.FrontOrario (); else mStatoCubo.FrontAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftUpReverse") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.DownAntioriario (); else mStatoCubo.DownOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftLeftReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.RightAntioriario (); else mStatoCubo.RightOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftRightReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.LeftOrario (); else mStatoCubo.LeftAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftDownReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpOrario (); else mStatoCubo.UpAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightUpReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownAntioriario (); else mStatoCubo.DownOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightRightReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.BackOrario (); else mStatoCubo.BackAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightLeftReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.FrontAntioriario (); else mStatoCubo.FrontOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightDownReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpOrario (); else mStatoCubo.UpAntioriario(); actionDone = true; }
-				} else if (cameraPosition == 2) {
-					if(name.Equals("SwipeDownDownRightReverse") && Is30Degrees(start, end)){ if(!toUp && !toRight) mStatoCubo.LeftAntioriario (); else mStatoCubo.LeftOrario(); actionDone = true; }
-					else if(name.Equals("SwipeDownDownLeftReverse") && Is30Degrees(start, end)){ if(!toUp && toRight) mStatoCubo.BackOrario (); else mStatoCubo.BackAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeDownUpRightReverse") && Is30Degrees(start, end)){ if(!toUp && toRight) mStatoCubo.FrontAntioriario (); else mStatoCubo.FrontOrario(); actionDone = true; }
-					else if(name.Equals("SwipeDownUpLeftReverse") && Is30Degrees(start, end)){ if(!toUp && !toRight) mStatoCubo.RightOrario (); else mStatoCubo.RightAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftUpReverse") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.DownAntioriario (); else mStatoCubo.DownOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftLeftReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.BackAntioriario (); else mStatoCubo.BackOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftRightReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.FrontOrario (); else mStatoCubo.FrontAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftDownReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpOrario (); else mStatoCubo.UpAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightUpReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownAntioriario (); else mStatoCubo.DownOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightRightReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.LeftOrario (); else mStatoCubo.LeftAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightLeftReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.RightAntioriario (); else mStatoCubo.RightOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightDownReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpOrario (); else mStatoCubo.UpAntioriario(); actionDone = true; }
-				} else if (cameraPosition == 3) {
-					if(name.Equals("SwipeDownDownRightReverse") && Is30Degrees(start, end)){ if(!toUp && !toRight) mStatoCubo.FrontAntioriario (); else mStatoCubo.FrontOrario(); actionDone = true; }
-					else if(name.Equals("SwipeDownDownLeftReverse") && Is30Degrees(start, end)){ if(!toUp && toRight) mStatoCubo.LeftOrario (); else mStatoCubo.LeftAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeDownUpRightReverse") && Is30Degrees(start, end)){ if(!toUp && toRight) mStatoCubo.RightAntioriario (); else mStatoCubo.RightOrario(); actionDone = true; }
-					else if(name.Equals("SwipeDownUpLeftReverse") && Is30Degrees(start, end)){ if(!toUp && !toRight) mStatoCubo.BackOrario (); else mStatoCubo.BackAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftUpReverse") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.DownAntioriario (); else mStatoCubo.DownOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftLeftReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.LeftAntioriario (); else mStatoCubo.LeftOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftRightReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.RightOrario (); else mStatoCubo.RightAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftDownReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpOrario (); else mStatoCubo.UpAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightUpReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownAntioriario (); else mStatoCubo.DownOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightRightReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.FrontOrario (); else mStatoCubo.FrontAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightLeftReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.BackAntioriario (); else mStatoCubo.BackOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightDownReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpOrario (); else mStatoCubo.UpAntioriario(); actionDone = true; }
-				} else if (cameraPosition == 4) {
-					if(name.Equals("SwipeDownDownRightReverse") && Is30Degrees(start, end)){ if(!toUp && !toRight) mStatoCubo.RightAntioriario (); else mStatoCubo.RightOrario(); actionDone = true; }
-					else if(name.Equals("SwipeDownDownLeftReverse") && Is30Degrees(start, end)){ if(!toUp && toRight) mStatoCubo.FrontOrario (); else mStatoCubo.FrontAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeDownUpRightReverse") && Is30Degrees(start, end)){ if(!toUp && toRight) mStatoCubo.BackAntioriario (); else mStatoCubo.BackOrario(); actionDone = true; }
-					else if(name.Equals("SwipeDownUpLeftReverse") && Is30Degrees(start, end)){ if(!toUp && !toRight) mStatoCubo.LeftOrario (); else mStatoCubo.LeftAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftUpReverse") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.DownAntioriario (); else mStatoCubo.DownOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftLeftReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.FrontAntioriario (); else mStatoCubo.FrontOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftRightReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.BackOrario (); else mStatoCubo.BackAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftDownReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpOrario (); else mStatoCubo.UpAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightUpReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownAntioriario (); else mStatoCubo.DownOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightRightReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.RightOrario (); else mStatoCubo.RightAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightLeftReverse") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.LeftAntioriario (); else mStatoCubo.LeftOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightDownReverse") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpOrario (); else mStatoCubo.UpAntioriario(); actionDone = true; }
-				} else if (cameraPosition == 5) {
-					if(name.Equals("SwipeUpDownLeft") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.FrontAntioriario (); else mStatoCubo.FrontOrario(); actionDone = true; }
-					else if(name.Equals("SwipeUpDownRight") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.LeftOrario (); else mStatoCubo.LeftAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeUpUpLeft") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.RightAntioriario (); else mStatoCubo.RightOrario(); actionDone = true; }
-					else if(name.Equals("SwipeUpUpRight") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.BackOrario (); else mStatoCubo.BackAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightUp") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.DownAntioriario (); else mStatoCubo.DownOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightLeft") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.FrontAntioriario (); else mStatoCubo.FrontOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightRight") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.BackOrario (); else mStatoCubo.BackAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightDown") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpOrario (); else mStatoCubo.UpAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftUp") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownAntioriario (); else mStatoCubo.DownOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftLeft") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.RightAntioriario (); else mStatoCubo.RightOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftRight") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.LeftOrario (); else mStatoCubo.LeftAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftDown") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpOrario (); else mStatoCubo.UpAntioriario(); actionDone = true; }
-				} else if (cameraPosition == 6) {
-					if(name.Equals("SwipeUpDownLeft") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.LeftAntioriario (); else mStatoCubo.LeftOrario(); actionDone = true; }
-					else if(name.Equals("SwipeUpDownRight") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.BackOrario (); else mStatoCubo.BackAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeUpUpLeft") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.FrontAntioriario (); else mStatoCubo.FrontOrario(); actionDone = true; }
-					else if(name.Equals("SwipeUpUpRight") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.RightOrario (); else mStatoCubo.RightAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightUp") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.DownAntioriario (); else mStatoCubo.DownOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightLeft") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.LeftAntioriario (); else mStatoCubo.LeftOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightRight") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.RightOrario (); else mStatoCubo.RightAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightDown") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpOrario (); else mStatoCubo.UpAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftUp") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownAntioriario (); else mStatoCubo.DownOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftLeft") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.FrontAntioriario (); else mStatoCubo.FrontOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftRight") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.BackOrario (); else mStatoCubo.BackAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftDown") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpOrario (); else mStatoCubo.UpAntioriario(); actionDone = true; }
-				} else if (cameraPosition == 7) {
-					if(name.Equals("SwipeUpDownLeft") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.BackAntioriario (); else mStatoCubo.BackOrario(); actionDone = true; }
-					else if(name.Equals("SwipeUpDownRight") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.RightOrario (); else mStatoCubo.RightAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeUpUpLeft") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.LeftAntioriario (); else mStatoCubo.LeftOrario(); actionDone = true; }
-					else if(name.Equals("SwipeUpUpRight") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.FrontOrario (); else mStatoCubo.FrontAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightUp") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.DownAntioriario (); else mStatoCubo.DownOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightLeft") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.BackAntioriario (); else mStatoCubo.BackOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightRight") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.FrontOrario (); else mStatoCubo.FrontAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightDown") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpOrario (); else mStatoCubo.UpAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftUp") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownAntioriario (); else mStatoCubo.DownOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftLeft") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.LeftAntioriario (); else mStatoCubo.LeftOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftRight") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.RightOrario (); else mStatoCubo.RightAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftDown") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpOrario (); else mStatoCubo.UpAntioriario(); actionDone = true; }
-				} else if (cameraPosition == 8) {
-					if(name.Equals("SwipeUpDownLeft") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.RightAntioriario (); else mStatoCubo.RightOrario(); actionDone = true; }
-					else if(name.Equals("SwipeUpDownRight") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.FrontOrario (); else mStatoCubo.FrontAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeUpUpLeft") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.BackAntioriario (); else mStatoCubo.BackOrario(); actionDone = true; }
-					else if(name.Equals("SwipeUpUpRight") && Is30Degrees(start, end)){ if(toUp && !toRight) mStatoCubo.LeftOrario (); else mStatoCubo.LeftAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightUp") && Is30Degrees(start, end)){ if(toUp && toRight) mStatoCubo.DownAntioriario (); else mStatoCubo.DownOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightLeft") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.RightAntioriario (); else mStatoCubo.RightOrario(); actionDone = true; }
-					else if(name.Equals("SwipeRightRight") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.LeftOrario (); else mStatoCubo.LeftAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeRightDown") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpOrario (); else mStatoCubo.UpAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftUp") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.DownAntioriario (); else mStatoCubo.DownOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftLeft") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.BackAntioriario (); else mStatoCubo.BackOrario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftRight") && Is90Degrees(start, end)){ if(toUp) mStatoCubo.FrontOrario (); else mStatoCubo.FrontAntioriario(); actionDone = true; }
-					else if(name.Equals("SwipeLeftDown") && Is30Degrees(start, end)){ if(toRight) mStatoCubo.UpOrario (); else mStatoCubo.UpAntioriario(); actionDone = true; }
+				if(actionPosition != 0){
+					moveDone = true;
 				}
 			}
 
-			if (actionDone) {
+			if (moveDone) {
 				mSuonoRotazione.enabled = false;
 				mSuonoRotazione.enabled = true;
 				mGameManager.HoFattoUnaMossa ();
 				mGameManager.ControllaSeHoVinto ();
 			}
 		}
-	}*/
-
-	/*public float CalculateNormalizedDistance(Vector3 start, Vector3 end){
-		int actualWidth = Screen.currentResolution.width;
-		int actualHeight = Screen.currentResolution.height;
-
-		float normalizedStartWidht = (1920 * start.x) / actualWidth;
-		float normalizedStartHeight = (1080 * start.y) / actualHeight;
-		float normalizedEndWidht = (1920 * end.x) / actualWidth;
-		float normalizedEndHeight = (1080 * end.y) / actualHeight;
-
-		Vector3 normalizedStart = new Vector3 (normalizedStartWidht, normalizedStartHeight);
-		Vector3 normalizedEnd = new Vector3 (normalizedEndWidht, normalizedEndHeight);
-
-		return Vector3.Distance (normalizedStart, normalizedEnd);
 	}
-
-	public bool Is30Degrees(Vector3 start, Vector3 end){
-		float angle = Vector2.Angle (new Vector2 (1f, 0f), new Vector2 (end.x - start.x, end.y - start.y));
-		return (angle > 0 && angle < 60) || (angle > 120 && angle < 180);
-	}
-
-	public bool Is90Degrees(Vector3 start, Vector3 end){
-		float angle = Vector2.Angle (new Vector2 (1f, 0f), new Vector2 (end.x - start.x, end.y - start.y));
-		return angle > 60 && angle < 120;
-	}*/
-
-
 }

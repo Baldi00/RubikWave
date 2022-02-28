@@ -128,4 +128,58 @@ public class MescolaRisolviReset : MonoBehaviour {
 		mReset.color = azzurro;
 		mInfoOggetto.text = "";
 	}
+
+    private void Update() {
+		if (mInputManager.IsSolveResetShuffleGamepadPressed() && mGameManager.IsGameRunning() && mAnimatore.isFermo()) {
+			if (mIndex == 0) {
+				mStatistiche.TimeReset();
+				mGameManager.ResetMosseEseguite();
+				mCongratulazioni.SetActive(false);
+				mGameManager.AIReset();
+
+				int numMosseMescola = mGameManager.GetNumMosseMescola();
+				int velocitaMescola = mGameManager.GetVelocitaMescola();
+
+				int[] mMosseInizializzazione = new int[numMosseMescola];
+				for (int index = 0; index < numMosseMescola; index++) {
+					mMosseInizializzazione[index] = Random.Range(1, 13);
+				}
+				mAnimatore.SetStatoStoMescolando(true);
+				mAnimatore.EseguiPiuMosse(mMosseInizializzazione, velocitaMescola);
+
+			}
+			else if (mIndex == 1) {
+				mGameManager.AISolve();
+			}
+			else if (mIndex == 2) {
+				mCongratulazioni.SetActive(false);
+				mGameManager.ResetMosseEseguite();
+				mStatistiche.TimeReset();
+				mGameManager.ResetCubo();
+				mGameManager.AIReset();
+			}
+		}
+		else if (mInputManager.IsChangeSolveResetShuffleGamepadPressed() && mGameManager.IsGameRunning()) {
+			mIndex++;
+			if (mIndex > 2) {
+				mIndex = 0;
+			}
+
+			mMescola.enabled = false;
+			mRisolvi.enabled = false;
+			mReset.enabled = false;
+
+			switch (mIndex) {
+				case 0:
+					mMescola.enabled = true;
+					break;
+				case 1:
+					mRisolvi.enabled = true;
+					break;
+				case 2:
+					mReset.enabled = true;
+					break;
+			}
+		}
+	}
 }
