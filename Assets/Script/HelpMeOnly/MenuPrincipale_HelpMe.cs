@@ -7,8 +7,8 @@ public class MenuPrincipale_HelpMe : MainMenuManager {
 
 
 	void Start () {
-		mFirstStart = false;
-		gameObject.SetActive (false);
+		//mFirstStart = false;
+		//gameObject.SetActive (false);
 	}
 
 }

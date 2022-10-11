@@ -47,14 +47,33 @@ public class GameManager_HelpMe : GameManager {
 		return new Color(0f,0f,0f);
 	}
 
-	void Start () {
-		mStatoCubo = GetComponent<CubeManager> ();
-		mAnimatore = GameObject.Find ("GameManager").GetComponent<AnimationManager>();
-		mGameRunning = true;
-		FileManager.caricaOpzioni ();
+    void Start() {
+		mAnimatore = GetComponent<AnimationManager>();
+		mInputManager = gameObject.GetComponent<InputManager>();
+		mAI = GameObject.Find("AI").GetComponent<AI>();
+		mMainMenuManager = gameObject.GetComponent<MainMenuManager>();
+		mMenuPrincipalePrincipaleContinua = mMainMenuManager.GetContinua();
+		mCongratulazioni = GameObject.Find("Congratulazioni");
+		mCongratulazioni.SetActive(false);
+		mStatisticheInGame = GameObject.Find("CanvasInGameUI").GetComponent<StatisticheInGame>();
+		mCameraFree = GameObject.Find("CameraFree").GetComponent<Camera>();
+		mVictoryAudioSource = GetComponent<AudioSource>();
+
+		mGameRunning = false;
+		SetCameraFreeEnabled(false);
+
+		SetCameraPosition(1);
+		SetCameraRotation(false);
+		SetActionPosition(0);
+
+		if (!(FileManager.isGameSavePresent() && FileManager.caricaOpzioni())) { 
+			GetComponent<SettingsManager>().SetAlto();
+			GetComponent<SettingsManager>().SetVsyncOn();
+			GetComponent<SettingsManager>().SetSuoniOn();
+		}
 	}
 
-	public bool isFaseSceltaColori(){
+    public bool isFaseSceltaColori(){
 		return mFaseSceltaColori;
 	}
 

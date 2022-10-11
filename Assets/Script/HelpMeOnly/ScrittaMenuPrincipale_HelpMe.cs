@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class ScrittaMenuPrincipale_HelpMe : ScrittaMenuPrincipale {
 
-	public new void OnMouseOver(){
+    public new void OnMouseOver(){
 
 		mInfoOggetto.text = mInfoString;
 
@@ -16,9 +16,10 @@ public class ScrittaMenuPrincipale_HelpMe : ScrittaMenuPrincipale {
 		}
 
 		if (Input.GetKeyDown (KeyCode.Mouse0) && name.Equals ("Continua")) {
-			mMenuPrincipale.SetActive (false);
-			mGameManager.GetComponent<GameManager_HelpMe> ().ToggleGameRunning ();
-			OnMouseExit ();
+			mGameManager.SetCameraFreeEnabled(true);
+			mMainMenuContainer.SetActive(false);
+			mGameManager.ToggleGameRunning();
+			OnMouseExit();
 		}
 
 		if (Input.GetKeyDown (KeyCode.Mouse0) && name.Equals ("NuovaPartita")) {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.PostProcessing;
+using System;
 
 public class GameManager : MonoBehaviour {
 
@@ -37,14 +38,21 @@ public class GameManager : MonoBehaviour {
 	protected AI mAI;
 
 
-    private void Awake() {
-		GetComponent<SettingsManager>().Initialize();
-		mStatoCubo = GetComponent<CubeManager>();
-		mStatoCubo.Initialize();
+    protected void Awake() {
+		try
+		{
+			mMainMenuManager = gameObject.GetComponent<MainMenuManager>();
+			mMainMenuManager.Initialize();
+			GetComponent<SettingsManager>().Initialize();
+			mStatoCubo = GetComponent<CubeManager>();
+			mStatoCubo.Initialize();
+		}catch(Exception e){
+			Debug.Log(e);
+        }
 	}
 
     void Start () {
-		mAnimatore = GameObject.Find ("GameManager").GetComponent<AnimationManager>();
+		mAnimatore = GetComponent<AnimationManager>();
 		mInputManager = gameObject.GetComponent<InputManager>();
 		mAI = GameObject.Find ("AI").GetComponent<AI>();
 		mMainMenuManager = gameObject.GetComponent<MainMenuManager>();
@@ -78,20 +86,20 @@ public class GameManager : MonoBehaviour {
 			GetComponent<SettingsManager> ().SetSuoniOn ();
 		}
 
-		if (ThroughScenesParameters.getSceneToLoad() == 0) {
-			Color attivato = new Color ();
-			ColorUtility.TryParseHtmlString ("#00CAFFFF", out attivato);
-			mMenuPrincipalePrincipaleContinua.GetComponent<Text> ().color = attivato;
-			mMenuPrincipalePrincipaleContinua.GetComponent<BoxCollider> ().enabled = true;
+		//if (ThroughScenesParameters.getSceneToLoad() == 0) {
+		//	Color attivato = new Color ();
+		//	ColorUtility.TryParseHtmlString ("#00CAFFFF", out attivato);
+		//	mMenuPrincipalePrincipaleContinua.GetComponent<Text> ().color = attivato;
+		//	mMenuPrincipalePrincipaleContinua.GetComponent<BoxCollider> ().enabled = true;
 
-			ResetCubo ();
-			ResetMosseEseguite ();
-			ResetTimer ();
+		//	ResetCubo ();
+		//	ResetMosseEseguite ();
+		//	ResetTimer ();
 
-			mMainMenuManager.SetFirtsStart(false);
-			mMainMenuManager.SetMainMenuVisibility (false);
-			mGameRunning = true;
-		}
+		//	mMainMenuManager.SetFirtsStart(false);
+		//	mMainMenuManager.SetMainMenuVisibility (false);
+		//	mGameRunning = true;
+		//}
 	}
 
 

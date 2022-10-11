@@ -12,7 +12,7 @@ public class MainMenuManager : MonoBehaviour {
 
 	protected bool mFirstStart = true;
 
-	void Awake() {
+	public void Initialize() {
 		mGameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
 		mInputManager = GameObject.Find ("GameManager").GetComponent<InputManager> ();
 		mMainMenuContainer = GameObject.Find ("MenuPrincipale");
