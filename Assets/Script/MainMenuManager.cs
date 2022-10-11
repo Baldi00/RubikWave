@@ -114,8 +114,8 @@ public class MainMenuManager : MonoBehaviour {
 		return Utilities.GetGameObjectChildByName(mOpzioni, "SuoniOff");
 	}
 
-	public GameObject GetInfoVarieMenuPrincipale(){
-		return Utilities.GetGameObjectChildByName(mPrincipale, "InfoVarie");
+	public GameObject GetInfoVarieMenuPrincipale() {
+		return GameObject.Find("InfoVarieMenuPrincipale");
 	}
 
 	public void SetMainMenuVisibility (bool visibility) {

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,68 +19,63 @@ public class CubeManager : MonoBehaviour {
 	private GameObject Spig1,Spig2,Spig3,Spig4,Spig5,Spig6,Spig7,Spig8,Spig9,Spig10,Spig11,Spig12;
 	private GameObject Vert1,Vert2,Vert3,Vert4,Vert5,Vert6,Vert7,Vert8;
 
-	private bool mOrario = true;
+    internal void Initialize() {
+		CentFront = GameObject.Find("CentFront");
+		CentBack = GameObject.Find("CentBack");
+		CentRight = GameObject.Find("CentRight");
+		CentLeft = GameObject.Find("CentLeft");
+		CentUp = GameObject.Find("CentUp");
+		CentDown = GameObject.Find("CentDown");
 
-	private AnimationManager mAnimatore;
+		SpigFrontUp = GameObject.Find("SpigFrontUp");
+		SpigFrontLeft = GameObject.Find("SpigFrontLeft");
+		SpigFrontRight = GameObject.Find("SpigFrontRight");
+		SpigFrontDown = GameObject.Find("SpigFrontDown");
+		SpigBackUp = GameObject.Find("SpigBackUp");
+		SpigBackLeft = GameObject.Find("SpigBackLeft");
+		SpigBackRight = GameObject.Find("SpigBackRight");
+		SpigBackDown = GameObject.Find("SpigBackDown");
+		SpigRightUp = GameObject.Find("SpigRightUp");
+		SpigRightLeft = GameObject.Find("SpigRightLeft");
+		SpigRightRight = GameObject.Find("SpigRightRight");
+		SpigRightDown = GameObject.Find("SpigRightDown");
+		SpigLeftUp = GameObject.Find("SpigLeftUp");
+		SpigLeftLeft = GameObject.Find("SpigLeftLeft");
+		SpigLeftRight = GameObject.Find("SpigLeftRight");
+		SpigLeftDown = GameObject.Find("SpigLeftDown");
+		SpigUpUp = GameObject.Find("SpigUpUp");
+		SpigUpLeft = GameObject.Find("SpigUpLeft");
+		SpigUpRight = GameObject.Find("SpigUpRight");
+		SpigUpDown = GameObject.Find("SpigUpDown");
+		SpigDownUp = GameObject.Find("SpigDownUp");
+		SpigDownLeft = GameObject.Find("SpigDownLeft");
+		SpigDownRight = GameObject.Find("SpigDownRight");
+		SpigDownDown = GameObject.Find("SpigDownDown");
 
-	void Start(){
-		
-		CentFront = GameObject.Find ("CentFront");
-		CentBack = GameObject.Find ("CentBack");
-		CentRight = GameObject.Find ("CentRight");
-		CentLeft = GameObject.Find ("CentLeft");
-		CentUp = GameObject.Find ("CentUp");
-		CentDown = GameObject.Find ("CentDown");
-
-		SpigFrontUp = GameObject.Find ("SpigFrontUp");
-		SpigFrontLeft = GameObject.Find ("SpigFrontLeft");
-		SpigFrontRight = GameObject.Find ("SpigFrontRight");
-		SpigFrontDown = GameObject.Find ("SpigFrontDown");
-		SpigBackUp = GameObject.Find ("SpigBackUp");
-		SpigBackLeft = GameObject.Find ("SpigBackLeft");
-		SpigBackRight = GameObject.Find ("SpigBackRight");
-		SpigBackDown = GameObject.Find ("SpigBackDown");
-		SpigRightUp = GameObject.Find ("SpigRightUp");
-		SpigRightLeft = GameObject.Find ("SpigRightLeft");
-		SpigRightRight = GameObject.Find ("SpigRightRight");
-		SpigRightDown = GameObject.Find ("SpigRightDown");
-		SpigLeftUp = GameObject.Find ("SpigLeftUp");
-		SpigLeftLeft = GameObject.Find ("SpigLeftLeft");
-		SpigLeftRight = GameObject.Find ("SpigLeftRight");
-		SpigLeftDown = GameObject.Find ("SpigLeftDown");
-		SpigUpUp = GameObject.Find ("SpigUpUp");
-		SpigUpLeft = GameObject.Find ("SpigUpLeft");
-		SpigUpRight = GameObject.Find ("SpigUpRight");
-		SpigUpDown = GameObject.Find ("SpigUpDown");
-		SpigDownUp = GameObject.Find ("SpigDownUp");
-		SpigDownLeft = GameObject.Find ("SpigDownLeft");
-		SpigDownRight = GameObject.Find ("SpigDownRight");
-		SpigDownDown = GameObject.Find ("SpigDownDown");
-
-		VertFrontRightUp = GameObject.Find ("VertFrontRightUp");
-		VertFrontRightDown = GameObject.Find ("VertFrontRightDown");
-		VertFrontLeftUp = GameObject.Find ("VertFrontLeftUp");
-		VertFrontLeftDown = GameObject.Find ("VertFrontLeftDown");
-		VertBackRightUp = GameObject.Find ("VertBackRightUp");
-		VertBackRightDown = GameObject.Find ("VertBackRightDown");
-		VertBackLeftUp = GameObject.Find ("VertBackLeftUp");
-		VertBackLeftDown = GameObject.Find ("VertBackLeftDown");
-		VertLeftRightUp = GameObject.Find ("VertLeftRightUp");
-		VertLeftRightDown = GameObject.Find ("VertLeftRightDown");
-		VertLeftLeftUp = GameObject.Find ("VertLeftLeftUp");
-		VertLeftLeftDown = GameObject.Find ("VertLeftLeftDown");
-		VertRightRightUp = GameObject.Find ("VertRightRightUp");
-		VertRightRightDown = GameObject.Find ("VertRightRightDown");
-		VertRightLeftUp = GameObject.Find ("VertRightLeftUp");
-		VertRightLeftDown = GameObject.Find ("VertRightLeftDown");
-		VertUpRightUp = GameObject.Find ("VertUpRightUp");
-		VertUpRightDown = GameObject.Find ("VertUpRightDown");
-		VertUpLeftUp = GameObject.Find ("VertUpLeftUp");
-		VertUpLeftDown = GameObject.Find ("VertUpLeftDown");
-		VertDownRightUp = GameObject.Find ("VertDownRightUp");
-		VertDownRightDown = GameObject.Find ("VertDownRightDown");
-		VertDownLeftUp = GameObject.Find ("VertDownLeftUp");
-		VertDownLeftDown = GameObject.Find ("VertDownLeftDown");
+		VertFrontRightUp = GameObject.Find("VertFrontRightUp");
+		VertFrontRightDown = GameObject.Find("VertFrontRightDown");
+		VertFrontLeftUp = GameObject.Find("VertFrontLeftUp");
+		VertFrontLeftDown = GameObject.Find("VertFrontLeftDown");
+		VertBackRightUp = GameObject.Find("VertBackRightUp");
+		VertBackRightDown = GameObject.Find("VertBackRightDown");
+		VertBackLeftUp = GameObject.Find("VertBackLeftUp");
+		VertBackLeftDown = GameObject.Find("VertBackLeftDown");
+		VertLeftRightUp = GameObject.Find("VertLeftRightUp");
+		VertLeftRightDown = GameObject.Find("VertLeftRightDown");
+		VertLeftLeftUp = GameObject.Find("VertLeftLeftUp");
+		VertLeftLeftDown = GameObject.Find("VertLeftLeftDown");
+		VertRightRightUp = GameObject.Find("VertRightRightUp");
+		VertRightRightDown = GameObject.Find("VertRightRightDown");
+		VertRightLeftUp = GameObject.Find("VertRightLeftUp");
+		VertRightLeftDown = GameObject.Find("VertRightLeftDown");
+		VertUpRightUp = GameObject.Find("VertUpRightUp");
+		VertUpRightDown = GameObject.Find("VertUpRightDown");
+		VertUpLeftUp = GameObject.Find("VertUpLeftUp");
+		VertUpLeftDown = GameObject.Find("VertUpLeftDown");
+		VertDownRightUp = GameObject.Find("VertDownRightUp");
+		VertDownRightDown = GameObject.Find("VertDownRightDown");
+		VertDownLeftUp = GameObject.Find("VertDownLeftUp");
+		VertDownLeftDown = GameObject.Find("VertDownLeftDown");
 
 		Cent1 = GameObject.Find("Cent1");
 		Cent2 = GameObject.Find("Cent2");
@@ -110,8 +106,12 @@ public class CubeManager : MonoBehaviour {
 		Vert7 = GameObject.Find("Vert7");
 		Vert8 = GameObject.Find("Vert8");
 
-		mAnimatore = GameObject.Find ("GameManager").GetComponent<AnimationManager> ();
+		mAnimatore = GameObject.Find("GameManager").GetComponent<AnimationManager>();
 	}
+
+    private bool mOrario = true;
+
+	private AnimationManager mAnimatore;
 
 	public void FrontOrario(){
 		Cent1.SetActive (false);

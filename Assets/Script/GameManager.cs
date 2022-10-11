@@ -37,8 +37,13 @@ public class GameManager : MonoBehaviour {
 	protected AI mAI;
 
 
-	void Start () {
-		mStatoCubo = GetComponent<CubeManager> ();
+    private void Awake() {
+		GetComponent<SettingsManager>().Initialize();
+		mStatoCubo = GetComponent<CubeManager>();
+		mStatoCubo.Initialize();
+	}
+
+    void Start () {
 		mAnimatore = GameObject.Find ("GameManager").GetComponent<AnimationManager>();
 		mInputManager = gameObject.GetComponent<InputManager>();
 		mAI = GameObject.Find ("AI").GetComponent<AI>();
@@ -68,9 +73,9 @@ public class GameManager : MonoBehaviour {
 			mMenuPrincipalePrincipaleContinua.GetComponent<Text>().color = disattivato;
 			mMenuPrincipalePrincipaleContinua.GetComponent<BoxCollider> ().enabled = false;
 
-			//GetComponent<SettingsManager> ().SetAlto ();
-			//GetComponent<SettingsManager> ().SetVsyncOn ();
-			//GetComponent<SettingsManager> ().SetSuoniOn ();
+			GetComponent<SettingsManager> ().SetAlto ();
+			GetComponent<SettingsManager> ().SetVsyncOn ();
+			GetComponent<SettingsManager> ().SetSuoniOn ();
 		}
 
 		if (ThroughScenesParameters.getSceneToLoad() == 0) {
@@ -91,13 +96,6 @@ public class GameManager : MonoBehaviour {
 
 
 	void Update () {
-
-		/*PostProcessingBehaviour pb = mCameraFree.GetComponent<PostProcessingBehaviour> ();
-		AntialiasingModel.Settings anti = pb.profile.antialiasing.settings; 
-		anti.method = AntialiasingModel.Method.Fxaa;
-		anti.fxaaSettings.preset = AntialiasingModel.FxaaPreset.ExtremeQuality;
-		pb.profile.antialiasing.settings = anti;
-		pb.profile.antialiasing.enabled = true;*/
 
 		if (mCheckVittoria && mAnimatore.isFermo () && mGameRunning) {
 			if (HoVinto ()) {

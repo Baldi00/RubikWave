@@ -14,9 +14,17 @@ public class SettingsManager : MonoBehaviour {
 	private MainMenuManager mMainMenuManager;
 	private ScrittaMenuOpzioni mScrittaAlto, mScrittaMedio, mScrittaBasso, mScrittaVsyncOn, mScrittaVsyncOff, mScrittaSuoniOn, mScrittaSuoniOff;
 
-	public void Start(){
-		mCameraPrincipale = GameObject.Find ("CameraFree");
-		mCubo = GameObject.Find ("Cubo");
+	public void Initialize(){
+		mWhoosh = Resources.Load<AudioClip>("Sounds/Whoosh");
+		mTurn = Resources.Load<AudioClip>("Sounds/Turn");
+		mVictory = Resources.Load<AudioClip>("Sounds/Victory - Tada");
+
+		mAlto = Resources.Load<PostProcessingProfile>("PostProPresetTAA");
+		mMedio = Resources.Load<PostProcessingProfile>("PostProPresetNoMotionBlur");
+		mBasso = Resources.Load<PostProcessingProfile>("PostProPresetLow");
+
+		mCameraPrincipale = GameObject.Find("CameraFree");
+		mCubo = GameObject.Find("Cubo");
 
 		mMainMenuManager = GameObject.Find ("GameManager").GetComponent<MainMenuManager> ();
 		mScrittaAlto = mMainMenuManager.GetAlto().GetComponent<ScrittaMenuOpzioni> ();
@@ -26,14 +34,6 @@ public class SettingsManager : MonoBehaviour {
 		mScrittaVsyncOff = mMainMenuManager.GetVsOff().GetComponent<ScrittaMenuOpzioni> ();
 		mScrittaSuoniOn = mMainMenuManager.GetSuoniOn().GetComponent<ScrittaMenuOpzioni> ();
 		mScrittaSuoniOff = mMainMenuManager.GetSuoniOff().GetComponent<ScrittaMenuOpzioni> ();
-
-		mWhoosh = Resources.Load<AudioClip> ("Sounds/Whoosh");
-		mTurn = Resources.Load<AudioClip>("Sounds/Turn");
-		mVictory = Resources.Load<AudioClip>("Sounds/Victory - Tada");
-
-		mAlto = Resources.Load<PostProcessingProfile> ("PostProPresetTAA");
-		mMedio = Resources.Load<PostProcessingProfile> ("PostProPresetNoMotionBlur");
-		mBasso = Resources.Load<PostProcessingProfile> ("PostProPresetLow");
 	}
 
 	public void SetAlto(){
@@ -58,7 +58,7 @@ public class SettingsManager : MonoBehaviour {
 
 	public void SetVsyncOff(){
 		QualitySettings.vSyncCount = 0;
-		Application.targetFrameRate = 60;
+		//Application.targetFrameRate = 60;
 		mScrittaVsyncOff.SetAcceso (true);
 	}
 
