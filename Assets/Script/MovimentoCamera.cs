@@ -4,139 +4,141 @@ using UnityEngine;
 
 public class MovimentoCamera : MonoBehaviour {
 
-	private int m_Pos;
-	private MovimentatoreCamera m_Movimentatore = null;
-	private AudioSource m_SuonoCamera;
-	private GameManager m_GameManager;
+	private int mPos;
+	private MovimentatoreCamera mMovimentatore = null;
+	private AudioSource mSuonoCamera;
+	private GameManager mGameManager;
+	private InputManager mInputManager;
 
-	private bool m_Invertito;
+	private bool mInvertito;
+	private bool mToGoDown = false;
 
 	// Use this for initialization
 	void Start () {
-		m_Pos = 1;
-		m_Invertito = true;
-		m_Movimentatore = GetComponent<MovimentatoreCamera> ();
-		m_SuonoCamera = GetComponent<AudioSource> ();
-		m_GameManager = GameObject.Find("GameManager").GetComponent<GameManager> ();
-		QualitySettings.vSyncCount = 0;
+		mPos = 1;
+		mInvertito = false;
+		mMovimentatore = GetComponent<MovimentatoreCamera> ();
+		mSuonoCamera = GetComponent<AudioSource> ();
+		mGameManager = GameObject.Find("GameManager").GetComponent<GameManager> ();
+		mInputManager = GameObject.Find("GameManager").GetComponent<InputManager> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		bool checkSinistra = Input.GetKeyDown (KeyCode.A) || Input.GetKeyDown (KeyCode.LeftArrow);
-		bool checkDestra = Input.GetKeyDown (KeyCode.D) || Input.GetKeyDown (KeyCode.RightArrow);
-		bool checkSu = Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown (KeyCode.UpArrow);
-		bool checkGiu = Input.GetKeyDown (KeyCode.S) || Input.GetKeyDown (KeyCode.DownArrow);
-		bool checkRuota = Input.GetKeyDown (KeyCode.R);
+		bool checkSinistra = mInputManager.IsLeftPressed ();
+		bool checkDestra = mInputManager.IsRightPressed ();
+		bool checkSu = mInputManager.IsUpPressed ();
+		bool checkGiu = mInputManager.IsDownPressed ();
+		bool checkRuota = mInputManager.IsCameraRotatePressed ();
 
-		if ((checkSinistra || checkDestra || checkSu || checkGiu || checkRuota) && m_Movimentatore.isFermo () && m_GameManager.IsGameRunning()) {
-			if (!m_Invertito) {
+		if ((checkSinistra || checkDestra || checkSu || checkGiu || checkRuota || mToGoDown) && mMovimentatore.isFermo () && mGameManager.IsGameRunning()) {
+
+			if (mToGoDown) {
+				if (mInvertito) {
+					if (mPos < 5) {
+						mPos += 4;
+						mSuonoCamera.enabled = false;
+						mSuonoCamera.enabled = true;
+					} else if (mPos > 4) {
+						mPos -= 4;
+						mSuonoCamera.enabled = false;
+						mSuonoCamera.enabled = true;
+					}
+					mToGoDown = true;
+				} else {
+					if (mPos > 4) {
+						mPos -= 4;
+						mSuonoCamera.enabled = false;
+						mSuonoCamera.enabled = true;
+					} else if (mPos < 5) {
+						mPos += 4;
+						mSuonoCamera.enabled = false;
+						mSuonoCamera.enabled = true;
+					}
+				}
+				mToGoDown = false;
+			}
+
+			if (checkGiu) {
+				mMovimentatore.ruota();
+				mInvertito = !mInvertito;
+				mGameManager.SetCameraRotation (mInvertito);
+				mGameManager.SetCameraHasJustRotated (true);
+				mToGoDown = true;
+			}
+
+			if (mInvertito) {
 				if (checkSinistra) {
-					switch (m_Pos) {
+					switch (mPos) {
 					case 1:
-						m_Pos = 4;
+						mPos = 4;
 						break;
 					case 5:
-						m_Pos = 8;
+						mPos = 8;
 						break;
 					default:
-						m_Pos = m_Pos - 1;
+						mPos = mPos - 1;
 						break;
 					}
-					m_SuonoCamera.enabled = false;
-					m_SuonoCamera.enabled = true;
+					mSuonoCamera.enabled = false;
+					mSuonoCamera.enabled = true;
 				}
 
 				if (checkDestra) {
-					switch (m_Pos) {
+					switch (mPos) {
 					case 4:
-						m_Pos = 1;
+						mPos = 1;
 						break;
 					case 8:
-						m_Pos = 5;
+						mPos = 5;
 						break;
 					default:
-						m_Pos = m_Pos + 1;
+						mPos = mPos + 1;
 						break;
 					}
-					m_SuonoCamera.enabled = false;
-					m_SuonoCamera.enabled = true;
-				}
-
-				if (checkSu) {
-					if (m_Pos < 5) {
-						m_Pos += 4;
-						m_SuonoCamera.enabled = false;
-						m_SuonoCamera.enabled = true;
-					}
-				}
-				if (checkGiu) {
-					if (m_Pos > 4) {
-						m_Pos -= 4;
-						m_SuonoCamera.enabled = false;
-						m_SuonoCamera.enabled = true;
-					}
+					mSuonoCamera.enabled = false;
+					mSuonoCamera.enabled = true;
 				}
 			} else {
 				if (checkDestra) {
-					switch (m_Pos) {
+					switch (mPos) {
 					case 1:
-						m_Pos = 4;
+						mPos = 4;
 						break;
 					case 5:
-						m_Pos = 8;
+						mPos = 8;
 						break;
 					default:
-						m_Pos = m_Pos - 1;
+						mPos = mPos - 1;
 						break;
 					}
-					m_SuonoCamera.enabled = false;
-					m_SuonoCamera.enabled = true;
+					mSuonoCamera.enabled = false;
+					mSuonoCamera.enabled = true;
 				}
 
 				if (checkSinistra) {
-					switch (m_Pos) {
+					switch (mPos) {
 					case 4:
-						m_Pos = 1;
+						mPos = 1;
 						break;
 					case 8:
-						m_Pos = 5;
+						mPos = 5;
 						break;
 					default:
-						m_Pos = m_Pos + 1;
+						mPos = mPos + 1;
 						break;
 					}
 
-					m_SuonoCamera.enabled = false;
-					m_SuonoCamera.enabled = true;
-				}
-
-				if (checkGiu) {
-					if (m_Pos < 5) {
-						m_Pos += 4;
-						m_SuonoCamera.enabled = false;
-						m_SuonoCamera.enabled = true;
-					}
-				}
-				if (checkSu) {
-					if (m_Pos > 4) {
-						m_Pos -= 4;
-						m_SuonoCamera.enabled = false;
-						m_SuonoCamera.enabled = true;
-					}
+					mSuonoCamera.enabled = false;
+					mSuonoCamera.enabled = true;
 				}
 			}
 
-			if (checkRuota) {
-				m_Movimentatore.ruota();
-				m_Invertito = !m_Invertito;
-				m_SuonoCamera.enabled = false;
-				m_SuonoCamera.enabled = true;
-			}
+			mGameManager.SetCameraPosition (mPos);
 		}
 	}
 
 	public int GetPosizione (){
-		return m_Pos;
+		return mPos;
 	}
 }

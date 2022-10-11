@@ -5,42 +5,45 @@ using UnityEngine.UI;
 
 public class MescolaRisolviReset : MonoBehaviour {
 
-	[SerializeField]
-	private Text m_Mescola, m_Risolvi, m_Reset;
+	private Text mMescola, mRisolvi, mReset;
+	protected Text mInfoOggetto;
 
-	[SerializeField]
-	protected Text m_InfoOggetto;
+	protected int mIndex = 0;
 
-	protected int m_Index = 0;
+	protected GameObject mCongratulazioni;
 
-	[SerializeField]
-	protected GameObject m_Congratulazioni;
+	protected GameManager mGameManager;
+	protected InputManager mInputManager;
+	protected AnimationManager mAnimatore;
 
-	protected GameManager m_GameManager;
-	protected Animatore m_Animatore;
-	protected AI m_AI;
-
-	protected StatisticheInGame m_Statistiche;
+	protected StatisticheInGame mStatistiche;
 
 	void Start () {
-		m_GameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
-		m_Animatore = GameObject.Find ("Animazioni").GetComponent<Animatore> ();
-		m_AI = GameObject.Find ("AI").GetComponent<AI> ();
-		m_Statistiche = GameObject.Find ("CanvasInGameUI").GetComponent<StatisticheInGame> ();
+		mGameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
+		mInputManager = GameObject.Find ("GameManager").GetComponent<InputManager> ();
+		mAnimatore = GameObject.Find ("GameManager").GetComponent<AnimationManager> ();
+		mStatistiche = GameObject.Find ("CanvasInGameUI").GetComponent<StatisticheInGame> ();
 
-		m_Mescola.enabled = true;
-		m_Risolvi.enabled = false;
-		m_Reset.enabled = false;
+		mCongratulazioni = mGameManager.GetCongratulazioni();
 
-		switch (m_Index) {
+		mMescola = GameObject.Find ("Mescola").GetComponent<Text> ();
+		mRisolvi = GameObject.Find ("Risolvi").GetComponent<Text> ();
+		mReset = GameObject.Find ("Reset").GetComponent<Text> ();
+		mInfoOggetto = GameObject.Find ("InfoVarie").GetComponent<Text> ();
+
+		mMescola.enabled = true;
+		mRisolvi.enabled = false;
+		mReset.enabled = false;
+
+		switch (mIndex) {
 		case 0:
-			m_Mescola.enabled = true;
+			mMescola.enabled = true;
 			break;
 		case 1:
-			m_Risolvi.enabled = true;
+			mRisolvi.enabled = true;
 			break;
 		case 2:
-			m_Reset.enabled = true;
+			mReset.enabled = true;
 			break;
 		}
 	}
@@ -48,70 +51,70 @@ public class MescolaRisolviReset : MonoBehaviour {
 	void OnMouseEnter(){
 		Color azzurroChiaro = new Color ();
 		ColorUtility.TryParseHtmlString ("#00FFFFFF", out azzurroChiaro);
-		m_Mescola.color = azzurroChiaro;
-		m_Risolvi.color = azzurroChiaro;
-		m_Reset.color = azzurroChiaro;
+		mMescola.color = azzurroChiaro;
+		mRisolvi.color = azzurroChiaro;
+		mReset.color = azzurroChiaro;
 	}
 
 	void OnMouseOver(){
 
-		switch (m_Index) {
+		switch (mIndex) {
 		case 0:
-			m_InfoOggetto.text = "Mescola il cubo\nTASTO DESTRO DEL MOUSE PER CAMBIARE AZIONE";
+			mInfoOggetto.text = "Mescola il cubo\nTASTO DESTRO DEL MOUSE PER CAMBIARE AZIONE";
 			break;
 		case 1:
-			m_InfoOggetto.text = "Risolvi il cubo con intelligenza artificiale\nTASTO DESTRO DEL MOUSE PER CAMBIARE AZIONE";
+			mInfoOggetto.text = "Risolvi il cubo con intelligenza artificiale\nTASTO DESTRO DEL MOUSE PER CAMBIARE AZIONE";
 			break;
 		case 2:
-			m_InfoOggetto.text = "Riporta il cubo allo stato iniziale\nTASTO DESTRO DEL MOUSE PER CAMBIARE AZIONE";
+			mInfoOggetto.text = "Riporta il cubo allo stato iniziale\nTASTO DESTRO DEL MOUSE PER CAMBIARE AZIONE";
 			break;
 		}
 
-		if (Input.GetKeyDown (KeyCode.Mouse0) && m_GameManager.IsGameRunning () && m_Animatore.isFermo ()) {
-			if (m_Index == 0) {
-				m_Statistiche.TimeReset ();
-				m_GameManager.ResetMosseEseguite ();
-				m_Congratulazioni.SetActive (false);
-				m_AI.Reset ();
+		if (mInputManager.IsSolveResetShufflePressed() && mGameManager.IsGameRunning () && mAnimatore.isFermo ()) {
+			if (mIndex == 0) {
+				mStatistiche.TimeReset ();
+				mGameManager.ResetMosseEseguite ();
+				mCongratulazioni.SetActive (false);
+				mGameManager.AIReset ();
 
-				int numMosseInizializzazione = m_GameManager.GetNumMosseInizializzazione ();
-				int velocitaMescola = m_GameManager.GetVelocitaMescola ();
+				int numMosseMescola = mGameManager.GetNumMosseMescola ();
+				int velocitaMescola = mGameManager.GetVelocitaMescola ();
 
-				int[] m_MosseInizializzazione = new int[numMosseInizializzazione];
-				for (int index = 0; index < numMosseInizializzazione; index++) {
-					m_MosseInizializzazione [index] = Random.Range (1, 13);
+				int[] mMosseInizializzazione = new int[numMosseMescola];
+				for (int index = 0; index < numMosseMescola; index++) {
+					mMosseInizializzazione [index] = Random.Range (1, 13);
 				}
-				m_Animatore.SetStatoStoMescolando (true);
-				m_Animatore.EseguiPiuMosse (m_MosseInizializzazione, velocitaMescola);
+				mAnimatore.SetStatoStoMescolando (true);
+				mAnimatore.EseguiPiuMosse (mMosseInizializzazione, velocitaMescola);
 
-			} else if (m_Index == 1) {
-				m_AI.Risolvi ();
-			} else if (m_Index == 2) {
-				m_Congratulazioni.SetActive (false);
-				m_GameManager.ResetMosseEseguite ();
-				m_Statistiche.TimeReset ();
-				m_GameManager.ResetCubo ();
-				m_AI.Reset ();
+			} else if (mIndex == 1) {
+				mGameManager.AISolve ();
+			} else if (mIndex == 2) {
+				mCongratulazioni.SetActive (false);
+				mGameManager.ResetMosseEseguite ();
+				mStatistiche.TimeReset ();
+				mGameManager.ResetCubo ();
+				mGameManager.AIReset ();
 			}
-		} else if (Input.GetKeyDown (KeyCode.Mouse1) && m_GameManager.IsGameRunning ()) {
-			m_Index++;
-			if (m_Index > 2) {
-				m_Index = 0;
+		} else if (mInputManager.IsChangeSolveResetShufflePressed() && mGameManager.IsGameRunning ()) {
+			mIndex++;
+			if (mIndex > 2) {
+				mIndex = 0;
 			}
 
-			m_Mescola.enabled = false;
-			m_Risolvi.enabled = false;
-			m_Reset.enabled = false;
+			mMescola.enabled = false;
+			mRisolvi.enabled = false;
+			mReset.enabled = false;
 
-			switch (m_Index) {
+			switch (mIndex) {
 			case 0:
-				m_Mescola.enabled = true;
+				mMescola.enabled = true;
 				break;
 			case 1:
-				m_Risolvi.enabled = true;
+				mRisolvi.enabled = true;
 				break;
 			case 2:
-				m_Reset.enabled = true;
+				mReset.enabled = true;
 				break;
 			}
 		}
@@ -120,9 +123,63 @@ public class MescolaRisolviReset : MonoBehaviour {
 	void OnMouseExit(){
 		Color azzurro = new Color ();
 		ColorUtility.TryParseHtmlString ("#00CAFFFF", out azzurro);
-		m_Mescola.color = azzurro;
-		m_Risolvi.color = azzurro;
-		m_Reset.color = azzurro;
-		m_InfoOggetto.text = "";
+		mMescola.color = azzurro;
+		mRisolvi.color = azzurro;
+		mReset.color = azzurro;
+		mInfoOggetto.text = "";
+	}
+
+    private void Update() {
+		if (mInputManager.IsSolveResetShuffleGamepadPressed() && mGameManager.IsGameRunning() && mAnimatore.isFermo()) {
+			if (mIndex == 0) {
+				mStatistiche.TimeReset();
+				mGameManager.ResetMosseEseguite();
+				mCongratulazioni.SetActive(false);
+				mGameManager.AIReset();
+
+				int numMosseMescola = mGameManager.GetNumMosseMescola();
+				int velocitaMescola = mGameManager.GetVelocitaMescola();
+
+				int[] mMosseInizializzazione = new int[numMosseMescola];
+				for (int index = 0; index < numMosseMescola; index++) {
+					mMosseInizializzazione[index] = Random.Range(1, 13);
+				}
+				mAnimatore.SetStatoStoMescolando(true);
+				mAnimatore.EseguiPiuMosse(mMosseInizializzazione, velocitaMescola);
+
+			}
+			else if (mIndex == 1) {
+				mGameManager.AISolve();
+			}
+			else if (mIndex == 2) {
+				mCongratulazioni.SetActive(false);
+				mGameManager.ResetMosseEseguite();
+				mStatistiche.TimeReset();
+				mGameManager.ResetCubo();
+				mGameManager.AIReset();
+			}
+		}
+		else if (mInputManager.IsChangeSolveResetShuffleGamepadPressed() && mGameManager.IsGameRunning()) {
+			mIndex++;
+			if (mIndex > 2) {
+				mIndex = 0;
+			}
+
+			mMescola.enabled = false;
+			mRisolvi.enabled = false;
+			mReset.enabled = false;
+
+			switch (mIndex) {
+				case 0:
+					mMescola.enabled = true;
+					break;
+				case 1:
+					mRisolvi.enabled = true;
+					break;
+				case 2:
+					mReset.enabled = true;
+					break;
+			}
+		}
 	}
 }

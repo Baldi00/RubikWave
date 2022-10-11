@@ -6,18 +6,18 @@ using UnityEngine.UI;
 public class GameManager_HelpMe : GameManager {
 
 	[SerializeField]
-	private GameObject m_InserisciColoriInfo;
+	private GameObject mInserisciColoriInfo;
 
-	bool m_PrimaModifica = false;
-	bool m_FaseSceltaColori = true;
+	bool mPrimaModifica = false;
+	bool mFaseSceltaColori = true;
 
 	Color[] colors;
 
 	public Color getNextOrPreviousColorByActualColor(Color c, bool prev){
 
-		if (!m_PrimaModifica) {
-			m_InserisciColoriInfo.SetActive (false);
-			m_PrimaModifica = true;
+		if (!mPrimaModifica) {
+			mInserisciColoriInfo.SetActive (false);
+			mPrimaModifica = true;
 		}
 
 		colors = new[] {GameObject.Find ("CentFront").GetComponent<Renderer>().material.color, 
@@ -47,18 +47,37 @@ public class GameManager_HelpMe : GameManager {
 		return new Color(0f,0f,0f);
 	}
 
-	void Start () {
-		m_StatoCubo = GetComponent<StatoCubo> ();
-		m_Animatore = GameObject.Find ("Animazioni").GetComponent<Animatore>();
-		m_GameRunning = true;
-		FileManager.caricaOpzioni ();
+    void Start() {
+		mAnimatore = GetComponent<AnimationManager>();
+		mInputManager = gameObject.GetComponent<InputManager>();
+		mAI = GameObject.Find("AI").GetComponent<AI>();
+		mMainMenuManager = gameObject.GetComponent<MainMenuManager>();
+		mMenuPrincipalePrincipaleContinua = mMainMenuManager.GetContinua();
+		mCongratulazioni = GameObject.Find("Congratulazioni");
+		mCongratulazioni.SetActive(false);
+		mStatisticheInGame = GameObject.Find("CanvasInGameUI").GetComponent<StatisticheInGame>();
+		mCameraFree = GameObject.Find("CameraFree").GetComponent<Camera>();
+		mVictoryAudioSource = GetComponent<AudioSource>();
+
+		mGameRunning = false;
+		SetCameraFreeEnabled(false);
+
+		SetCameraPosition(1);
+		SetCameraRotation(false);
+		SetActionPosition(0);
+
+		if (!(FileManager.isGameSavePresent() && FileManager.caricaOpzioni())) { 
+			GetComponent<SettingsManager>().SetAlto();
+			GetComponent<SettingsManager>().SetVsyncOn();
+			GetComponent<SettingsManager>().SetSuoniOn();
+		}
 	}
 
-	public bool isFaseSceltaColori(){
-		return m_FaseSceltaColori;
+    public bool isFaseSceltaColori(){
+		return mFaseSceltaColori;
 	}
 
 	public void FaseSceltaColoriCompletata(){
-		m_FaseSceltaColori = false;
+		mFaseSceltaColori = false;
 	}
 }

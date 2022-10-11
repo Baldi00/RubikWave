@@ -1,61 +1,70 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PostProcessing;
 
 public class ScrittaMenuOpzioni : ScrittaMenuPrincipale {
+	
+	private bool mAcceso = false;
 
-	[SerializeField]
-	private bool m_Acceso;
+	private ScrittaMenuOpzioni mScrittaAlto, mScrittaMedio, mScrittaBasso, mVsyncOn, mVsyncOff, mScrittaSuoniOn, mScrittaSuoniOff;
 
-	[SerializeField]
-	private ScrittaMenuOpzioni m_ScrittaAlto, m_ScrittaMedio, m_ScrittaBasso, m_VsyncOn, m_VsyncOff, m_ScrittaSuoniOn, m_ScrittaSuoniOff;
+	new void Start() {
+		base.Start ();
+		mScrittaAlto = mMainMenuManager.GetAlto().GetComponent<ScrittaMenuOpzioni> ();
+		mScrittaMedio = mMainMenuManager.GetMedio().GetComponent<ScrittaMenuOpzioni> ();
+		mScrittaBasso = mMainMenuManager.GetBasso().GetComponent<ScrittaMenuOpzioni> ();
+		mVsyncOn = mMainMenuManager.GetVsOn().GetComponent<ScrittaMenuOpzioni> ();
+		mVsyncOff = mMainMenuManager.GetVsOff().GetComponent<ScrittaMenuOpzioni> ();
+		mScrittaSuoniOn = mMainMenuManager.GetSuoniOn().GetComponent<ScrittaMenuOpzioni> ();
+		mScrittaSuoniOff = mMainMenuManager.GetSuoniOff().GetComponent<ScrittaMenuOpzioni> ();
+		mInputManager = GameObject.Find ("GameManager").GetComponent<InputManager> ();
+	}
 
-	void OnMouseOver(){
+	new void OnMouseOver(){
 
-		m_InfoOggetto.text = m_InfoString;
+		mInfoOggetto.text = mInfoString;
 
-		if (Input.GetKeyDown (KeyCode.Mouse0)){
+		if (mInputManager.IsLeftMousePressed()){
 			switch (name) {
 			case "Alto":
 				DisabilitaTuttiPulsantiGrafica ();
-				m_Acceso = true;
-				m_GameManager.GetComponent<SettingsManager> ().SetAlto ();
+				mAcceso = true;
+				mGameManager.GetComponent<SettingsManager> ().SetAlto ();
 				break;
 			case "Medio":
 				DisabilitaTuttiPulsantiGrafica ();
-				m_Acceso = true;
-				m_GameManager.GetComponent<SettingsManager> ().SetMedio ();
+				mAcceso = true;
+				mGameManager.GetComponent<SettingsManager> ().SetMedio ();
 				break;
 			case "Basso":
 				DisabilitaTuttiPulsantiGrafica ();
-				m_Acceso = true;
-				m_GameManager.GetComponent<SettingsManager> ().SetBasso ();
+				mAcceso = true;
+				mGameManager.GetComponent<SettingsManager> ().SetBasso ();
 				break;
 			case "Vs_On":
 				DisabilitaTuttiPulsantiGraficaVsync ();
-				m_Acceso = true;
-				m_GameManager.GetComponent<SettingsManager> ().SetVsyncOn ();
+				mAcceso = true;
+				mGameManager.GetComponent<SettingsManager> ().SetVsyncOn ();
 				break;
 			case "Vs_Off":
 				DisabilitaTuttiPulsantiGraficaVsync ();
-				m_Acceso = true;
-				m_GameManager.GetComponent<SettingsManager> ().SetVsyncOff ();
+				mAcceso = true;
+				mGameManager.GetComponent<SettingsManager> ().SetVsyncOff ();
 				break;
 			case "SuoniOn":
 				DisabilitaTuttiPulsantiSuono ();
-				m_Acceso = true;
-				m_GameManager.GetComponent<SettingsManager> ().SetSuoniOn ();
+				mAcceso = true;
+				mGameManager.GetComponent<SettingsManager> ().SetSuoniOn ();
 				break;
 			case "SuoniOff":
 				DisabilitaTuttiPulsantiSuono ();
-				m_Acceso = true;
-				m_GameManager.GetComponent<SettingsManager> ().SetSuoniOff ();
+				mAcceso = true;
+				mGameManager.GetComponent<SettingsManager> ().SetSuoniOff ();
 				break;
 			case "Indietro":
-				m_MenuPrincipale.SetActive (true);
-				m_MenuOpzioni.SetActive (false);
-				m_MenuControlli.SetActive (false);
+				mMenuPrincipale.SetActive (true);
+				mMenuOpzioni.SetActive (false);
+				mMenuControlli.SetActive (false);
 				OnMouseExit ();
 				break;
 			}
@@ -63,35 +72,35 @@ public class ScrittaMenuOpzioni : ScrittaMenuPrincipale {
 	}
 
 	public void Update(){
-		if (m_Acceso) {
+		if (mAcceso) {
 			OnMouseEnter ();
 		}
 	}
 
 	public void SetAcceso(bool value){
-		m_Acceso = value;
+		mAcceso = value;
 	}
 
 	public void DisabilitaTuttiPulsantiGrafica(){
-		m_ScrittaAlto.SetAcceso (false);
-		m_ScrittaMedio.SetAcceso (false);
-		m_ScrittaBasso.SetAcceso (false);
-		m_ScrittaAlto.OnMouseExit();
-		m_ScrittaMedio.OnMouseExit();
-		m_ScrittaBasso.OnMouseExit();
+		mScrittaAlto.SetAcceso (false);
+		mScrittaMedio.SetAcceso (false);
+		mScrittaBasso.SetAcceso (false);
+		mScrittaAlto.OnMouseExit();
+		mScrittaMedio.OnMouseExit();
+		mScrittaBasso.OnMouseExit();
 	}
 
 	public void DisabilitaTuttiPulsantiGraficaVsync(){
-		m_VsyncOn.SetAcceso (false);
-		m_VsyncOff.SetAcceso (false);
-		m_VsyncOn.OnMouseExit();
-		m_VsyncOff.OnMouseExit();
+		mVsyncOn.SetAcceso (false);
+		mVsyncOff.SetAcceso (false);
+		mVsyncOn.OnMouseExit();
+		mVsyncOff.OnMouseExit();
 	}
 
 	public void DisabilitaTuttiPulsantiSuono(){
-		m_ScrittaSuoniOn.SetAcceso (false);
-		m_ScrittaSuoniOff.SetAcceso (false);
-		m_ScrittaSuoniOn.OnMouseExit();
-		m_ScrittaSuoniOff.OnMouseExit();
+		mScrittaSuoniOn.SetAcceso (false);
+		mScrittaSuoniOff.SetAcceso (false);
+		mScrittaSuoniOn.OnMouseExit();
+		mScrittaSuoniOff.OnMouseExit();
 	}
 }

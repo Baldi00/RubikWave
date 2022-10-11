@@ -16,6 +16,8 @@ TagManager:
   - Left
   - Up
   - Down
+  - SwipeCollider
+  - FaceCollider
   layers:
   - Default
   - TransparentFX

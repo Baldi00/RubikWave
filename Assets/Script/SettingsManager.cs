@@ -5,65 +5,81 @@ using UnityEngine.PostProcessing;
 
 public class SettingsManager : MonoBehaviour {
 
-	[SerializeField]
-	private GameObject m_CameraPrincipale;
+	private AudioClip mWhoosh, mTurn, mVictory;
+	private PostProcessingProfile mAlto, mMedio, mBasso;
 
-	[SerializeField]
-	private PostProcessingProfile m_Alto, m_Medio, m_Basso;
+	private GameObject mCameraPrincipale;
+	private GameObject mCubo;
 
-	[SerializeField]
-	private GameObject m_Cubo;
+	private MainMenuManager mMainMenuManager;
+	private ScrittaMenuOpzioni mScrittaAlto, mScrittaMedio, mScrittaBasso, mScrittaVsyncOn, mScrittaVsyncOff, mScrittaSuoniOn, mScrittaSuoniOff;
 
-	[SerializeField]
-	private AudioClip m_Whoosh, m_Turn, m_Victory;
+	public void Initialize(){
+		mWhoosh = Resources.Load<AudioClip>("Sounds/Whoosh");
+		mTurn = Resources.Load<AudioClip>("Sounds/Turn");
+		mVictory = Resources.Load<AudioClip>("Sounds/Victory - Tada");
 
-	[SerializeField]
-	private ScrittaMenuOpzioni m_ScrittaAlto, m_ScrittaMedio, m_ScrittaBasso, m_ScrittaVsyncOn, m_ScrittaVsyncOff, m_ScrittaSuoniOn, m_ScrittaSuoniOff;
+		mAlto = Resources.Load<PostProcessingProfile>("PostProPresetTAA");
+		mMedio = Resources.Load<PostProcessingProfile>("PostProPresetNoMotionBlur");
+		mBasso = Resources.Load<PostProcessingProfile>("PostProPresetLow");
+
+		mCameraPrincipale = GameObject.Find("CameraFree");
+		mCubo = GameObject.Find("Cubo");
+
+		mMainMenuManager = GameObject.Find ("GameManager").GetComponent<MainMenuManager> ();
+		mScrittaAlto = mMainMenuManager.GetAlto().GetComponent<ScrittaMenuOpzioni> ();
+		mScrittaMedio = mMainMenuManager.GetMedio().GetComponent<ScrittaMenuOpzioni> ();
+		mScrittaBasso = mMainMenuManager.GetBasso().GetComponent<ScrittaMenuOpzioni> ();
+		mScrittaVsyncOn = mMainMenuManager.GetVsOn().GetComponent<ScrittaMenuOpzioni> ();
+		mScrittaVsyncOff = mMainMenuManager.GetVsOff().GetComponent<ScrittaMenuOpzioni> ();
+		mScrittaSuoniOn = mMainMenuManager.GetSuoniOn().GetComponent<ScrittaMenuOpzioni> ();
+		mScrittaSuoniOff = mMainMenuManager.GetSuoniOff().GetComponent<ScrittaMenuOpzioni> ();
+	}
 
 	public void SetAlto(){
-		m_CameraPrincipale.GetComponent<PostProcessingBehaviour> ().profile = m_Alto;
-		m_ScrittaAlto.SetAcceso (true);
+		mCameraPrincipale.GetComponent<PostProcessingBehaviour> ().profile = mAlto;
+		mScrittaAlto.SetAcceso (true);
 	}
 
 	public void SetMedio(){
-		m_CameraPrincipale.GetComponent<PostProcessingBehaviour> ().profile = m_Medio;
-		m_ScrittaMedio.SetAcceso (true);
+		mCameraPrincipale.GetComponent<PostProcessingBehaviour> ().profile = mMedio;
+		mScrittaMedio.SetAcceso (true);
 	}
 
 	public void SetBasso(){
-		m_CameraPrincipale.GetComponent<PostProcessingBehaviour> ().profile = m_Basso;
-		m_ScrittaBasso.SetAcceso (true);
+		mCameraPrincipale.GetComponent<PostProcessingBehaviour> ().profile = mBasso;
+		mScrittaBasso.SetAcceso (true);
 	}
 
 	public void SetVsyncOn(){
 		QualitySettings.vSyncCount = 1;
-		m_ScrittaVsyncOn.SetAcceso (true);
+		mScrittaVsyncOn.SetAcceso (true);
 	}
 
 	public void SetVsyncOff(){
 		QualitySettings.vSyncCount = 0;
 		//Application.targetFrameRate = 60;
-		m_ScrittaVsyncOff.SetAcceso (true);
+		mScrittaVsyncOff.SetAcceso (true);
 	}
 
 	public void SetSuoniOn(){
-		m_Cubo.GetComponent<AudioSource> ().clip = m_Turn;
-		m_CameraPrincipale.GetComponent<AudioSource> ().clip = m_Whoosh;
-		GetComponent<AudioSource> ().clip = m_Victory;
-		m_ScrittaSuoniOn.SetAcceso (true);
+		mCubo.GetComponent<AudioSource> ().clip = mTurn;
+		mCameraPrincipale.GetComponent<AudioSource> ().clip = mWhoosh;
+		GetComponent<AudioSource> ().clip = mVictory;
+		mScrittaSuoniOn.SetAcceso (true);
 	}
 
 	public void SetSuoniOff(){
-		m_Cubo.GetComponent<AudioSource> ().clip = null;
-		m_CameraPrincipale.GetComponent<AudioSource> ().clip = null;
+		mCubo.GetComponent<AudioSource> ().clip = null;
+		mCameraPrincipale.GetComponent<AudioSource> ().clip = null;
 		GetComponent<AudioSource> ().clip = null;
-		m_ScrittaSuoniOff.SetAcceso (true);
+		mScrittaSuoniOff.SetAcceso (true);
 	}
 
 	public int GetGrafica(){
-		if (m_CameraPrincipale.GetComponent<PostProcessingBehaviour> ().profile == m_Alto) {
+		if (mCameraPrincipale.GetComponent<PostProcessingBehaviour> ().profile == mAlto) {
 			return 2;
-		} else if (m_CameraPrincipale.GetComponent<PostProcessingBehaviour> ().profile == m_Medio) {
+		} else if (mCameraPrincipale.GetComponent<PostProcessingBehaviour> ().profile == mMedio) {
 			return 1;
 		} else {
 			return 0;

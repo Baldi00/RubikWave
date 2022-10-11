@@ -7,8 +7,8 @@ public class InformazioniInGame : StatisticheInGame {
 	private int mosseEseguiteDalGiocatore = 0;
 
 	void Update () {
-		int mosseEseguite = m_GameManager.GetNumMosseEseguite();
-		m_NumMosse.text = mosseEseguiteDalGiocatore + " / " + mosseEseguite;
+		int mosseEseguite = mGameManager.GetNumMosseEseguite();
+		mNumMosse.text = mosseEseguiteDalGiocatore + " / " + mosseEseguite;
 	}
 
 	public void AddMossaEseguitaDalGiocatore(){
@@ -20,6 +20,6 @@ public class InformazioniInGame : StatisticheInGame {
 	}
 
 	public void SetMosseEseguite(int mosse){
-		m_GameManager.SetNumMosseEseguite (mosse);
+		mGameManager.SetNumMosseEseguite (mosse);
 	}
 }

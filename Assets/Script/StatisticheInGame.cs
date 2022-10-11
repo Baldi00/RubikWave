@@ -8,55 +8,56 @@ public class StatisticheInGame : MonoBehaviour {
 	protected int minuti = 0;
 	protected int ore = 0;
 
-	[SerializeField]
-	protected Text m_NumMosse;
+	protected Text mNumMosse;
+	protected Text mTempoTrascorso;
 
-	[SerializeField]
-	protected Text m_TempoTrascorso;
-
-	protected GameManager m_GameManager;
-	protected Animatore m_Animatore;
+	protected GameManager mGameManager;
+	protected AnimationManager mAnimatore;
 
 	// Use this for initialization
 	void Start () {
-		m_GameManager = GameObject.Find ("GameManager").GetComponent<GameManager>();
-		m_Animatore = GameObject.Find ("Animazioni").GetComponent<Animatore>();
+		mGameManager = GameObject.Find ("GameManager").GetComponent<GameManager>();
+		mAnimatore = GameObject.Find ("GameManager").GetComponent<AnimationManager>();
+
+		GameObject ui = Utilities.GetGameObjectChildByName (gameObject, "UI");
+		mNumMosse = Utilities.GetGameObjectChildByName (ui, "NumMosse").GetComponent<Text> ();
+		mTempoTrascorso = Utilities.GetGameObjectChildByName (ui, "TempoTrascorso").GetComponent<Text> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
-		int mosseEseguite = m_GameManager.GetNumMosseEseguite();
+		int mosseEseguite = mGameManager.GetNumMosseEseguite();
 
 		if (mosseEseguite < 10) {
-			m_NumMosse.text = "" + mosseEseguite;
+			mNumMosse.text = "" + mosseEseguite;
 		} else if (mosseEseguite < 100) {
-			m_NumMosse.text = "" + mosseEseguite.ToString ().Insert (1, " ");
+			mNumMosse.text = "" + mosseEseguite.ToString ().Insert (1, " ");
 		} else if (mosseEseguite < 1000) {
-			m_NumMosse.text = "" + mosseEseguite.ToString ().Insert (2, " ").Insert (1, " ");
+			mNumMosse.text = "" + mosseEseguite.ToString ().Insert (2, " ").Insert (1, " ");
 		} else if (mosseEseguite < 10000) {
-			m_NumMosse.text = "" + mosseEseguite.ToString ().Insert (3, " ").Insert (2, " ").Insert (1, " ");
+			mNumMosse.text = "" + mosseEseguite.ToString ().Insert (3, " ").Insert (2, " ").Insert (1, " ");
 		} else if (mosseEseguite < 100000) {
-			m_NumMosse.text = "" + mosseEseguite.ToString ().Insert (4, " ").Insert (3, " ").Insert (2, " ").Insert (1, " ");
+			mNumMosse.text = "" + mosseEseguite.ToString ().Insert (4, " ").Insert (3, " ").Insert (2, " ").Insert (1, " ");
 		} else {
-			m_GameManager.ResetMosseEseguite ();
+			mGameManager.ResetMosseEseguite ();
 		}
 
 		if(ore<10)
-			m_TempoTrascorso.text = "0 " + ore + " : ";
+			mTempoTrascorso.text = "0 " + ore + " : ";
 		else
-			m_TempoTrascorso.text = "" + ore.ToString().Insert(1," ") + " : ";
+			mTempoTrascorso.text = "" + ore.ToString().Insert(1," ") + " : ";
 		if(minuti<10)
-			m_TempoTrascorso.text += "0 " + minuti + " : ";
+			mTempoTrascorso.text += "0 " + minuti + " : ";
 		else
-			m_TempoTrascorso.text += "" + minuti.ToString().Insert(1," ") + " : ";
+			mTempoTrascorso.text += "" + minuti.ToString().Insert(1," ") + " : ";
 		if(secondi<10)
-			m_TempoTrascorso.text += "0 " + (int)secondi;
+			mTempoTrascorso.text += "0 " + (int)secondi;
 		else
-			m_TempoTrascorso.text += "" + ((int)secondi).ToString().Insert(1," ");
+			mTempoTrascorso.text += "" + ((int)secondi).ToString().Insert(1," ");
 		
 		
-		if (m_GameManager.IsGameRunning () && !m_Animatore.StoMescolando()) {
+		if (mGameManager.IsGameRunning () && !mAnimatore.StoMescolando()) {
 			secondi += Time.deltaTime;
 		}
 
