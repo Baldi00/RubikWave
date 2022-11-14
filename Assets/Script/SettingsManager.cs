@@ -19,7 +19,7 @@ public class SettingsManager : MonoBehaviour {
 		mTurn = Resources.Load<AudioClip>("Sounds/Turn");
 		mVictory = Resources.Load<AudioClip>("Sounds/Victory - Tada");
 
-		mAlto = Resources.Load<PostProcessingProfile>("PostProPresetTAA");
+		mAlto = Resources.Load<PostProcessingProfile>("PostProPresetFXAA");
 		mMedio = Resources.Load<PostProcessingProfile>("PostProPresetNoMotionBlur");
 		mBasso = Resources.Load<PostProcessingProfile>("PostProPresetLow");
 
@@ -58,7 +58,7 @@ public class SettingsManager : MonoBehaviour {
 
 	public void SetVsyncOff(){
 		QualitySettings.vSyncCount = 0;
-		//Application.targetFrameRate = 60;
+		Application.targetFrameRate = -1;
 		mScrittaVsyncOff.SetAcceso (true);
 	}
 
