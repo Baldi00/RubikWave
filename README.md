@@ -2,11 +2,8 @@
 Unity Rubik Cube Game
 
 My first Unity project alone<br>
-First (COMPLETE) release: <a href="https://github.com/Baldi00/RubikWave/releases/tag/20190911Alpha">v2019-11-09</a><br>
-Unity version: 2017.3.0f3<br>
 
-Lastest (IMPROVED BUT INCOMPLETE) release: <a href="https://github.com/Baldi00/RubikWave/releases/tag/20220228Alpha">v2022-02-28</a><br>
-Unity version: 2020.3.29f1<br><br>
+Lastest release here: <a href="https://github.com/Baldi00/RubikWave/releases/download/20221114/RubikWave.Portable.zip">v2022-11-14</a><br>
 
 
 <img src="img1.jpg">
